@@ -143,20 +143,14 @@ const Changeover = () => {
 
     return (
         <>
-        
-                <div className="layout__content-main">
+
+            <div id="container">
                     
                     <div className="row">
                         <div className="col-12">
+                            <div className="position">
                             <div className="card full-height">
 
-                                
-                                <div>
-
-                                       
-        
-
-                                
                                 <div className="textFieldContainer1">
                                     {/* <div className="right-corner">Date:</div> */}
 
@@ -171,7 +165,7 @@ const Changeover = () => {
 
                                 
                                     <div className="textFieldContainer1">
-    <label htmlFor="productionorder">Production Order</label>
+                                        <label htmlFor="productionorder">Production Order</label>
 
                                               <CreatableSelect
                                                 options={""}
@@ -225,8 +219,7 @@ const Changeover = () => {
                             </div>
                             </Grid> */}
                         </div>
-                    
-                </div>
+            </div>
           
         </>
     )

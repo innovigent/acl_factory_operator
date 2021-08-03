@@ -53,7 +53,6 @@
   input {
     padding: 10px 10px;
     border-radius: 5px;
-    outline: none;
     border: 1px solid #cfcfcf;
   }
   
@@ -137,7 +136,11 @@
 
   
   .SubmitButtonA button {
-    background-color: #519e8a;
+    background: linear-gradient(
+            to right,
+            var(--main-color-green),
+            var(--second-color-green)
+    );
     color: #fff;
     border: 2px solid #fff;
     width: 100%;
@@ -151,7 +154,11 @@
 
   
   .SubmitButtonB button {
-    background-color: #d4e02d;
+    background: linear-gradient(
+            to right,
+            var(--main-color-green),
+            var(--second-color-green)
+    );
     color: #fff;
     border: 2px solid #fff;
     width: 100%;
@@ -165,7 +172,11 @@
   
   .SubmitButtonA button:hover {
     color: #519e8a;
-    background-color: #fff;
+    background: linear-gradient(
+            to right,
+            var(--main-color-green),
+            var(--second-color-green)
+    );
     border: 2px solid #519e8a;
   }
   .SubmitButtonB button:hover {
@@ -250,8 +261,13 @@ border: 1px solid #cfcfcf;
 
   position: absolute;
   right: 6%;
-  
-  background-color: #519e8a;
+
+  background: linear-gradient(
+          to right,
+          var(--main-color-green),
+          var(--second-color-green)
+  );
+  border-radius: 10px;
   color: #fff;
   border: 2px solid #fff;
  
