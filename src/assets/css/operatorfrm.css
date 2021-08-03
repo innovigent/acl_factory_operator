@@ -1,0 +1,265 @@
+
+.wrapper {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #258ea6; */
+    margin-top: 8%;
+    padding: 30px;
+  }
+  
+  .form-wrapper {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 50px #555;
+    background-color: #ffffff;
+ 
+  }
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3.1rem 0;
+
+
+    
+  
+  }
+  
+  h1 {
+    text-align: center;
+    width: 100%;
+    color: #111;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  
+  label {
+    font-size: 15px;
+    margin-bottom: 0.25em;
+    color: #222;
+    font-weight: lighter;
+  }
+  
+  input {
+    padding: 10px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #cfcfcf;
+  }
+  
+  input::placeholder {
+    font-size: 1.2em;
+    font-weight: lighter;
+    color: #999;
+  }
+  
+  input.error {
+    border: 1px solid red;
+  }
+  
+  .errorMessage {
+    color: red;
+    font-size: 0.75em;
+    display: relative;
+  }
+  
+  /* .firstName {
+    margin-right: 1%;
+  } */
+  
+  /* .lastName {
+    margin-left: 1%;
+  } */
+  
+  /* .firstName,
+  .lastName, */
+  .textFieldContainer1,
+  .textFieldContainer2 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+  }
+/*   
+  .firstName,
+  .lastName {
+    width: 49%;
+  }
+   */
+  .textFieldContainer1,
+  .textFieldContainer2{
+    width: 100%;
+  }
+  
+  .SubmitButton {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+    bottom: 15%;
+    right: 8%;
+
+
+  }
+
+  .SubmitButtonA {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+    /* bottom: 15%;
+    right: 8%; */
+  
+
+
+  }
+  .SubmitButtonB {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+    bottom: 15%;
+    right: 30%;
+
+
+  }
+
+
+
+  
+  .SubmitButtonA button {
+    background-color: #519e8a;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 100%;
+    /* margin-top: 1em; */
+    padding: 8px 0px;
+    font-size: 1em;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    /* margin-bottom: 0.25em; */
+  }
+
+  
+  .SubmitButtonB button {
+    background-color: #d4e02d;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 100%;
+    margin-top: 1em;
+    padding: 8px 0px;
+    font-size: 1em;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin-bottom: 0.25em;
+  }
+  
+  .SubmitButtonA button:hover {
+    color: #519e8a;
+    background-color: #fff;
+    border: 2px solid #519e8a;
+  }
+  .SubmitButtonB button:hover {
+    color: #519e8a;
+    background-color: #fff;
+    border: 2px solid #519e8a;
+  }
+  
+  .SubmitButtonA small {
+    color: #999;
+    font-weight: lighter;
+  }
+  .SubmitButtonB small {
+    color: #999;
+    font-weight: lighter;
+  }
+
+.left-corner {
+
+  position: absolute;
+right:7%;
+font-size: 18px;
+border-radius: 8px;
+
+}
+
+.right-corner {
+
+font-size: 18px;
+}
+.a{
+
+
+  border-radius: 5px;
+}
+
+.middle{
+
+  position: absolute;
+  right:50%;
+  font-size: 18px;
+}
+.fault{
+align-items: center;
+  right:50%;
+  font-size: 18px;
+color: red;
+padding-top: 5px;
+
+}
+
+
+.timer{
+
+  border: 2px ;
+  height: 20vh;
+  width: 20vh;
+  border-style: solid;
+  border-color: coral;
+}
+.left-corner1 {
+
+  position: absolute;
+right:7%;
+font-size: 18px;
+border-radius: 8px;
+color: red;
+
+}
+
+.dropdown{
+
+
+/* height: 100px; */
+padding: 10px 10px;
+border-radius: 5px;
+outline: none;
+border: 1px solid #cfcfcf;
+}
+
+.submita{
+
+  position: absolute;
+  right: 6%;
+  
+  background-color: #519e8a;
+  color: #fff;
+  border: 2px solid #fff;
+ 
+  /* margin-top: 1em; */
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  width: 15%;
+  justify-content: end;
+}
