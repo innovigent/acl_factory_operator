@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
 import Changeover from "./Pages/ChangeOver";
 import Downtime from "./Pages/DownTime";
@@ -9,6 +9,7 @@ import OperatorActionTable from "./Pages/OperatorActionTable";
 import OperatorExperiment from "./Pages/OperatorExperiment";
 import SlowDownSpeed from "./Pages/SlowDownSpeed";
 import StatusChanged from "./Pages/StatusChanged";
+import Login from "./Pages/Login";
 
 const Routes = () => {
 
@@ -16,6 +17,10 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
 
+                <Route exact path="/">
+                    <Redirect to="/Login" />
+                </Route>
+                <Route path="/Login" component={Login} />
                 <Route path="/Changeover" component={Changeover} />
                 <Route path="/Downtime" component={Downtime} />
                 <Route path="/FaultDetection" component={FaultDetection} />
