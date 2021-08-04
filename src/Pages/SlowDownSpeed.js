@@ -149,9 +149,8 @@ const Device = () => {
         <>
         
                 <div className="layout__content-main">
-                 
-                    <div className="row">
-                        <div className="col-12">
+
+                    <div className="position">
                             <div className="card full-height">
 
                                 
@@ -169,10 +168,10 @@ const Device = () => {
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
 
                                     <div className="textFieldContainer1">
-         
-         timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
-         timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
-       </div>
+
+                                         timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
+                                         timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
+                                       </div>
 
 
 
@@ -195,7 +194,7 @@ const Device = () => {
                                     </div>
 
                                     <div className="textFieldContainer1">
-    <label htmlFor="productionorder">Reason</label>
+                                        <label htmlFor="productionorder">Reason</label>
 
                                               <CreatableSelect
                                                 options={""}
@@ -234,12 +233,7 @@ const Device = () => {
 
                                 </div>
                             </div>
-                        </div>
-                            {/* <Grid item xs={6}>
-                            <div className="card full-height">
 
-                            </div>
-                            </Grid> */}
                         </div>
                     <TopNav/>
                 </div>
