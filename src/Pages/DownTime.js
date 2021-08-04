@@ -149,18 +149,13 @@ const Downtime = () => {
         <>
         
                 <div className="layout__content-main">
-                   
-                    <div className="row">
-                        <div className="col-12">
+
+                    <div className="position">
                             <div className="card full-height">
 
                                 
                                 <div>
 
-                                       
-        
-
-                                
                                 <div className="textFieldContainer1">
                                     <div className="right-corner">Date:</div>
                                     <div className="middle">Line No:</div>
@@ -170,10 +165,10 @@ const Downtime = () => {
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
 
                                     <div className="textFieldContainer1">
-         
-         timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
-         timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
-       </div>
+
+                                         timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
+                                         timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
+                                       </div>
 
 
 
@@ -185,7 +180,7 @@ const Downtime = () => {
 
                                  
                                     <div className="textFieldContainer1">
-    <label htmlFor="productionorder">Production Order</label>
+                                        <label htmlFor="productionorder">Production Order</label>
 
                                               <CreatableSelect
                                                 options={""}
@@ -210,8 +205,8 @@ const Downtime = () => {
                                              </div>
 
                                                                                        
-    <div className="textFieldContainer1">
-    <label htmlFor="Department">Department</label>
+                                            <div className="textFieldContainer1">
+                                            <label htmlFor="Department">Department</label>
 
                                             <div className="wrapper1">
                                                 <input type="radio" name="select1" id="option1-4"/>
@@ -270,13 +265,7 @@ const Downtime = () => {
 
                                 </div>
                             </div>
-                        </div>
-                            {/* <Grid item xs={6}>
-                            <div className="card full-height">
-
-                            </div>
-                            </Grid> */}
-                        </div>
+                    </div>
                     <TopNav/>
                 </div>
           
