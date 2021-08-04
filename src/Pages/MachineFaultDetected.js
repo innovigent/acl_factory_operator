@@ -148,9 +148,8 @@ const FaultDetection = () => {
         <>
         
                 <div className="layout__content-main">
-              
-                    <div className="row">
-                        <div className="col-12">
+
+                    <div className="position">
                             <div className="card full-height">
 
                                 
@@ -213,12 +212,7 @@ const FaultDetection = () => {
 
                                 </div>
                             </div>
-                        </div>
-                            {/* <Grid item xs={6}>
-                            <div className="card full-height">
 
-                            </div>
-                            </Grid> */}
                         </div>
                     <TopNav/>
                 </div>
