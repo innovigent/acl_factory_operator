@@ -95,18 +95,12 @@ const ActionTable = () => {
         <>
         
                 <div className="layout__content-main">
-                 
-                    <div className="row">
-                        <div className="col-12">
+
+                    <div className="position">
                             <div className="card full-height">
 
-                                
                                 <div>
 
-                                       
-        
-
-                                
                                 <div className="textFieldContainer1">
                                     <div className="right-corner">Date:</div>
 
@@ -115,27 +109,27 @@ const ActionTable = () => {
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
 
                                     <table>
-  <tbody>
-      <th>Action</th>
-      <th>Content</th>
-    <tr>
-      <td class="action" align="center" >
-        <a> ✔ </a>
-      </td>
-      <td class="content" align="center">
-       <p>A</p>
-      </td>
-    </tr>
-    <tr>
-      <td class="action" align="center" >
-        <a> ✔ </a><a> ✘ </a>
-      </td>
-      <td class="content" align="center">
-       <p>B</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+                                          <tbody>
+                                              <th>Action</th>
+                                              <th>Content</th>
+                                            <tr>
+                                              <td class="action" align="center" >
+                                                <a> ✔ </a>
+                                              </td>
+                                              <td class="content" align="center">
+                                               <p>A</p>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td class="action" align="center" >
+                                                <a> ✔ </a><a> ✘ </a>
+                                              </td>
+                                              <td class="content" align="center">
+                                               <p>B</p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
 
                                    
 
@@ -166,12 +160,7 @@ const ActionTable = () => {
 
                                 </div>
                             </div>
-                        </div>
-                            {/* <Grid item xs={6}>
-                            <div className="card full-height">
 
-                            </div>
-                            </Grid> */}
                         </div>
                     <TopNav/>
                 </div>
