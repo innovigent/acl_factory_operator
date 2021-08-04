@@ -105,7 +105,7 @@ input[type="radio"]{
   display: none;
 }
 #option-1:checked:checked ~ .option-1,
-#option1-4:checked:checked ~ .option1-4,
+#option1-4:checked:checked ~ .option4-4,
 #option1-5:checked:checked ~ .option1-5,
 #option1-6:checked:checked ~ .option1-6,
 #option-3:checked:checked ~ .option-3,

@@ -6,22 +6,60 @@ import { makeStyles } from '@material-ui/core/styles';
 import { css } from '@emotion/css' ;
 import CreatableSelect from 'react-select/creatable';
 import TopNav from "../components/topnav/TopNav";
+import Table from "../components/table/Table";
+import axios from "axios";
+import moment from 'moment';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-
-
-
-
-function createData(name,empty) {
-    return { name,empty};
-}
+const fields = [
+    "Department Name",
+    "Created At",
+    "Action"
+]
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    {
+        "id": 1,
+        "firstName": "mujeeb",
+        "lastName": "singham",
+        "email": "chandulagayan@gmail.com",
+        "verificationtoken": "1234",
+        "epfNo": null,
+        "phoneNo": "0776465645",
+        "image": null,
+        "statusId": 1,
+        "password": "$2y$10$zrrjILLqTKyxYiR3jrOdvuaE.tEG3U148gVPoe7zYQLpitytXpyU2 ",
+        "createdAt": "2021-07-16T10:38:11.002Z",
+        "updatedAt": "2021-07-16T10:38:11.002Z",
+    },
+    {
+        "id": 9,
+        "firstName": "Gayath",
+        "lastName": "Chandula",
+        "email": "chandulagayan1@gmail.com",
+        "verificationtoken": "g96wx6",
+        "epfNo": "47586598",
+        "phoneNo": null,
+        "image": "uploads/dashboard.JPG-1626512057383.jpeg",
+        "statusId": 50,
+        "password": "$2b$10$vqy4Pln0C.V88NOCdpOOFOKZYHbVGWv.yV/7XLn7cpYxLQnV2PzPi",
+    }
 ];
+
+const renderOrderHead = (item, index) => (
+    <th key={index}>{item}</th>
+)
+const renderOrderBody = (item, index) => (
+    <tr key={index}>
+        <td>{item.firstName}</td>
+        <td>{moment(item.createdAt).format("MMM Do YY")}</td>
+        <td>
+            <button className="usertblbutton" >Delete</button>
+        </td>
+    </tr>
+)
 
 const useStyles = makeStyles({
     table: {
@@ -58,12 +96,14 @@ className
 
 
 const Downtime = () => {
-    const classes = useStyles();
-    const [uuid, setUuid] = useState("");
-    const [timerDays, setTimerDays] = useState("00");
-  const [timerHours, setTimerHours] = useState("00");
-  const [timerMinutes, setTimerMinutes] = useState("00");
-  const [timerSeconds, setTimerSeconds] = useState("00");
+
+      const classes = useStyles();
+      const [uuid, setUuid] = useState("");
+      const [timerDays, setTimerDays] = useState("00");
+      const [timerHours, setTimerHours] = useState("00");
+      const [timerMinutes, setTimerMinutes] = useState("00");
+      const [timerSeconds, setTimerSeconds] = useState("00");
+      const [type, setType] = React.useState('');
 
   let interval = useRef();
 
@@ -115,45 +155,24 @@ const Downtime = () => {
   }, []);
 
 
-
-
-
-    // create a preview as a side effect, whenever selected file is changed
-    
-
-    // function validateForm() {
-    //     return email.length > 0 && password.length > 0;
-    // }
-    // const handleChange = (event) => {
-    //     setType(event.target.value);
-    // };
-    // const imagehandleChange = (event) => {
-    //     setImage(event.target.files[0]);
-    // };
-
     function handleSubmit(event) {
         event.preventDefault();
     }
 
-    // const onSelectFile = e => {
-    //     if (!e.target.files || e.target.files.length === 0) {
-    //         setSelectedFile(undefined)
-    //         return
-    //     }
-
-    //     // I've kept this example simple by using the first image instead of multiple
-    //     setSelectedFile(e.target.files[0])
-    // }
+    const handleChange = (event) => {
+        setType(event.target.value);
+    };
 
     return (
         <>
-        
+
                 <div className="layout__content-main">
 
-                    <div className="position">
+                    <div className="row">
+                        <div className='col-12'>
                             <div className="card full-height">
 
-                                
+
                                 <div>
 
                                 <div className="textFieldContainer1">
@@ -175,10 +194,10 @@ const Downtime = () => {
                             <div className="textFieldContainer1">
                                 <label>Product</label>
                                         <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
+
                                     </div>
 
-                                 
+
                                     <div className="textFieldContainer1">
                                         <label htmlFor="productionorder">Production Order</label>
 
@@ -204,71 +223,63 @@ const Downtime = () => {
                                              />
                                              </div>
 
-                                                                                       
+
                                             <div className="textFieldContainer1">
                                             <label htmlFor="Department">Department</label>
 
                                             <div className="wrapper1">
-                                                <input type="radio" name="select1" id="option1-4"/>
-                                                <input type="radio" name="select1" id="option1-5"/>
-                                                <input type="radio" name="select1" id="option1-6"/>
-                                                <label htmlFor="option1-4" className="option1 option1-4">
-                                                    <div className="dot"></div>
-                                                    <span>Electrical</span>
-                                                </label>
-                                                <label htmlFor="option1-5" className="option1 option1-5">
-                                                    <div className="dot"></div>
-                                                    <span>Mechanical</span>
-                                                </label>
-                                                <label htmlFor="option1-6" className="option1 option1-6">
-                                                    <div className="dot"></div>
-                                                    <span>Production</span>
-                                                </label>
+                                                <RadioGroup  aria-label="type" name="type" value={type} onChange={handleChange} row>
+                                                    <FormControlLabel value="Electrical" control={<Radio color="primary" />} label="Electrical" />
+                                                    <FormControlLabel value="Mechanical" control={<Radio color="primary" />} label="Mechanical" />
+                                                    <FormControlLabel value="Production" control={<Radio color="primary" />} label="Production" />
+                                                </RadioGroup>
                                             </div>
                                             </div>
-
-                                            <div className="orderNo">
-
-                                            <div className="wrapper1">
-                                                <input type="radio" name="select" id="option-1"/>
-                                                <input type="radio" name="select" id="option-2"/>
-                                                <input type="radio" name="select" id="option-3"/>
-                                                <label htmlFor="option-1" className="option option-1">
-                                                    <div className="dot"></div>
-                                                    <span>Uncategerizes</span>
-                                                </label>
-                                                <label htmlFor="option-2" className="option option-2">
-                                                    <div className="dot"></div>
-                                                    <span>EndShift</span>
-                                                </label>
-                                                <label htmlFor="option-3" className="option option-3">
-                                                    <div className="dot"></div>
-                                                    <span>It</span>
-                                                </label>
-                                            </div>
-                                            </div>
+                                    <div className="textFieldContainer1">
+                                        <div className="wrapper1">
+                                            <RadioGroup  aria-label="type" name="type" value={type} onChange={handleChange} row>
+                                                <FormControlLabel value="uncategorized" control={<Radio color="primary" />} label="uncategorized" />
+                                                <FormControlLabel value="EndShift" control={<Radio color="primary" />} label="End Shift" />
+                                                <FormControlLabel value="Changeover" control={<Radio color="primary" />} label="Change over" />
+                                            </RadioGroup>
+                                        </div>
+                                    </div>
 
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
 
 
-                                   
+
 
 
                                         <button   onClick={handleSubmit}  className="submita">submit</button>
 
                                            <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                     
-                                  
+
+
 
 
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className='col-12'>
+                            <div className="card full-height">
+                                <Table
+                                    limit="5"
+                                    headData={fields}
+                                    renderHead={(item, index) => renderOrderHead(item, index)}
+                                    bodyData={rows}
+                                    renderBody={(item, index) => renderOrderBody(item, index)}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <TopNav/>
                 </div>
-          
+
         </>
     )
 }
