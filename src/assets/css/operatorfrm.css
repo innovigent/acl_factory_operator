@@ -279,3 +279,9 @@ outline: none;
   width: 15%;
   justify-content: end;
 }
+
+.position{
+  margin-top: 20%;
+  left: auto;
+  right: auto;
+}
