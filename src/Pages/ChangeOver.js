@@ -8,7 +8,7 @@ import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import CreatableSelect from "react-select/creatable/dist/react-select.esm";
-
+import { useHistory } from 'react-router-dom';
 
 
 const SingleValue = ({
@@ -41,6 +41,7 @@ const SingleValue = ({
 
 const Changeover = () => {
 
+    const history = useHistory();
     const [listData, setListData] = useState({ lists: [] });
     const macaddress = localStorage.getItem('macaddress')
     const [epfNo, setepfNo] = useState("");
@@ -56,6 +57,7 @@ const Changeover = () => {
                 `https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/${macaddress}/listproductorderIPC/getall`,
             );
             setListData({ lists: removeDuplicates(result.data.data.productionOrders)});
+            localStorage.setItem("productionrunId", result.data.data.id);
             setLoading(false);
         };
 
@@ -71,7 +73,7 @@ const Changeover = () => {
         try{
             const body = {epfNo,macaddress,productionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create",body);
-
+            history.push("/Dashboard")
         } catch(err) {
             err.response.data.message && setErr(err.response.data.message)
         }
@@ -81,6 +83,14 @@ const Changeover = () => {
     function removeDuplicates(arr) {
         arr.forEach(value => podata.push({value: value.id, label: value.productionorderCode}))
         console.log(podata)
+    };
+
+    const handleChange = (newValue: any, actionMeta: any) => {
+
+        let value = newValue.value;
+
+        setproductionId(value);
+
     };
 
     return (
@@ -108,7 +118,7 @@ const Changeover = () => {
                                     options={podata}
                                     className="orderNo"
                                     components={{ SingleValue}}
-                                    onChange={(e) => setproductionId(e.target.value)}
+                                    onChange={handleChange}
                                     isValidNewOption={() => false}
                                     // styles={customStyles}
                                     styles={{
