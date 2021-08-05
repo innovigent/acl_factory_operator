@@ -1,12 +1,9 @@
 import React, {useEffect,useState,useRef} from 'react';
 import "../assets/css/Usercreate.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { css } from '@emotion/css' ;
+import CreatableSelect from 'react-select/creatable';
 import TopNav from "../components/topnav/TopNav";
-
-
 
 
 
@@ -29,96 +26,96 @@ const useStyles = makeStyles({
 });
 
 const SingleValue = ({
-    cx,
-    getStyles,
-    selectProps,
-    data,
-    isDisabled,
-    className,
-    ...props
-}) => {
-console.log(props);
-return (
-<div
-className={cx(
-css(getStyles("singleValue", props)),
-{
-"single-value": true,
-"single-value--is-disabled": isDisabled,
+                         cx,
+                         getStyles,
+                         selectProps,
+                         data,
+                         isDisabled,
+                         className,
+                         ...props
+                     }) => {
+    console.log(props);
+    return (
+        <div
+            className={cx(
+                css(getStyles("singleValue", props)),
+                {
+                    "single-value": true,
+                    "single-value--is-disabled": isDisabled,
 
-},
-className
-)}
->
-<div>{selectProps.getOptionLabel(data)}</div>
-</div>
-);
+                },
+                className
+            )}
+        >
+            <div>{selectProps.getOptionLabel(data)}</div>
+        </div>
+    );
 };
 
 
 const FaultDetection = () => {
     const classes = useStyles();
-    const [uuid, setUuid] = useState("");
+    const [Product, setProduct] = useState("");
     const [timerDays, setTimerDays] = useState("00");
-  const [timerHours, setTimerHours] = useState("00");
-  const [timerMinutes, setTimerMinutes] = useState("00");
-  const [timerSeconds, setTimerSeconds] = useState("00");
+    const [timerHours, setTimerHours] = useState("00");
+    const [timerMinutes, setTimerMinutes] = useState("00");
+    const [timerSeconds, setTimerSeconds] = useState("00");
 
-  let interval = useRef();
+    let interval = useRef();
 
-  const startTimer = (countdownDate) => {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
+    const startTimer = (countdownDate) => {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if (distance < 0) {
-      clearInterval(interval.current);
-    } else {
-      setTimerDays(days);
-      setTimerHours(hours);
-      setTimerMinutes(minutes);
-      setTimerSeconds(seconds);
-    }
-  };
+        if (distance < 0) {
+            clearInterval(interval.current);
+        } else {
+            setTimerDays(days);
+            setTimerHours(hours);
+            setTimerMinutes(minutes);
+            setTimerSeconds(seconds);
+        }
+    };
 
-  function saveInLocalStorage(time) {
-    localStorage.setItem("timer", time);
-  }
-
-  function getTimeFromLocalStorage() {
-    return localStorage.getItem("timer");
-  }
-
-  useEffect(() => {
-    const localTimer = getTimeFromLocalStorage();
-
-    if (localTimer) {
-      interval.current = setInterval(() => {
-        startTimer(+localTimer);
-      }, 1000);
-    } else {
-      const countdownDate = new Date().getTime() + 14 * 24 * 60 * 1000;
-      saveInLocalStorage(countdownDate);
-      interval.current = setInterval(() => {
-        startTimer(+countdownDate);
-      }, 1000);
+    function saveInLocalStorage(time) {
+        localStorage.setItem("timer", time);
     }
 
-    return () => clearInterval(interval.current);
-  }, []);
+    function getTimeFromLocalStorage() {
+        return localStorage.getItem("timer");
+    }
+
+    useEffect(() => {
+        const localTimer = getTimeFromLocalStorage();
+
+        if (localTimer) {
+            interval.current = setInterval(() => {
+                startTimer(+localTimer);
+            }, 1000);
+        } else {
+            const countdownDate = new Date().getTime() + 14 * 24 * 60 * 1000;
+            saveInLocalStorage(countdownDate);
+            interval.current = setInterval(() => {
+                startTimer(+countdownDate);
+            }, 1000);
+        }
+
+        return () => clearInterval(interval.current);
+    }, []);
 
 
 
 
 
     // create a preview as a side effect, whenever selected file is changed
-    
+
 
     // function validateForm() {
     //     return email.length > 0 && password.length > 0;
@@ -146,77 +143,76 @@ const FaultDetection = () => {
 
     return (
         <>
-        
-                <div className="layout__content-main">
 
-                    <div className="position">
-                            <div className="card full-height">
+            <div id="container">
 
-                                
-                                <div>
+                <div className="position">
+                    <div className="card full-height">
 
-                                       
-        
+                        <div className="textFieldContainer1">
+                            {/* <div className="right-corner">Date:</div> */}
 
-                                
-                                <div className="textFieldContainer1">
-                                    <div className="right-corner">Date:</div>
-                                    <div className="middle">Line No:</div>
-
-                                    <div className="left-corner">Status:</div>
-                                    </div>
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-                                    <div className="textFieldContainer1">
-              <label htmlFor="orderNo">Product Order No.</label>
-              <input
-                className="a"
-                placeholder=""
-                type="text"
-                name=""
-               
-              />
-            </div>
-            <div className="textFieldContainer1">
-              <label htmlFor="epf">Operator Epf No.</label>
-              <input
-                className="a"
-                placeholder=""
-                type="text"
-                name=""
-               
-              />
-            </div>
-
-           
-
-         
+                            <div className="left-corner">Status:</div>
+                        </div>
+                        <div className="textFieldContainer1"></div>{/* to make space*/ }
 
 
 
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContiner1"></div>{/* to make space*/ }
-
-
-                                   
-
-
-                                        <button   onClick={handleSubmit}  className="submita">submit</button>
-
-                                        <div className="textFieldContiner1"></div>{/* to make space*/ }\
-                                        <div className="textFieldContiner1"></div>{/* to make space*/ }
-                                     
-                                  
 
 
 
-                                </div>
-                            </div>
+
+                        <div className="textFieldContainer1">
+                            <label htmlFor="productionorder">Production Order</label>
+
+                            <CreatableSelect
+                                options={""}
+                                className="orderNo"
+                                components={{ SingleValue}}
+                                isValidNewOption={() => false}
+                                // styles={customStyles}
+                                styles={{
+                                    menu: (provided, state) => ({
+                                        ...provided,
+                                        width: "90%",
+                                        padding: 30,
+                                    }),
+                                    singleValue: (provided, state) => ({
+                                        ...provided,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        opacity : 0.5
+                                    })
+                                }}
+                            />
+                        </div>
+
+
+                        <div className="textFieldContainer1">
+                            <label htmlFor="productionorder">Product</label>
+                            <input type="text" autoFocus placeholder="" value={Product}  onChange={(e) => setProduct(e.target.value)} />
 
                         </div>
-                    <TopNav/>
+
+                        <div className="textFieldContainer1"></div>{/* to make space*/ }
+                        <div className="textFieldContainer1"></div>{/* to make space*/ }
+
+
+
+
+
+                        <button   onClick={handleSubmit}  className="submita">submit</button>
+                        <div className="textFieldContainer1"></div>{/* to make space*/ }
+
+
+
+
+
+                    </div>
                 </div>
-          
+
+                <TopNav/>
+            </div>
         </>
     )
 }
