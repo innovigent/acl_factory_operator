@@ -11,24 +11,6 @@ import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 
 
 
-function createData(name,empty) {
-    return { name,empty};
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
 const SingleValue = ({
                          cx,
                          getStyles,
@@ -59,63 +41,28 @@ const SingleValue = ({
 
 const Changeover = () => {
 
-    const classes = useStyles();
+    const [listData, setListData] = useState({ lists: [] });
     const macaddress = localStorage.getItem('macaddress')
     const [epfNo, setepfNo] = useState("");
     const [productionId, setproductionId] = useState("");
-    const [timerDays, setTimerDays] = useState("00");
-    const [timerHours, setTimerHours] = useState("00");
-    const [timerMinutes, setTimerMinutes] = useState("00");
-    const [timerSeconds, setTimerSeconds] = useState("00");
     const [err, setErr] = useState("");
-
-    let interval = useRef();
-
-    const startTimer = (countdownDate) => {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if (distance < 0) {
-            clearInterval(interval.current);
-        } else {
-            setTimerDays(days);
-            setTimerHours(hours);
-            setTimerMinutes(minutes);
-            setTimerSeconds(seconds);
-        }
-    };
-
-    function saveInLocalStorage(time) {
-        localStorage.setItem("timer", time);
-    }
-
-    function getTimeFromLocalStorage() {
-        return localStorage.getItem("timer");
-    }
+    const [loading, setLoading] = useState(true);
+    const [podata,setpodata] = useState([])
 
     useEffect(() => {
-        const localTimer = getTimeFromLocalStorage();
 
-        if (localTimer) {
-            interval.current = setInterval(() => {
-                startTimer(+localTimer);
-            }, 1000);
-        } else {
-            const countdownDate = new Date().getTime() + 14 * 24 * 60 * 1000;
-            saveInLocalStorage(countdownDate);
-            interval.current = setInterval(() => {
-                startTimer(+countdownDate);
-            }, 1000);
-        }
+        const fetchData = async () => {
+            const result = await axios(
+                `https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/${macaddress}/listproductorderIPC/getall`,
+            );
+            setListData({ lists: removeDuplicates(result.data.data.productionOrders)});
+            setLoading(false);
+        };
 
-        return () => clearInterval(interval.current);
+
+        fetchData();
+
+
     }, []);
 
     const submit = async (e) => {
@@ -129,6 +76,11 @@ const Changeover = () => {
             err.response.data.message && setErr(err.response.data.message)
         }
 
+    };
+
+    function removeDuplicates(arr) {
+        arr.forEach(value => podata.push({value: value.id, label: value.productionorderCode}))
+        console.log(podata)
     };
 
     return (
@@ -153,9 +105,10 @@ const Changeover = () => {
                             <div className="textFieldContainer1">
                                 <label htmlFor="orderNo">Product Order No.</label>
                                 <CreatableSelect
-                                    options={""}
+                                    options={podata}
                                     className="orderNo"
                                     components={{ SingleValue}}
+                                    onChange={(e) => setproductionId(e.target.value)}
                                     isValidNewOption={() => false}
                                     // styles={customStyles}
                                     styles={{

@@ -11,11 +11,12 @@ const Home = () => {
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress')
+    const productionrunId = localStorage.getItem('productionrunId')
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/1/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/${productionrunId}/getall`,
             );
             setListData({lists:result.data.data.productionOrders})
             setLoading(false);
