@@ -7,6 +7,7 @@ import { css } from '@emotion/css' ;
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import {Alert, AlertTitle} from "@material-ui/lab";
+import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 
 
 
@@ -61,6 +62,7 @@ const Changeover = () => {
     const classes = useStyles();
     const macaddress = localStorage.getItem('macaddress')
     const [epfNo, setepfNo] = useState("");
+    const [productionId, setproductionId] = useState("");
     const [timerDays, setTimerDays] = useState("00");
     const [timerHours, setTimerHours] = useState("00");
     const [timerMinutes, setTimerMinutes] = useState("00");
@@ -120,7 +122,7 @@ const Changeover = () => {
         e.preventDefault();
         setErr("");
         try{
-            const body = {epfNo,macaddress};
+            const body = {epfNo,macaddress,productionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create",body);
 
         } catch(err) {
@@ -150,12 +152,34 @@ const Changeover = () => {
                             <div className="textFieldContainer1"></div>{/* to make space*/ }
                             <div className="textFieldContainer1">
                                 <label htmlFor="orderNo">Product Order No.</label>
-                                <input
-                                    className="a"
-                                    placeholder=""
-                                    type="text"
-                                    name=""
+                                <CreatableSelect
+                                    options={""}
+                                    className="orderNo"
+                                    components={{ SingleValue}}
+                                    isValidNewOption={() => false}
+                                    // styles={customStyles}
+                                    styles={{
+                                        menu: (provided, state) => ({
+                                            ...provided,
+                                            width: "90%",
+                                            padding: 30,
+                                        }),
+                                        singleValue: (provided, state) => ({
+                                            ...provided,
+                                            display: "flex",
+                                            alignItems: "center",
+                                            opacity : 0.5
+                                        })
+                                    }}
                                 />
+                                {/*<input*/}
+                                {/*    className="a"*/}
+                                {/*    placeholder=""*/}
+                                {/*    type="text"*/}
+                                {/*    name=""*/}
+                                {/*    value={productionId}*/}
+                                {/*    onChange={(e) => setproductionId(e.target.value)}*/}
+                                {/*/>*/}
                             </div>
                             <div className="textFieldContainer1">
                                 <label htmlFor="epf">Operator Epf No.</label>

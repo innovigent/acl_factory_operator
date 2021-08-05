@@ -1,9 +1,7 @@
 import React,{useContext} from 'react'
-
 import './topnav.css'
 import '../sidebar/sidebar.css'
 import { Link } from 'react-router-dom'
-import UserContext from '../../userContext';
 import Dropdown from '../dropdown/Dropdown'
 
 const sidebar_items1 = [
@@ -27,8 +25,8 @@ const sidebar_items = [
         "icon": "bx bx-category-alt"
     },
     {
-        "display_name": "Fault Detection",
-        "route": "/FaultDetection",
+        "display_name": "Home",
+        "route": "/Home",
         "icon": "bx bx-category-alt"
     },
     {
@@ -54,7 +52,12 @@ const notifications = [
         "content": "Status",
         "route": "/StatusChanged",
         "icon": "bx bx-category-alt"
-    }
+    },
+    {
+        "display_name": "Fault Detection",
+        "route": "/FaultDetection",
+        "icon": "bx bx-category-alt"
+    },
 ]
 
 const user_menu = [
