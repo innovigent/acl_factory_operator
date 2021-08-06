@@ -31,32 +31,40 @@ const Home = () => {
 
             <div id="container">
                 <div className="position">
+                    <>
                     <div className="card full-height">
+                        {listData.lists.map((country, key) => (
+                            <>
                                         <div className="textFieldContainer1">
                                             {/* <div className="right-corner">Date:</div> */}
                                                 <div className="left-corner">Status:</div>
                                             </div>
                                             <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                                <div className="textFieldContainer1">
-                                                    <label htmlFor="productionorder"><h1>Production Order</h1></label>
-                                                    <label htmlFor="productionorder"><h1>{listData.lists[0].productionorderId}</h1></label>
+
+                                                    <div className="textFieldContainer1">
+                                                        <label htmlFor="productionorder"><h1>Production Order</h1></label>
+                                                        <label htmlFor="productionorder"><h2>{country.productionorderId}</h2></label>
                                                     </div>
                                                     <div className="textFieldContainer1">
-                                                    <label htmlFor="productionorder"><h1>Product</h1></label>
-                                                        <label htmlFor="productionorder"><h1>{listData.lists[0].productInfos.productName}</h1></label>
+                                                        <label htmlFor="productionorder"><h1>Product</h1></label>
+                                                        <label htmlFor="productionorder"><h2>{country.productInfos.productName}</h2></label>
                                                     </div>
-                                        <div className="textFieldContainer1">
-                                            <label htmlFor="productionorder"><h1>Machine speed</h1></label>
-                                            <label htmlFor="productionorder"><h1>{listData.lists[0].machineSpeed}</h1></label>
-                                        </div>
-                                        <div className="textFieldContainer1">
-                                            <label htmlFor="productionorder"><h1>Planned total</h1></label>
-                                            <label htmlFor="productionorder"><h1>{listData.lists[0].outputQuantity}</h1></label>
-                                        </div>
+                                                    <div className="textFieldContainer1">
+                                                        <label htmlFor="productionorder"><h1>Machine speed</h1></label>
+                                                        <label htmlFor="productionorder"><h2>{country.machineSpeed}</h2></label>
+                                                    </div>
+                                                    <div className="textFieldContainer1">
+                                                        <label htmlFor="productionorder"><h1>Planned total</h1></label>
+                                                        <label htmlFor="productionorder"><h2>{country.outputQuantity}</h2></label>
+                                                    </div>
+
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
                                 <div className="textFieldContainer1"></div>{/* to make space*/ }
+                            </>
+                        ))}
                             </div>
+                    </>
                         </div>
                 <TopNav/>
             </div>

@@ -57,7 +57,6 @@ const Changeover = () => {
                 `https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/${macaddress}/listproductorderIPC/getall`,
             );
             setListData({ lists: removeDuplicates(result.data.data.productionOrders)});
-            localStorage.setItem("productionrunId", result.data.data.id);
             setLoading(false);
         };
 
@@ -73,6 +72,7 @@ const Changeover = () => {
         try{
             const body = {epfNo,macaddress,productionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create",body);
+            localStorage.setItem("productionrunId", loginResponse.data.data.id);
             history.push("/Dashboard")
         } catch(err) {
             err.response.data.message && setErr(err.response.data.message)
