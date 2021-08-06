@@ -73,7 +73,7 @@ const Changeover = () => {
             const body = {epfNo,macaddress,productionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create",body);
             localStorage.setItem("productionrunId", loginResponse.data.data.id);
-            history.push("/Dashboard")
+            history.push("/Home")
         } catch(err) {
             err.response.data.message && setErr(err.response.data.message)
         }

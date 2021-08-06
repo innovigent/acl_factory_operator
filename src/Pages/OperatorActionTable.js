@@ -5,22 +5,54 @@ import "../assets/css/operatorfrm.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { css } from '@emotion/css' ;
 import TopNav from "../components/topnav/TopNav";
+import moment from 'moment';
+import Table from "../components/table/Table";
+import axios from "axios";
+import {useHistory} from "react-router-dom";
+import {HashLoader} from "react-spinners";
 
-
-
-
-
-function createData(name,empty) {
-    return { name,empty};
-}
+const fields = [
+    "Production Order",
+    "Production line",
+    "Start time",
+    "reason",
+    "Action"
+]
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    {
+        "id": 1,
+        "firstName": "mujeeb",
+        "lastName": "singham",
+        "email": "chandulagayan@gmail.com",
+        "createdAt": "2021-07-16T10:38:11.002Z",
+        "updatedAt": "2021-07-16T10:38:11.002Z",
+    },
+    {
+        "id": 9,
+        "firstName": "Gayath",
+        "lastName": "Chandula",
+        "email": "chandulagayan1@gmail.com",
+        "createdAt": "2021-07-16T10:38:11.002Z",
+        "updatedAt": "2021-07-16T10:38:11.002Z",
+    }
 ];
+
+const renderOrderHead = (item, index) => (
+    <th key={index}>{item}</th>
+)
+
+const renderOrderBody = (item, index) => (
+    <tr key={index}>
+        <td>{item.productionorderId}</td>
+        <td>{item.downtime[0].productionRunId}</td>
+        <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
+        <td>{item.downtime[0].reportedReasonId}</td>
+        <td>
+            <button  className="usertblbutton" ><i className='bx bxs-report'></i></button>
+        </td>
+    </tr>
+)
 
 const useStyles = makeStyles({
     table: {
@@ -57,25 +89,29 @@ className
 
 
 const ActionTable = () => {
-    const classes = useStyles();
-    const [uuid, setUuid] = useState("");
-  
+
+    const history = useHistory();
+    const [listData, setListData] = useState({ lists: [] });
+    const macaddress = localStorage.getItem('macaddress')
+    const productionrunId = localStorage.getItem('productionrunId')
+    const [err, setErr] = useState("");
+    const [loading, setLoading] = useState(true);
 
 
 
 
-    // create a preview as a side effect, whenever selected file is changed
-    
+    useEffect(() => {
 
-    // function validateForm() {
-    //     return email.length > 0 && password.length > 0;
-    // }
-    // const handleChange = (event) => {
-    //     setType(event.target.value);
-    // };
-    // const imagehandleChange = (event) => {
-    //     setImage(event.target.files[0]);
-    // };
+        const fetchData = async () => {
+            const result = await axios(
+                `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,
+            );
+            setListData({ lists: result.data.data.productRunLog});
+            setLoading(false);
+        };
+
+        fetchData();
+    }, []);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -90,77 +126,36 @@ const ActionTable = () => {
     //     // I've kept this example simple by using the first image instead of multiple
     //     setSelectedFile(e.target.files[0])
     // }
-
+    if (loading) {
+        return (
+            <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
+                <HashLoader  loading={loading}  size={150} />
+            </div>
+        )
+    }
     return (
         <>
         
                 <div className="layout__content-main">
-
                     <div className="position">
                             <div className="card full-height">
-
                                 <div>
-
                                 <div className="textFieldContainer1">
                                     <div className="right-corner">Date:</div>
-
                                     <div className="left-corner">Status:</div>
                                     </div>
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-                                    <table>
-                                          <tbody>
-                                              <th>Action</th>
-                                              <th>Content</th>
-                                            <tr>
-                                              <td class="action" align="center" >
-                                                <a> ✔ </a>
-                                              </td>
-                                              <td class="content" align="center">
-                                               <p>A</p>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td class="action" align="center" >
-                                                <a> ✔ </a><a> ✘ </a>
-                                              </td>
-                                              <td class="content" align="center">
-                                               <p>B</p>
-                                              </td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-
-                                   
-
-
-
-                       
-                                    
-                                    
-
-                                  
-
+                                    <Table
+                                        limit="5"
+                                        headData={fields}
+                                        renderHead={(item, index) => renderOrderHead(item, index)}
+                                        bodyData={listData.lists}
+                                        renderBody={(item, index) => renderOrderBody(item, index)}
+                                    />
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
                                     <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-
-                                   
-
-
-                                        <button   onClick={handleSubmit}  className="submita">submit</button>
-
-                                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-                                     
-                                  
-
-
-
                                 </div>
                             </div>
-
                         </div>
                     <TopNav/>
                 </div>
