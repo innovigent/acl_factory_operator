@@ -12,6 +12,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { useHistory,useLocation   } from 'react-router-dom';
 import {HashLoader} from "react-spinners";
+import {Alert, AlertTitle} from "@material-ui/lab";
 
 
 const SingleValue = ({
@@ -52,6 +53,7 @@ const Downtime = () => {
     const [downtimeId, setdowntimeId] = useState('');
     const [epfNo, setepfNo] = useState('');
     const [specialcaseId, setspecialcaseId] = useState('');
+    const [err, setErr] = useState("");
     const productionrunId = localStorage.getItem('productionrunId')
     const macaddress = localStorage.getItem('macaddress')
     const data = location.state;
@@ -79,12 +81,21 @@ const Downtime = () => {
         fetchData();
     }, []);
 
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
+    const submit = async (e) => {
+        e.preventDefault();
+        setErr("");
+        try{
+            const body = {downtimeId,macaddress,epfNo,specialcaseId,productionrunId,type};
+            const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,body);
+            history.push("/Home")
+        } catch(err) {
+            err.response.data.message && setErr(err.response.data.message)
+        }
+
+    };
 
     const handleChange = (event) => {
-        setType(event.target.value);
+        setspecialcaseId(event.target.value);
     };
 
     if (loading) {
@@ -103,6 +114,12 @@ const Downtime = () => {
                         <div className="position">
                             <div className="card full-height">
                                 <div>
+                                    {err ? (
+                                        <Alert severity="error">
+                                            <AlertTitle>Error</AlertTitle>
+                                            {err}
+                                        </Alert>
+                                    ) : null}
                                     <div className="textFieldContainer1">
                                         <div className="right-corner">Date:</div>
                                         <div className="middle">Line No:</div>
@@ -149,7 +166,7 @@ const Downtime = () => {
                                     {/* to make space*/}
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
-                                    <button onClick={handleSubmit} className="submita">submit</button>
+                                    <button onClick={submit} className="submita">submit</button>
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
                                 </div>
