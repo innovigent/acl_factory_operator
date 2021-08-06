@@ -59,7 +59,6 @@ h2 {
     font-size: 15px;
     margin-bottom: 0.25em;
     color: #222;
-    font-weight: lighter;
   }
   
   input {
@@ -100,6 +99,10 @@ h2 {
     flex-direction: column;
     margin-bottom: 22px;
   }
+.textFieldContainer1 label{
+  font-family: "Roboto", sans-serif;
+  font-size: medium;
+}
 /*   
   .firstName,
   .lastName {

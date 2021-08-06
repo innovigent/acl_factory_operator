@@ -11,6 +11,7 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 import {HashLoader} from "react-spinners";
 
+
 const fields = [
     "Production Order",
     "Production line",
@@ -38,21 +39,13 @@ const rows = [
     }
 ];
 
+
+
+
 const renderOrderHead = (item, index) => (
     <th key={index}>{item}</th>
 )
 
-const renderOrderBody = (item, index) => (
-    <tr key={index}>
-        <td>{item.productionorderId}</td>
-        <td>{item.downtime[0].productionRunId}</td>
-        <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
-        <td>{item.downtime[0].reportedReasonId}</td>
-        <td>
-            <button  className="usertblbutton" ><i className='bx bxs-report'></i></button>
-        </td>
-    </tr>
-)
 
 const useStyles = makeStyles({
     table: {
@@ -97,8 +90,24 @@ const ActionTable = () => {
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const onUpdate = (item) => {
 
+        history.push({pathname: '/Downtime',
+            state: item
+        })
+    }
 
+    const renderOrderBody = (item, index) => (
+        <tr key={index}>
+            <td>{item.productionorderId}</td>
+            <td>{item.downtime[0].productionRunId}</td>
+            <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
+            <td>{item.downtime[0].reportedReasonId}</td>
+            <td>
+                <button  className="usertblbutton" onClick={()=>{onUpdate(item)}}><i className='bx bxs-report'></i></button>
+            </td>
+        </tr>
+    )
 
     useEffect(() => {
 
