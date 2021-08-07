@@ -107,7 +107,6 @@ const Downtime = () => {
     }
     return (
         <>
-
             <div className="layout__content-main">
                 <div className="row">
                     <div className='col-12'>
@@ -176,7 +175,6 @@ const Downtime = () => {
                 </div>
                 <TopNav/>
             </div>
-
         </>
     )
 }
