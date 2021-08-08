@@ -144,31 +144,34 @@ const ActionTable = () => {
     }
     return (
         <>
-        
-                <div className="layout__content-main">
-                    <div className="position">
-                            <div className="card full-height">
-                                <div>
-                                <div className="textFieldContainer1">
-                                    <div className="right-corner">Date:</div>
-                                    <div className="left-corner">Status:</div>
-                                    </div>
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <Table
-                                        limit="5"
-                                        headData={fields}
-                                        renderHead={(item, index) => renderOrderHead(item, index)}
-                                        bodyData={listData.lists}
-                                        renderBody={(item, index) => renderOrderBody(item, index)}
-                                    />
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                </div>
+
+            <div className="layout__content-main">
+                <div className="position">
+                    <div className="card full-height">
+                        <div>
+                            <div className="textFieldContainer1">
+                                <div className="right-corner">Date:</div>
+                                <div className="left-corner">Status:</div>
                             </div>
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <Table
+                                limit="5"
+                                headData={fields}
+                                renderHead={(item, index) => renderOrderHead(item, index)}
+                                bodyData={listData.lists}
+                                renderBody={(item, index) => renderOrderBody(item, index)}
+                            />
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
                         </div>
-                    <TopNav/>
+                    </div>
                 </div>
-          
+                <TopNav/>
+            </div>
+
         </>
     )
 }

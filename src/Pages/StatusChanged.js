@@ -146,98 +146,97 @@ const Device = () => {
 
     return (
         <>
-        
-                <div className="layout__content-main">
 
-                    <div className="position">
-                            <div className="card full-height">
+            <div className="layout__content-main">
 
-                                
-                                <div>
+                <div className="position">
+                    <div className="card full-height">
 
-                                       
-        
 
-                                
-                                <div className="textFieldContainer1">
-                                    {/* <div className="right-corner">Date:</div>
+                        <div>
+
+
+                            <div className="textFieldContainer1">
+                                {/* <div className="right-corner">Date:</div>
 
                                     <div className="left-corner">Status:</div> */}
-                                    </div>
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
+                            </div>
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
 
-                                    <div className="textFieldContainer1">
-         
-                                         timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
-                                         timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
-                                       </div>
+                            <div className="textFieldContainer1">
 
+                                timerDays: {timerDays} &nbsp; timerHours: {timerHours} &nbsp;
+                                timerMinutes: {timerMinutes} &nbsp; timerSeconds: {timerSeconds} &nbsp;
+                            </div>
 
 
                             <div className="textFieldContainer1">
                                 <label>Production Order</label>
-                                        <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
-                                    </div>
+                                <input type="text" autoFocus placeholder="" value={uuid}
+                                       onChange={(e) => setUuid(e.target.value)}/>
 
-                                    <div className="textFieldContainer1">
-                                <label>Excegetive Info</label>
-                                        <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
-                                    </div>
-
-                                    <div className="textFieldContainer1">
-                                <label>Department</label>
-                                        <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
-                                    </div>
-
-                                    <div className="textFieldContainer1">
-                                        <label htmlFor="productionorder">Reason</label>
-
-                                              <CreatableSelect
-                                                options={""}
-                                                className="orderNo"
-                                                components={{ SingleValue}}
-                                                isValidNewOption={() => false}
-                                                // styles={customStyles}
-                                                styles={{
-                                                    menu: (provided, state) => ({
-                                                        ...provided,
-                                                        width: "90%",
-                                                        padding: 30,
-                                                    }),
-                                                    singleValue: (provided, state) => ({
-                                                        ...provided,
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        opacity : 0.5
-                                                    })
-                                                }}
-                                             />
-                                             </div>
-
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-
-                                   
-
-
-                                        <button   onClick={handleSubmit}  className="submita">submit</button>
-                                     
-                                  
-                                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-                               
-
-
-                                </div>
                             </div>
 
+                            <div className="textFieldContainer1">
+                                <label>Excegetive Info</label>
+                                <input type="text" autoFocus placeholder="" value={uuid}
+                                       onChange={(e) => setUuid(e.target.value)}/>
+
+                            </div>
+
+                            <div className="textFieldContainer1">
+                                <label>Department</label>
+                                <input type="text" autoFocus placeholder="" value={uuid}
+                                       onChange={(e) => setUuid(e.target.value)}/>
+
+                            </div>
+
+                            <div className="textFieldContainer1">
+                                <label htmlFor="productionorder">Reason</label>
+
+                                <CreatableSelect
+                                    options={""}
+                                    className="orderNo"
+                                    components={{SingleValue}}
+                                    isValidNewOption={() => false}
+                                    // styles={customStyles}
+                                    styles={{
+                                        menu: (provided, state) => ({
+                                            ...provided,
+                                            width: "90%",
+                                            padding: 30,
+                                        }),
+                                        singleValue: (provided, state) => ({
+                                            ...provided,
+                                            display: "flex",
+                                            alignItems: "center",
+                                            opacity: 0.5
+                                        })
+                                    }}
+                                />
+                            </div>
+
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+
+
+                            <button onClick={handleSubmit} className="submita">submit</button>
+
+
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+
+
                         </div>
-                    <TopNav/>
+                    </div>
+
                 </div>
-          
+                <TopNav/>
+            </div>
+
         </>
     )
 }

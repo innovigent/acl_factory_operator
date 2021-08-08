@@ -93,69 +93,61 @@ const ProductOrder = () => {
 
     return (
         <>
-        
-                <div className="layout__content-main">
 
-                    <div className="position">
-                            <div className="card full-height">
+            <div className="layout__content-main">
 
-                                
-                                <div>
+                <div className="position">
+                    <div className="card full-height">
 
-                                       
-        
 
-                                
-                                <div className="textFieldContainer1">
-                                    <div className="right-corner">Date:</div>
+                        <div>
 
-                                    <div className="left-corner">Status:</div>
-                                    </div>
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
 
-                                   
+                            <div className="textFieldContainer1">
+                                <div className="right-corner">Date:</div>
 
+                                <div className="left-corner">Status:</div>
+                            </div>
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
 
 
                             <div className="textFieldContainer1">
                                 <label>Product Order No.</label>
-                                        <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
-                                    </div>
+                                <input type="text" autoFocus placeholder="" value={uuid}
+                                       onChange={(e) => setUuid(e.target.value)}/>
 
-                                    <div className="textFieldContainer1">
-                                <label>Operator Epf No.</label>
-                                        <input type="text" autoFocus placeholder="" value={uuid}  onChange={(e) => setUuid(e.target.value)} />
-                                    
-                                    </div>
-                                    
-                                    
-
-                                  
-
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-
-                                   
-
-
-                                        <button   onClick={handleSubmit}  className="submita">submit</button>
-
-                                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                     
-                                  
-
-
-
-                                </div>
                             </div>
 
+                            <div className="textFieldContainer1">
+                                <label>Operator Epf No.</label>
+                                <input type="text" autoFocus placeholder="" value={uuid}
+                                       onChange={(e) => setUuid(e.target.value)}/>
+
+                            </div>
+
+
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+
+
+                            <button onClick={handleSubmit} className="submita">submit</button>
+
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+
+
                         </div>
-                    <TopNav/>
+                    </div>
+
                 </div>
-          
+                <TopNav/>
+            </div>
+
         </>
     )
 }
