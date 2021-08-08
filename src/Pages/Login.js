@@ -54,11 +54,13 @@ const Login = () => {
                         ) : null}
                         <div className="rowlogin">
                             <label>EPF no</label>
-                            <input type="number" min="0"  autoFocus placeholder="Enter your epf no" value={Epf}  onChange={(e) => setEpf(e.target.value)} />
+                            <input type="number" min="0" autoFocus placeholder="Enter your epf no" value={Epf}
+                                   onChange={(e) => setEpf(e.target.value)}/>
                         </div>
                         <div className="rowlogin">
                             <label>Employye Id</label>
-                            <input type="number" min="0" placeholder="Enter your employee number" value={Employeeno}  onChange={(e) => setEmployeeno(e.target.value)} />
+                            <input type="number" min="0" placeholder="Enter your employee number" value={Employeeno}
+                                   onChange={(e) => setEmployeeno(e.target.value)}/>
                         </div>
 
 

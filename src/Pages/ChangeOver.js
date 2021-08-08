@@ -111,13 +111,14 @@ const Changeover = () => {
 
                                 <div className="left-corner">Status:</div>
                             </div>
-                            <div className="textFieldContainer1"></div>{/* to make space*/ }
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
                             <div className="textFieldContainer1">
                                 <label htmlFor="orderNo">Product Order No.</label>
                                 <CreatableSelect
                                     options={podata}
                                     className="orderNo"
-                                    components={{ SingleValue}}
+                                    components={{SingleValue}}
                                     onChange={handleChange}
                                     isValidNewOption={() => false}
                                     // styles={customStyles}
@@ -131,7 +132,7 @@ const Changeover = () => {
                                             ...provided,
                                             display: "flex",
                                             alignItems: "center",
-                                            opacity : 0.5
+                                            opacity: 0.5
                                         })
                                     }}
                                 />
@@ -155,14 +156,17 @@ const Changeover = () => {
                                     onChange={(e) => setepfNo(e.target.value)}
                                 />
                             </div>
-                                <div className="textFieldContainer1"></div>{/* to make space*/ }
-                                    <div className="textFieldContiner1"></div>{/* to make space*/ }
-                                        <button  onClick={submit}  className="submita">submit</button>
-                                    <div className="textFieldContiner1"></div>{/* to make space*/ }
-                                <br/>
-                            </div>
+                            <div className="textFieldContainer1"></div>
+                            {/* to make space*/}
+                            <div className="textFieldContiner1"></div>
+                            {/* to make space*/}
+                            <button onClick={submit} className="submita">submit</button>
+                            <div className="textFieldContiner1"></div>
+                            {/* to make space*/}
+                            <br/>
                         </div>
                     </div>
+                </div>
                 <TopNav/>
             </div>
         </>

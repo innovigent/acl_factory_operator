@@ -154,12 +154,8 @@ const FaultDetection = () => {
 
                             <div className="left-corner">Status:</div>
                         </div>
-                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-
-
-
-
+                        <div className="textFieldContainer1"></div>
+                        {/* to make space*/}
 
 
                         <div className="textFieldContainer1">
@@ -168,7 +164,7 @@ const FaultDetection = () => {
                             <CreatableSelect
                                 options={""}
                                 className="orderNo"
-                                components={{ SingleValue}}
+                                components={{SingleValue}}
                                 isValidNewOption={() => false}
                                 // styles={customStyles}
                                 styles={{
@@ -181,7 +177,7 @@ const FaultDetection = () => {
                                         ...provided,
                                         display: "flex",
                                         alignItems: "center",
-                                        opacity : 0.5
+                                        opacity: 0.5
                                     })
                                 }}
                             />
@@ -190,22 +186,20 @@ const FaultDetection = () => {
 
                         <div className="textFieldContainer1">
                             <label htmlFor="productionorder">Product</label>
-                            <input type="text" autoFocus placeholder="" value={Product}  onChange={(e) => setProduct(e.target.value)} />
+                            <input type="text" autoFocus placeholder="" value={Product}
+                                   onChange={(e) => setProduct(e.target.value)}/>
 
                         </div>
 
-                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-                        <div className="textFieldContainer1"></div>{/* to make space*/ }
+                        <div className="textFieldContainer1"></div>
+                        {/* to make space*/}
+                        <div className="textFieldContainer1"></div>
+                        {/* to make space*/}
 
 
-
-
-
-                        <button   onClick={handleSubmit}  className="submita">submit</button>
-                        <div className="textFieldContainer1"></div>{/* to make space*/ }
-
-
-
+                        <button onClick={handleSubmit} className="submita">submit</button>
+                        <div className="textFieldContainer1"></div>
+                        {/* to make space*/}
 
 
                     </div>
