@@ -17,7 +17,8 @@ const fields = [
     "Production line",
     "Start time",
     "reason",
-    "Action"
+    "Reslove",
+    "Report"
 ]
 
 const rows = [
@@ -97,12 +98,22 @@ const ActionTable = () => {
         })
     }
 
+    const onPush = (item) => {
+
+        history.push({pathname: '/VerifyIssue',
+            state: item
+        })
+    }
+
     const renderOrderBody = (item, index) => (
         <tr key={index}>
             <td>{item.productionorderId}</td>
             <td>{item.downtime[0].productionRunId}</td>
             <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
             <td>{item.downtime[0].reportedReasonId}</td>
+            <td>
+                <button  className="usertblbutton" onClick={()=>{onPush(item)}}><i className='bx bx-edit'></i></button>
+            </td>
             <td>
                 <button  className="usertblbutton" onClick={()=>{onUpdate(item)}}><i className='bx bxs-report'></i></button>
             </td>
@@ -126,15 +137,6 @@ const ActionTable = () => {
         event.preventDefault();
     }
 
-    // const onSelectFile = e => {
-    //     if (!e.target.files || e.target.files.length === 0) {
-    //         setSelectedFile(undefined)
-    //         return
-    //     }
-
-    //     // I've kept this example simple by using the first image instead of multiple
-    //     setSelectedFile(e.target.files[0])
-    // }
     if (loading) {
         return (
             <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>

@@ -11,6 +11,7 @@ import SlowDownSpeed from "./Pages/SlowDownSpeed";
 import StatusChanged from "./Pages/StatusChanged";
 import Login from "./Pages/Login";
 import Home from './Pages/Home';
+import VerifyIssue from "./Pages/VerifyIssue";
 
 const Routes = () => {
 
@@ -30,6 +31,7 @@ const Routes = () => {
                 <Route path="/SlowDownSpeed" component={SlowDownSpeed} />
                 <Route path="/StatusChanged" component={StatusChanged} />
                 <Route path="/Home" component={Home} />
+                <Route path="/VerifyIssue" component={VerifyIssue} />
 
             </Switch>
         </BrowserRouter>

@@ -53,9 +53,11 @@ const Downtime = () => {
     const [downtimeId, setdowntimeId] = useState('');
     const [epfNo, setepfNo] = useState('');
     const [specialcaseId, setspecialcaseId] = useState('');
+    const [productionorder, setproductionorder] = useState('');
     const [err, setErr] = useState("");
-    const productionrunId = localStorage.getItem('productionrunId')
+    const productionrunId = +localStorage.getItem('productionrunId')
     const macaddress = localStorage.getItem('macaddress')
+    const empid = +localStorage.getItem('empid')
     const data = location.state;
 
     useEffect(() => {
@@ -63,7 +65,7 @@ const Downtime = () => {
         console.log(data)
         setdowntimeId(data.id)
         setepfNo(data.downtime[0].operatorId)
-        setspecialcaseId(data.downtime[0].specialcaseId)
+        setproductionorder(data.downtime[0].specialcaseId)
         setLoading(false);
 
     }, []);
@@ -84,18 +86,29 @@ const Downtime = () => {
     const submit = async (e) => {
         e.preventDefault();
         setErr("");
-        try{
-            const body = {downtimeId,macaddress,epfNo,specialcaseId,productionrunId,type};
-            const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,body);
-            history.push("/Home")
-        } catch(err) {
-            err.response.data.message && setErr(err.response.data.message)
+        if(specialcaseId === 'Endshift'){
+            try {
+                const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
+                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`, body);
+                history.push("/Home")
+            }
+            catch(err) {
+                err.response.data.message && setErr(err.response.data.message)
+            }
+        }else{
+            try {
+                const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
+                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`, body);
+                history.push("/Home")
+            }
+            catch(err) {
+                err.response.data.message && setErr(err.response.data.message)
+            }
         }
-
     };
 
-    const handleChange = (event) => {
-        setspecialcaseId(event.target.value);
+    const handleChange = (id) => {
+        setspecialcaseId(id);
     };
 
     if (loading) {
@@ -133,7 +146,7 @@ const Downtime = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <label>Production Order</label>
-                                        <input value={specialcaseId} disabled></input>
+                                        <input value={productionorder} disabled></input>
                                     </div>
                                     <div className="textFieldContainer1">
                                         <label htmlFor="Department">Department</label>
@@ -151,14 +164,14 @@ const Downtime = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <div className="wrapper1">
-                                            <RadioGroup aria-label="type" name="type" value={type}
-                                                        onChange={handleChange}
-                                                        row>
                                                 {listData.lists.map((country, key) => (
+                                                    <RadioGroup aria-label="type" name="type" value={specialcaseId}
+                                                                onChange={(e)=>handleChange(country.id)}
+                                                                row>
                                                     <FormControlLabel value={country.id} control={<Radio color="primary"/>}
                                                                       label={country.name}/>
-                                                ))}
                                             </RadioGroup>
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="textFieldContainer1"></div>
