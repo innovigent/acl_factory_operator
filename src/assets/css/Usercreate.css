@@ -132,6 +132,7 @@ input:focus {
     border-radius: 10px 10px 10px 10px;
 
 }
+
 .usertblbutton{
     border-radius: 5px;
     width: 60%;
@@ -154,6 +155,8 @@ input:focus {
 .usertblbutton:hover{
     opacity: 0.8;
 }
+
+
 
 a:hover {
     color: var(--main-color);

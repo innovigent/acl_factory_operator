@@ -112,7 +112,7 @@ const ActionTable = () => {
             <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
             <td>{item.downtime[0].reportedReasonId}</td>
             <td>
-                <button  className="usertblbutton" onClick={()=>{onPush(item)}}><i className='bx bx-edit'></i></button>
+                <button  className="usertblactivebutton" onClick={()=>{onPush(item)}}><i className='bx bx-edit'></i></button>
             </td>
             <td>
                 <button  className="usertblbutton" onClick={()=>{onUpdate(item)}}><i className='bx bxs-report'></i></button>
