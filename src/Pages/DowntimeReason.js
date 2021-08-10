@@ -61,7 +61,7 @@ const DowntimeReason = () => {
         try{
             const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/SubmitFaultReason/create",body);
-            // history.push("/Changeover")
+            history.push("/Home")
 
         } catch(err) {
             err && setErr(err)
@@ -103,7 +103,7 @@ const DowntimeReason = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <label>Reason</label>
-                                        <select id="department" name="department" value={reasonId} onChange={(e) => setreasonId(e.target.value)} >
+                                        <select  value={reasonId} onChange={(e) => setreasonId(e.target.value)} >
                                             <option value=""  selected>please select Reason</option>
                                             {listData.lists.map((country, key) => (
                                                 <option key={key} value={country.id}>
