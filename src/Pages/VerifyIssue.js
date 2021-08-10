@@ -34,7 +34,8 @@ const VerifyIssue = () => {
             history.push({pathname: '/DowntimeReason',
                 state: dataproduction,
                 executive:loginResponse.data.data.id,
-                name:loginResponse.data.data.userInfo.firstName
+                name:loginResponse.data.data.userInfo.firstName,
+                permissionId:loginResponse.data.data.permissionId,
             })
 
         } catch(err) {

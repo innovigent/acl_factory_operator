@@ -23,6 +23,7 @@ const DowntimeReason = () => {
     const [reportedExecutiveId ,setreportedExecutiveId] = useState('');
     const [reasonId, setreasonId] = useState('');
     const [name, setname] = useState('');
+    const [permissionId, setpermissionId] = useState('');
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress');
@@ -38,10 +39,12 @@ const DowntimeReason = () => {
         const data = location.state;
         const executive = location.executive;
         const name = location.name;
+        const permissionId = location.permissionId;
         console.log(data)
         setdowntimeId(data.id)
         setreportedExecutiveId(executive)
         setname(name)
+        setpermissionId(permissionId)
         setLoading(false);
     }, []);
 
@@ -62,7 +65,7 @@ const DowntimeReason = () => {
         //e.preventDefault();
         setErr("");
         try{
-            const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId};
+            const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId,permissionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/SubmitFaultReason/create",body);
             history.push("/Home")
 
