@@ -33,7 +33,8 @@ const VerifyIssue = () => {
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/emailreasoningtokenvalidate/validate",body);
             history.push({pathname: '/DowntimeReason',
                 state: dataproduction,
-                executive:loginResponse.data.data.id
+                executive:loginResponse.data.data.id,
+                name:loginResponse.data.data.userInfo.firstName
             })
 
         } catch(err) {

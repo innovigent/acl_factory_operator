@@ -22,6 +22,7 @@ const DowntimeReason = () => {
     const [Department, setDepartment] = useState('');
     const [reportedExecutiveId ,setreportedExecutiveId] = useState('');
     const [reasonId, setreasonId] = useState('');
+    const [name, setname] = useState('');
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress');
@@ -36,9 +37,11 @@ const DowntimeReason = () => {
     useEffect(() => {
         const data = location.state;
         const executive = location.executive;
+        const name = location.name;
         console.log(data)
         setdowntimeId(data.id)
         setreportedExecutiveId(executive)
+        setname(name)
         setLoading(false);
     }, []);
 
@@ -113,8 +116,8 @@ const DowntimeReason = () => {
                                         </select>
                                     </div>
                                     <div className="textFieldContainer1">
-                                        <label>Executive ID</label>
-                                        <input value={reportedExecutiveId} disabled></input>
+                                        <label>Executive name</label>
+                                        <input value={name} disabled></input>
                                     </div>
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
