@@ -6,11 +6,11 @@ import "../assets/css/Login.css";
 import {useHistory, useLocation} from 'react-router-dom';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import axios from 'axios';
+import TopNav from "../components/topnav/TopNav";
+import {HashLoader} from "react-spinners";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import TopNav from "../components/topnav/TopNav";
-import {HashLoader} from "react-spinners";
 
 
 const DowntimeReason = () => {
@@ -21,6 +21,7 @@ const DowntimeReason = () => {
     const [Product, setProduct] = useState('');
     const [Department, setDepartment] = useState('');
     const [reportedExecutiveId ,setreportedExecutiveId] = useState('');
+    const [tospecialCaseId, settospecialCaseId] = useState('');
     const [reasonId, setreasonId] = useState('');
     const [name, setname] = useState('');
     const [permissionId, setpermissionId] = useState('');
@@ -29,10 +30,11 @@ const DowntimeReason = () => {
     const macaddress = localStorage.getItem('macaddress');
     const productionrunId = +localStorage.getItem('productionrunId');
     const [listData, setListData] = useState({ lists: [] });
-    const [dataproduction, setdataproduction] = useState([])
+    const [listData1, setListData1] = useState({ lists: [] });
+
 
     function validateForm() {
-        return reportedExecutiveId.length > 0;
+        return tospecialCaseId.length > 0;
     }
 
     useEffect(() => {
@@ -41,7 +43,6 @@ const DowntimeReason = () => {
         const name = location.name;
         const permissionId = location.permissionId;
         console.log(data)
-        setdataproduction(data)
         setdowntimeId(data.id)
         setreportedExecutiveId(executive)
         setname(name)
@@ -52,10 +53,10 @@ const DowntimeReason = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
+            const result1 = await axios(
+                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
             );
-            setListData({ lists: result.data.data.FaultReasonsDetails});
+            setListData1({ lists: result1.data.data.specialCase});
             setLoading(false);
         };
 
@@ -66,8 +67,8 @@ const DowntimeReason = () => {
         //e.preventDefault();
         setErr("");
         try{
-            const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId,permissionId};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/SubmitFaultReason/create",body);
+            const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId,permissionId,tospecialCaseId};
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/transferreasoning/create",body);
             history.push("/Home")
 
         } catch(err) {
@@ -75,14 +76,6 @@ const DowntimeReason = () => {
         }
     };
 
-    const transfer = async (e) => {
-        history.push({pathname: '/Downtimetransfer',
-            state: dataproduction,
-            executive:reportedExecutiveId,
-            name:name,
-            permissionId:permissionId,
-        })
-    };
     if (loading) {
         return (
             <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
@@ -117,12 +110,12 @@ const DowntimeReason = () => {
                                         <input value={productionrunId} disabled></input>
                                     </div>
                                     <div className="textFieldContainer1">
-                                        <label>Reason</label>
-                                        <select  value={reasonId} onChange={(e) => setreasonId(e.target.value)} >
+                                        <label>Special Case</label>
+                                        <select  value={tospecialCaseId} onChange={(e) => settospecialCaseId(e.target.value)} >
                                             <option value=""  selected>please select Reason</option>
-                                            {listData.lists.map((country, key) => (
+                                            {listData1.lists.map((country, key) => (
                                                 <option key={key} value={country.id}>
-                                                    {country.faultreason}
+                                                    {country.name}
                                                 </option>
                                             ))}
                                         </select>
@@ -135,8 +128,7 @@ const DowntimeReason = () => {
                                     {/* to make space*/}
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
-                                    <button onClick={transfer} className="submitb">Transfer</button>
-                                    <button onClick={submit} className="submita">submit</button>
+                                    <button onClick={submit} disabled={!validateForm()} className="submita">submit</button>
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
                                 </div>

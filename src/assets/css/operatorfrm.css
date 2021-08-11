@@ -299,7 +299,27 @@ outline: none;
   width: 15%;
   justify-content: end;
 }
+.submitb{
 
+  position: absolute;
+
+  background: linear-gradient(
+          to right,
+          var(--main-color-orange),
+          var(--second-color-orange)
+  );
+  border-radius: 10px;
+  color: #fff;
+  border: 2px solid #fff;
+
+  /* margin-top: 1em; */
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  width: 15%;
+  justify-content: end;
+}
 .position{
   margin-top: 20%;
   left: auto;
