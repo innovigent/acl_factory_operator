@@ -14,6 +14,7 @@ import Home from './Pages/Home';
 import VerifyIssue from "./Pages/VerifyIssue";
 import DowntimeReason from "./Pages/DowntimeReason";
 import Downtimetransfer from "./Pages/Downtimetransfer";
+import OperatorBrakdown from "./Pages/OperatorBrakdown";
 
 const Routes = () => {
 
@@ -36,6 +37,7 @@ const Routes = () => {
                 <Route path="/VerifyIssue" component={VerifyIssue} />
                 <Route path="/DowntimeReason" component={DowntimeReason} />
                 <Route path="/Downtimetransfer" component={Downtimetransfer} />
+                <Route path="/OperatorBrakdown" component={OperatorBrakdown} />
 
             </Switch>
         </BrowserRouter>

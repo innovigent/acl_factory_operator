@@ -2,7 +2,8 @@ import React, {useEffect,useState} from 'react';
 import "../assets/css/Usercreate.css";
 import TopNav from "../components/topnav/TopNav";
 import axios from 'axios';
-
+import Dropdown from '../components/dropdown/Dropdown'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -12,6 +13,18 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress')
     const productionrunId = localStorage.getItem('productionrunId')
+
+    const notifications = [
+        {
+            "icon": "bx bx-error",
+            "content": "BreakDown",
+            "route": "/OperatorBrakdown",
+        },
+        {
+            "icon": "bx bx-edit-alt",
+            "content": "Slow Speed"
+        },
+    ]
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +37,14 @@ const Home = () => {
         fetchData();
     }, [])
 
-
+    const renderNotificationItem = (item, index) => (
+        <Link to={item.route} key={index}>
+            <div className="notification-item" key={index}>
+                <i className={item.icon}></i>
+                <span>{item.content}</span>
+            </div>
+        </Link>
+    )
 
     return (
         <>
@@ -37,7 +57,14 @@ const Home = () => {
                                 <>
                                     <div className="textFieldContainer1">
                                         {/* <div className="right-corner">Date:</div> */}
-                                        <div className="left-corner">Status:</div>
+                                        <div className="left-corner">
+                                            <Dropdown
+                                                icon='bx bx-message-edit'
+                                                contentData={notifications}
+                                                renderItems={(item, index) => renderNotificationItem(item, index)}
+                                            />
+                                        </div>
+                                        <div className="right-corner">Status:</div>
                                     </div>
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
