@@ -1,8 +1,8 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { css } from '@emotion/css' ;
+import {css} from '@emotion/css' ;
 import CreatableSelect from 'react-select/creatable';
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
@@ -10,7 +10,7 @@ import moment from 'moment';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useHistory,useLocation   } from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {HashLoader} from "react-spinners";
 import {Alert, AlertTitle} from "@material-ui/lab";
 
@@ -49,7 +49,7 @@ const Downtime = () => {
     const location = useLocation();
     const [loading, setLoading] = useState(true);
     const [type, setType] = React.useState('');
-    const [listData, setListData] = useState({ lists: [] });
+    const [listData, setListData] = useState({lists: []});
     const [downtimeId, setdowntimeId] = useState('');
     const [epfNo, setepfNo] = useState('');
     const [specialcaseId, setspecialcaseId] = useState('');
@@ -76,7 +76,7 @@ const Downtime = () => {
             const result = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
             );
-            setListData({ lists: result.data.data.specialCase});
+            setListData({lists: result.data.data.specialCase});
             setLoading(false);
         };
 
@@ -86,22 +86,20 @@ const Downtime = () => {
     const submit = async (e) => {
         e.preventDefault();
         setErr("");
-        if(specialcaseId === 'Endshift'){
+        if (specialcaseId === 'Endshift') {
             try {
                 const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
                 const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`, body);
                 history.push("/Home")
-            }
-            catch(err) {
+            } catch (err) {
                 err.response.data.message && setErr(err.response.data.message)
             }
-        }else{
+        } else {
             try {
                 const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
                 const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`, body);
                 history.push("/Home")
-            }
-            catch(err) {
+            } catch (err) {
                 err.response.data.message && setErr(err.response.data.message)
             }
         }
@@ -113,8 +111,17 @@ const Downtime = () => {
 
     if (loading) {
         return (
-            <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
-                <HashLoader  loading={loading}  size={150} />
+            <div style={{
+                padding: "10px 20px",
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "#FFFFFF"
+            }}>
+                <HashLoader loading={loading} size={150}/>
             </div>
         )
     }
@@ -155,7 +162,8 @@ const Downtime = () => {
                                             <RadioGroup aria-label="type" name="type" value={type}
                                                         onChange={handleChange}
                                                         row>
-                                                <FormControlLabel value="uncategorized" control={<Radio color="primary"/>}
+                                                <FormControlLabel value="uncategorized"
+                                                                  control={<Radio color="primary"/>}
                                                                   label="uncategorized"/>
                                                 <FormControlLabel value="EndShift" control={<Radio color="primary"/>}
                                                                   label="End Shift"/>
@@ -164,13 +172,14 @@ const Downtime = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <div className="wrapper1">
-                                                {listData.lists.map((country, key) => (
-                                                    <RadioGroup aria-label="type" name="type" value={specialcaseId}
-                                                                onChange={(e)=>handleChange(country.id)}
-                                                                row>
-                                                    <FormControlLabel value={country.id} control={<Radio color="primary"/>}
+                                            {listData.lists.map((country, key) => (
+                                                <RadioGroup aria-label="type" name="type" value={specialcaseId}
+                                                            onChange={(e) => handleChange(country.id)}
+                                                            row>
+                                                    <FormControlLabel value={country.id}
+                                                                      control={<Radio color="primary"/>}
                                                                       label={country.name}/>
-                                            </RadioGroup>
+                                                </RadioGroup>
                                             ))}
                                         </div>
                                     </div>
