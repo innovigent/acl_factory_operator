@@ -1,9 +1,9 @@
-import React, {useEffect,useState,useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { makeStyles } from '@material-ui/core/styles';
-import { css } from '@emotion/css' ;
+import {makeStyles} from '@material-ui/core/styles';
+import {css} from '@emotion/css' ;
 import TopNav from "../components/topnav/TopNav";
 import moment from 'moment';
 import Table from "../components/table/Table";
@@ -41,8 +41,6 @@ const rows = [
 ];
 
 
-
-
 const renderOrderHead = (item, index) => (
     <th key={index}>{item}</th>
 )
@@ -55,37 +53,37 @@ const useStyles = makeStyles({
 });
 
 const SingleValue = ({
-    cx,
-    getStyles,
-    selectProps,
-    data,
-    isDisabled,
-    className,
-    ...props
-}) => {
-console.log(props);
-return (
-<div
-className={cx(
-css(getStyles("singleValue", props)),
-{
-"single-value": true,
-"single-value--is-disabled": isDisabled,
+                         cx,
+                         getStyles,
+                         selectProps,
+                         data,
+                         isDisabled,
+                         className,
+                         ...props
+                     }) => {
+    console.log(props);
+    return (
+        <div
+            className={cx(
+                css(getStyles("singleValue", props)),
+                {
+                    "single-value": true,
+                    "single-value--is-disabled": isDisabled,
 
-},
-className
-)}
->
-<div>{selectProps.getOptionLabel(data)}</div>
-</div>
-);
+                },
+                className
+            )}
+        >
+            <div>{selectProps.getOptionLabel(data)}</div>
+        </div>
+    );
 };
 
 
 const ActionTable = () => {
 
     const history = useHistory();
-    const [listData, setListData] = useState({ lists: [] });
+    const [listData, setListData] = useState({lists: []});
     const macaddress = localStorage.getItem('macaddress')
     const productionrunId = localStorage.getItem('productionrunId')
     const [err, setErr] = useState("");
@@ -93,14 +91,16 @@ const ActionTable = () => {
 
     const onUpdate = (item) => {
 
-        history.push({pathname: '/Downtime',
+        history.push({
+            pathname: '/Downtime',
             state: item
         })
     }
 
     const onPush = (item) => {
 
-        history.push({pathname: '/VerifyIssue',
+        history.push({
+            pathname: '/VerifyIssue',
             state: item
         })
     }
@@ -112,10 +112,14 @@ const ActionTable = () => {
             <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
             <td>{item.downtime[0].reportedReasonId}</td>
             <td>
-                <button  className="usertblactivebutton" onClick={()=>{onPush(item)}}><i className='bx bx-edit'></i></button>
+                <button className="usertblactivebutton" onClick={() => {
+                    onPush(item)
+                }}><i className='bx bx-edit'></i></button>
             </td>
             <td>
-                <button  className="usertblbutton" onClick={()=>{onUpdate(item)}}><i className='bx bxs-report'></i></button>
+                <button className="usertblbutton" onClick={() => {
+                    onUpdate(item)
+                }}><i className='bx bxs-report'></i></button>
             </td>
         </tr>
     )
@@ -126,7 +130,7 @@ const ActionTable = () => {
             const result = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,
             );
-            setListData({ lists: result.data.data.productRunLog});
+            setListData({lists: result.data.data.productRunLog});
             setLoading(false);
         };
 
@@ -139,8 +143,17 @@ const ActionTable = () => {
 
     if (loading) {
         return (
-            <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
-                <HashLoader  loading={loading}  size={150} />
+            <div style={{
+                padding: "10px 20px",
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "#FFFFFF"
+            }}>
+                <HashLoader loading={loading} size={150}/>
             </div>
         )
     }
