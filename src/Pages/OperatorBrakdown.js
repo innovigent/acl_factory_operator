@@ -4,7 +4,7 @@ import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
 import {useHistory, useLocation} from 'react-router-dom';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import {Alert, AlertTitle} from '@material-ui/lab';
 import axios from 'axios';
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -27,8 +27,8 @@ const OperatorBreakdown = () => {
     const macaddress = localStorage.getItem('macaddress');
     const productionrunId = +localStorage.getItem('productionrunId');
     const empid = +localStorage.getItem('empid');
-    const [listData, setListData] = useState({ lists: [] });
-    const [listData1, setListData1] = useState({ lists: [] });
+    const [listData, setListData] = useState({lists: []});
+    const [listData1, setListData1] = useState({lists: []});
     const [dataproduction, setdataproduction] = useState([])
 
     function validateForm() {
@@ -55,11 +55,11 @@ const OperatorBreakdown = () => {
             const result = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
             );
-            setListData({ lists: result.data.data.FaultReasonsDetails});
+            setListData({lists: result.data.data.FaultReasonsDetails});
             const result1 = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
             );
-            setListData1({ lists: result1.data.data.specialCase});
+            setListData1({lists: result1.data.data.specialCase});
             setLoading(false);
         };
 
@@ -73,12 +73,12 @@ const OperatorBreakdown = () => {
     const submit = async (e) => {
         //e.preventDefault();
         setErr("");
-        try{
-            const body = {macaddress,productionrunId,permissionId,specialcaseId,empid};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/manualDowntimeReason/create",body);
+        try {
+            const body = {macaddress, productionrunId, permissionId, specialcaseId, empid};
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/manualDowntimeReason/create", body);
             history.push("/Home")
 
-        } catch(err) {
+        } catch (err) {
             err && setErr(err)
         }
     };
@@ -86,8 +86,17 @@ const OperatorBreakdown = () => {
 
     if (loading) {
         return (
-            <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
-                <HashLoader  loading={loading}  size={150} />
+            <div style={{
+                padding: "10px 20px",
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "#FFFFFF"
+            }}>
+                <HashLoader loading={loading} size={150}/>
             </div>
         )
     }
@@ -122,9 +131,10 @@ const OperatorBreakdown = () => {
                                         <div className="wrapper1">
                                             {listData1.lists.map((country, key) => (
                                                 <RadioGroup aria-label="type" name="type" value={specialcaseId}
-                                                            onChange={(e)=>handleChange(country.id)}
+                                                            onChange={(e) => handleChange(country.id)}
                                                             row>
-                                                    <FormControlLabel value={country.id} control={<Radio color="primary"/>}
+                                                    <FormControlLabel value={country.id}
+                                                                      control={<Radio color="primary"/>}
                                                                       label={country.name}/>
                                                 </RadioGroup>
                                             ))}
