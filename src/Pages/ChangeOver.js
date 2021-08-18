@@ -44,7 +44,7 @@ const Changeover = () => {
     const history = useHistory();
     const [listData, setListData] = useState({ lists: [] });
     const macaddress = localStorage.getItem('macaddress')
-    const [epfNo, setepfNo] = useState("");
+    const epfNo = localStorage.getItem('epfno');
     const [productionId, setproductionId] = useState("");
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
@@ -153,7 +153,7 @@ const Changeover = () => {
                                     type="text"
                                     name=""
                                     value={epfNo}
-                                    onChange={(e) => setepfNo(e.target.value)}
+                                    disabled
                                 />
                             </div>
                             <div className="textFieldContainer1"></div>
