@@ -88,6 +88,7 @@ const ActionTable = () => {
     const productionrunId = localStorage.getItem('productionrunId')
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
+    const [reasonType, setreasonType] = useState('');
 
     const onUpdate = (item) => {
 
@@ -105,17 +106,33 @@ const ActionTable = () => {
         })
     }
 
+    const onPushSlowdown = (item) => {
+
+        history.push({
+            pathname: '/VerifySlowdown',
+            state: item
+        })
+    }
+
     const renderOrderBody = (item, index) => (
         <tr key={index}>
             <td>{item.productionorderId}</td>
             <td>{item.downtime[0].productionRunId}</td>
             <td>{moment(item.downtimeStartTime).format('hh:mm:ss')}</td>
             <td>{item.downtime[0].reportedReasonId}</td>
-            <td>
-                <button className="usertblactivebutton" onClick={() => {
-                    onPush(item)
-                }}><i className='bx bx-edit'></i></button>
-            </td>
+            {reasonType === 2 ?
+                <td>
+                    <button className="usertblactivebutton" onClick={() => {
+                        onPushSlowdown(item)
+                    }}><i className='bx bx-edit'></i></button>
+                </td>
+                :
+                <td>
+                    <button className="usertblactivebutton" onClick={() => {
+                        onPush(item)
+                    }}><i className='bx bx-edit'></i></button>
+                </td>
+            }
             <td>
                 <button className="usertblbutton" onClick={() => {
                     onUpdate(item)
@@ -130,7 +147,9 @@ const ActionTable = () => {
             const result = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,
             );
+
             setListData({lists: result.data.data.productRunLog});
+            setreasonType(result.data.data.productRunLog[0].downtime[0].reportedReasonId)
             setLoading(false);
         };
 
