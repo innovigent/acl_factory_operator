@@ -4,7 +4,7 @@ import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
 import {useHistory, useLocation} from 'react-router-dom';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import {Alert, AlertTitle} from '@material-ui/lab';
 import axios from 'axios';
 import TopNav from "../components/topnav/TopNav";
 import {HashLoader} from "react-spinners";
@@ -20,7 +20,7 @@ const DowntimeReason = () => {
     const [downtimeId, setdowntimeId] = useState('');
     const [Product, setProduct] = useState('');
     const [Department, setDepartment] = useState('');
-    const [reportedExecutiveId ,setreportedExecutiveId] = useState('');
+    const [reportedExecutiveId, setreportedExecutiveId] = useState('');
     const [tospecialCaseId, settospecialCaseId] = useState('');
     const [reasonId, setreasonId] = useState('');
     const [name, setname] = useState('');
@@ -29,8 +29,8 @@ const DowntimeReason = () => {
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress');
     const productionrunId = +localStorage.getItem('productionrunId');
-    const [listData, setListData] = useState({ lists: [] });
-    const [listData1, setListData1] = useState({ lists: [] });
+    const [listData, setListData] = useState({lists: []});
+    const [listData1, setListData1] = useState({lists: []});
 
 
     function validateForm() {
@@ -56,7 +56,7 @@ const DowntimeReason = () => {
             const result1 = await axios(
                 `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
             );
-            setListData1({ lists: result1.data.data.specialCase});
+            setListData1({lists: result1.data.data.specialCase});
             setLoading(false);
         };
 
@@ -66,20 +66,37 @@ const DowntimeReason = () => {
     const submit = async (e) => {
         //e.preventDefault();
         setErr("");
-        try{
-            const body = {macaddress,downtimeId,reportedExecutiveId,reasonId,productionrunId,permissionId,tospecialCaseId};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/transferreasoning/create",body);
+        try {
+            const body = {
+                macaddress,
+                downtimeId,
+                reportedExecutiveId,
+                reasonId,
+                productionrunId,
+                permissionId,
+                tospecialCaseId
+            };
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/transferreasoning/create", body);
             history.push("/Home")
 
-        } catch(err) {
+        } catch (err) {
             err && setErr(err)
         }
     };
 
     if (loading) {
         return (
-            <div style={{ padding: "10px 20px", textAlign: "center", justifyContent:"center", display:"flex", alignItems:"center", width:"100%", height:"100vh", backgroundColor:"#FFFFFF"}}>
-                <HashLoader  loading={loading}  size={150} />
+            <div style={{
+                padding: "10px 20px",
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "#FFFFFF"
+            }}>
+                <HashLoader loading={loading} size={150}/>
             </div>
         )
     }
@@ -111,8 +128,9 @@ const DowntimeReason = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <label>Special Case</label>
-                                        <select  value={tospecialCaseId} onChange={(e) => settospecialCaseId(e.target.value)} >
-                                            <option value=""  selected>please select Reason</option>
+                                        <select value={tospecialCaseId}
+                                                onChange={(e) => settospecialCaseId(e.target.value)}>
+                                            <option value="" selected>please select Reason</option>
                                             {listData1.lists.map((country, key) => (
                                                 <option key={key} value={country.id}>
                                                     {country.name}
@@ -128,7 +146,8 @@ const DowntimeReason = () => {
                                     {/* to make space*/}
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
-                                    <button onClick={submit} disabled={!validateForm()} className="submita">submit</button>
+                                    <button onClick={submit} disabled={!validateForm()} className="submita">submit
+                                    </button>
                                     <div className="textFieldContainer1"></div>
                                     {/* to make space*/}
                                 </div>
