@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
@@ -6,6 +6,7 @@ import "../assets/css/Login.css";
 import { useHistory } from 'react-router-dom';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import axios from 'axios';
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 
 const Login = () => {
@@ -14,6 +15,19 @@ const Login = () => {
     const [Employeeno, setEmployeeno] = useState("");
     const [err, setErr] = useState("");
     const history = useHistory();
+    const [text,setText] = useState("");
+
+    const headers = {
+
+        headers: {
+
+            "Authorization":`Bearer ${text}`
+        }
+    };
+
+    useEffect(()=>{
+        axios(txt).then(res => setText(res.data)); // This will have your text inside data attribute
+    },[])
 
     function validateForm() {
         return Epf.length > 0 && Employeeno.length > 0;
@@ -53,7 +67,7 @@ const Login = () => {
                             </Alert>
                         ) : null}
                         <div className="rowlogin">
-                            <label>EPF no</label>
+                            <label>EPF no {text}</label>
                             <input type="number" min="0" autoFocus placeholder="Enter your epf no" value={Epf}
                                    onChange={(e) => setEpf(e.target.value)}/>
                         </div>
