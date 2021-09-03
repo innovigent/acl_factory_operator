@@ -8,7 +8,7 @@ import {Alert, AlertTitle} from '@material-ui/lab';
 import axios from 'axios';
 import TopNav from "../components/topnav/TopNav";
 import {HashLoader} from "react-spinners";
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const DowntimeReason = () => {
 
@@ -49,8 +49,18 @@ const DowntimeReason = () => {
     useEffect(() => {
 
         const fetchData = async () => {
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,headers,
             );
             setListData({lists: result.data.data.FaultReasonsDetails});
             setLoading(false);
@@ -61,10 +71,20 @@ const DowntimeReason = () => {
 
     const submit = async (e) => {
         //e.preventDefault();
+        const token = await axios(txt);
+
+        const tokentxt = token.data
+        const headers = {
+
+            headers: {
+
+                "Authorization":`Bearer ${tokentxt}`
+            }
+        };
         setErr("");
         try {
             const body = {macaddress, downtimeId, reportedExecutiveId, reasonId, productionrunId, permissionId};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/submitslowrun/create", body);
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/submitslowrun/create", body,headers);
             history.push("/Home")
 
         } catch (err) {

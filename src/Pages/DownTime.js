@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {useHistory, useLocation} from 'react-router-dom';
 import {HashLoader} from "react-spinners";
 import {Alert, AlertTitle} from "@material-ui/lab";
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const SingleValue = ({
                          cx,
@@ -73,8 +73,18 @@ const Downtime = () => {
     useEffect(() => {
 
         const fetchData = async () => {
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,headers,
             );
             setListData({lists: result.data.data.specialCase});
             setLoading(false);
@@ -85,11 +95,21 @@ const Downtime = () => {
 
     const submit = async (e) => {
         e.preventDefault();
+        const token = await axios(txt);
+
+        const tokentxt = token.data
+        const headers = {
+
+            headers: {
+
+                "Authorization":`Bearer ${tokentxt}`
+            }
+        };
         setErr("");
         if (specialcaseId === 'Endshift') {
             try {
                 const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
-                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`, body);
+                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`, body,headers);
                 history.push("/Home")
             } catch (err) {
                 err.response.data.message && setErr(err.response.data.message)
@@ -97,7 +117,7 @@ const Downtime = () => {
         } else {
             try {
                 const body = {downtimeId, macaddress, epfNo, specialcaseId, productionrunId, productionorder, empid};
-                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`, body);
+                const loginResponse = await axios.post(`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`, body,headers);
                 history.push("/Home")
             } catch (err) {
                 err.response.data.message && setErr(err.response.data.message)
