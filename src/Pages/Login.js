@@ -67,7 +67,7 @@ const Login = () => {
                             </Alert>
                         ) : null}
                         <div className="rowlogin">
-                            <label>EPF no {text}</label>
+                            <label>EPF no</label>
                             <input type="number" min="0" autoFocus placeholder="Enter your epf no" value={Epf}
                                    onChange={(e) => setEpf(e.target.value)}/>
                         </div>

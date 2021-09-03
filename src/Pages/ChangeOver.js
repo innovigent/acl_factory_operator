@@ -9,7 +9,8 @@ import axios from "axios";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from 'react-router-dom';
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
+import {HashLoader} from "react-spinners";
 
 const SingleValue = ({
                          cx,
@@ -43,34 +44,64 @@ const Changeover = () => {
 
     const history = useHistory();
     const [listData, setListData] = useState({ lists: [] });
-    const macaddress = localStorage.getItem('macaddress')
+    const [text,setText] = useState("");
     const epfNo = localStorage.getItem('epfno');
     const [productionId, setproductionId] = useState("");
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(true);
     const [podata,setpodata] = useState([])
 
-    useEffect(() => {
 
+    //
+    // useEffect(()=>{
+    //     setLoading(true)
+    //     axios(txt).then(res => setText(res.data)); // This will have your text inside data attribute
+    // },[])
+
+    useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            setText(token.data)
+            setLoading(false);
+        };
+        const fetchData1 = async () => {
+            setLoading(true);
+
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/${macaddress}/listproductorderIPC/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${tokentxt}/getall`,headers,
             );
-            setListData({ lists: removeDuplicates(result.data.data.productionOrders)});
+            setListData({ lists: result.data.data.productionOrders});
             setLoading(false);
         };
 
 
         fetchData();
-
+        fetchData1();
 
     }, []);
+
+    let options = listData.lists.map(function (city) {
+        return {value: city.id, label: city.productionorderCode};
+    })
 
     const submit = async (e) => {
         e.preventDefault();
         setErr("");
         try{
-            const body = {epfNo,macaddress,productionId};
+            const body = {epfNo,productionId};
             const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create",body);
             localStorage.setItem("productionrunId", loginResponse.data.data.id);
             history.push("/Home")
@@ -92,6 +123,24 @@ const Changeover = () => {
         setproductionId(value);
 
     };
+
+
+    if (loading) {
+        return (
+            <div style={{
+                padding: "10px 20px",
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "#FFFFFF"
+            }}>
+                <HashLoader loading={loading} size={150}/>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -116,7 +165,7 @@ const Changeover = () => {
                             <div className="textFieldContainer1">
                                 <label htmlFor="orderNo">Product Order No.</label>
                                 <CreatableSelect
-                                    options={podata}
+                                    options={options}
                                     className="orderNo"
                                     components={{SingleValue}}
                                     onChange={handleChange}
