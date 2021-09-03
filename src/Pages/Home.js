@@ -4,7 +4,7 @@ import TopNav from "../components/topnav/TopNav";
 import axios from 'axios';
 import Dropdown from '../components/dropdown/Dropdown'
 import { Link } from 'react-router-dom'
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const Home = () => {
 
@@ -28,8 +28,18 @@ const Home = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/${productionrunId}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,headers,
             );
             setListData({lists:result.data.data.productionOrders})
             setLoading(false);
