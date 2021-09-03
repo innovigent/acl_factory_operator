@@ -1,17 +1,15 @@
-import React, {useEffect,useState,useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { makeStyles } from '@material-ui/core/styles';
-import { css } from '@emotion/css' ;
+import {makeStyles} from '@material-ui/core/styles';
+import {css} from '@emotion/css' ;
 import TopNav from "../components/topnav/TopNav";
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 
-
-
-
-function createData(name,empty) {
-    return { name,empty};
+function createData(name, empty) {
+    return {name, empty};
 }
 
 const rows = [
@@ -29,43 +27,40 @@ const useStyles = makeStyles({
 });
 
 const SingleValue = ({
-    cx,
-    getStyles,
-    selectProps,
-    data,
-    isDisabled,
-    className,
-    ...props
-}) => {
-console.log(props);
-return (
-<div
-className={cx(
-css(getStyles("singleValue", props)),
-{
-"single-value": true,
-"single-value--is-disabled": isDisabled,
+                         cx,
+                         getStyles,
+                         selectProps,
+                         data,
+                         isDisabled,
+                         className,
+                         ...props
+                     }) => {
+    console.log(props);
+    return (
+        <div
+            className={cx(
+                css(getStyles("singleValue", props)),
+                {
+                    "single-value": true,
+                    "single-value--is-disabled": isDisabled,
 
-},
-className
-)}
->
-<div>{selectProps.getOptionLabel(data)}</div>
-</div>
-);
+                },
+                className
+            )}
+        >
+            <div>{selectProps.getOptionLabel(data)}</div>
+        </div>
+    );
 };
 
 
 const ProductOrder = () => {
     const classes = useStyles();
     const [uuid, setUuid] = useState("");
-  
-
-
 
 
     // create a preview as a side effect, whenever selected file is changed
-    
+
 
     // function validateForm() {
     //     return email.length > 0 && password.length > 0;

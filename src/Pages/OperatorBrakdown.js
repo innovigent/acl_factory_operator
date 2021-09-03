@@ -11,7 +11,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import TopNav from "../components/topnav/TopNav";
 import {HashLoader} from "react-spinners";
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const OperatorBreakdown = () => {
 
@@ -52,12 +52,22 @@ const OperatorBreakdown = () => {
     useEffect(() => {
 
         const fetchData = async () => {
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,headers,
             );
             setListData({lists: result.data.data.FaultReasonsDetails});
             const result1 = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,headers,
             );
             setListData1({lists: result1.data.data.specialCase});
             setLoading(false);
@@ -72,10 +82,20 @@ const OperatorBreakdown = () => {
 
     const submit = async (e) => {
         //e.preventDefault();
+        const token = await axios(txt);
+
+        const tokentxt = token.data
+        const headers = {
+
+            headers: {
+
+                "Authorization":`Bearer ${tokentxt}`
+            }
+        };
         setErr("");
         try {
             const body = {macaddress, productionrunId, permissionId, specialcaseId, empid};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/manualDowntimeReason/create", body);
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/manualDowntimeReason/create", body,headers);
             history.push("/Home")
 
         } catch (err) {

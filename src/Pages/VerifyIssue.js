@@ -6,7 +6,7 @@ import "../assets/css/Login.css";
 import {useHistory, useLocation} from 'react-router-dom';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import axios from 'axios';
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const VerifyIssue = () => {
 
@@ -27,10 +27,20 @@ const VerifyIssue = () => {
 
     const submit = async (e) => {
         //e.preventDefault();
+        const token = await axios(txt);
+
+        const tokentxt = token.data
+        const headers = {
+
+            headers: {
+
+                "Authorization":`Bearer ${tokentxt}`
+            }
+        };
         setErr("");
         try{
             const body = {verificationCode,macaddress};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/emailreasoningtokenvalidate/validate",body);
+            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/emailreasoningtokenvalidate/validate",body,headers);
             history.push({pathname: '/DowntimeReason',
                 state: dataproduction,
                 executive:loginResponse.data.data.id,

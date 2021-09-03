@@ -10,7 +10,7 @@ import Table from "../components/table/Table";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import {HashLoader} from "react-spinners";
-
+import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
 
 const fields = [
     "Production Order",
@@ -144,8 +144,18 @@ const ActionTable = () => {
     useEffect(() => {
 
         const fetchData = async () => {
+            const token = await axios(txt);
+
+            const tokentxt = token.data
+            const headers = {
+
+                headers: {
+
+                    "Authorization":`Bearer ${tokentxt}`
+                }
+            };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,
+                `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,headers,
             );
 
             setListData({lists: result.data.data.productRunLog});
