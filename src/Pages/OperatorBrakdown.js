@@ -63,7 +63,7 @@ const OperatorBreakdown = () => {
                 }
             };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,headers,
+                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/getall`,headers,
             );
             setListData({lists: result.data.data.FaultReasonsDetails});
             const result1 = await axios(

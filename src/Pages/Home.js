@@ -85,7 +85,7 @@ const Home = () => {
                                     </div>
                                     <div className="textFieldContainer1">
                                         <label htmlFor="productionorder"><h1>Product</h1></label>
-                                        <label htmlFor="productionorder"><h2>{country.productInfos.productName}</h2>
+                                        <label htmlFor="productionorder"><h2>{country.productInfos.productCode}</h2>
                                         </label>
                                     </div>
                                     <div className="textFieldContainer1">
