@@ -67,7 +67,7 @@ const OperatorBreakdown = () => {
             );
             setListData({lists: result.data.data.FaultReasonsDetails});
             const result1 = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`,headers,
+                `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getall`,headers,
             );
             setListData1({lists: result1.data.data.specialCase});
             setLoading(false);
