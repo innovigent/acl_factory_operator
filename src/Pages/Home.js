@@ -10,6 +10,7 @@ const Home = () => {
 
     const [listData, setListData] = useState({ lists: [] });
     const [err, setErr] = useState("");
+    const [status, setstatus] = useState("");
     const [loading, setLoading] = useState(true);
     const macaddress = localStorage.getItem('macaddress')
     const productionrunId = localStorage.getItem('productionrunId')
