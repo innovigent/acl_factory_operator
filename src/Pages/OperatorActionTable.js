@@ -151,11 +151,11 @@ const ActionTable = () => {
 
                 headers: {
 
-                    "Authorization":`Bearer ${tokentxt}`
+                    "Authorization": `Bearer ${tokentxt}`
                 }
             };
             const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,headers,
+                `https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`, headers,
             );
 
             setListData({lists: result.data.data.productRunLog});
