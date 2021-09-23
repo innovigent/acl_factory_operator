@@ -9,7 +9,7 @@ import axios from "axios";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from 'react-router-dom';
-import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
+import txt from "C:/Projects Backup/acl_factory_operator/src/token.txt";
 import {HashLoader} from "react-spinners";
 
 const SingleValue = ({
