@@ -22,7 +22,11 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		axios(txt).then((res) => setText(res.data)); // This will have your text inside data attribute
+		axios(txt).then((res) => {
+			setText(res.data);
+			console.log(res.data);
+		});
+		// This will have your text inside data attribute
 	}, []);
 
 	function validateForm() {
@@ -40,6 +44,7 @@ const Login = () => {
 		try {
 			localStorage.setItem("epfno", Epf);
 			localStorage.setItem("empid", Employeeno);
+			localStorage.setItem("community", 1);
 			history.push("/Changeover");
 		} catch (err) {
 			err && setErr(err);

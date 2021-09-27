@@ -23,6 +23,7 @@ const DowntimeReason = () => {
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
 	const macaddress = localStorage.getItem("macaddress");
+	const community = localStorage.getItem("community");
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [listData, setListData] = useState({ lists: [] });
 	const [dataproduction, setdataproduction] = useState([]);
@@ -36,6 +37,7 @@ const DowntimeReason = () => {
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
+		console.log(location);
 		console.log(data);
 		setdataproduction(data);
 		setdowntimeId(data.id);
@@ -55,12 +57,17 @@ const DowntimeReason = () => {
 					Authorization: `Bearer ${tokentxt}`,
 				},
 			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
-				headers
-			);
-			setListData({ lists: result.data.data.FaultReasonsDetails });
-			setLoading(false);
+			try {
+				const result = await axios(
+					`https://acl-automation.herokuapp.com/api/v1/faultreason/device/getall`,
+					headers
+				);
+				console.log(result);
+				setListData({ lists: result.data.data.FaultReasonsDetails });
+				setLoading(false);
+			} catch (err) {
+				console.log(err.response);
+			}
 		};
 
 		fetchData();
