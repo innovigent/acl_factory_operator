@@ -148,24 +148,32 @@ const ActionTable = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
+			try {
+				const token = await axios(txt);
+				const tokentxt = token.data;
 
-			const tokentxt = token.data;
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${tokentxt}`,
-				},
-			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/${productionrunId}/getall`,
-				headers
-			);
+				const headers = {
+					headers: {
+						Authorization: `Bearer ${tokentxt}`,
+					},
+				};
+				const result = await axios(
+					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${tokentxt}/${productionrunId}/getall`,
+					headers
+				);
+				console.log(result);
+				setListData({ lists: result.data.data.productRunLog });
 
-			setListData({ lists: result.data.data.productRunLog });
-			setreasonType(
-				result.data.data.productRunLog[0].downtime[0].reportedReasonId
-			);
-			setLoading(false);
+				if (listData.lists.length > 0) {
+					setreasonType(
+						result.data.data.productRunLog[0].downtime[0].reportedReasonId
+					);
+				}
+				setLoading(false);
+			} catch (err) {
+				console.log(err.response);
+				console.log(err);
+			}
 		};
 
 		fetchData();
@@ -205,13 +213,17 @@ const ActionTable = () => {
 							</div>
 							<div className="textFieldContainer1"></div>
 							{/* to make space*/}
-							<Table
-								limit="5"
-								headData={fields}
-								renderHead={(item, index) => renderOrderHead(item, index)}
-								bodyData={listData.lists}
-								renderBody={(item, index) => renderOrderBody(item, index)}
-							/>
+							{listData.lists.length > 0 && reasonType ? (
+								<Table
+									limit="5"
+									headData={fields}
+									renderHead={(item, index) => renderOrderHead(item, index)}
+									bodyData={listData.lists}
+									renderBody={(item, index) => renderOrderBody(item, index)}
+								/>
+							) : (
+								<p>No Data</p>
+							)}
 							<div className="textFieldContainer1"></div>
 							{/* to make space*/}
 							<div className="textFieldContainer1"></div>

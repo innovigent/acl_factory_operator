@@ -41,6 +41,7 @@ const Home = () => {
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 					headers
 				);
+				console.log(result);
 				setListData({ lists: result.data.data.productionOrders });
 				setLoading(false);
 			} catch (err) {
