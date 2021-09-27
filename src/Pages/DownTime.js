@@ -54,7 +54,6 @@ const Downtime = () => {
 	const [err, setErr] = useState("");
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const macaddress = localStorage.getItem("macaddress");
-	const community = localStorage.getItem("community");
 	const empid = +localStorage.getItem("empid");
 	// const data = location.state;
 

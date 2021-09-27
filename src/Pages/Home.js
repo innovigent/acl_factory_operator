@@ -28,20 +28,24 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
+			try {
+				const token = await axios(txt);
 
-			const tokentxt = token.data;
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${tokentxt}`,
-				},
-			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
-				headers
-			);
-			setListData({ lists: result.data.data.productionOrders });
-			setLoading(false);
+				const tokentxt = token.data;
+				const headers = {
+					headers: {
+						Authorization: `Bearer ${tokentxt}`,
+					},
+				};
+				const result = await axios(
+					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
+					headers
+				);
+				setListData({ lists: result.data.data.productionOrders });
+				setLoading(false);
+			} catch (err) {
+				console.log(err);
+			}
 		};
 		fetchData();
 	}, []);
@@ -60,6 +64,7 @@ const Home = () => {
 				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 				headers
 			);
+			console.log(result.data);
 			setListData({ lists: result.data.data.productionOrders });
 			setLoading(false);
 		};
