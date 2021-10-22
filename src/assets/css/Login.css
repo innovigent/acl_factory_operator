@@ -15,7 +15,7 @@ html {
 	height: 60%;
 	margin: 100px auto;
 	background: #ffffff;
-	border-radius: 25px;
+	border-radius: 20px;
 	box-shadow: var(--box-shadow);
 }
 
@@ -39,10 +39,13 @@ html {
 	width: 80%;
 	box-sizing: border-box;
 	border: none;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	padding-bottom: 1rem;
 	box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 	transition: box-shadow 0.2s ease-in;
+	font-family: "work sans", sans-serif;
+	font-weight: 500;
+	color: #283343;
 }
 input:focus {
 	outline: none;

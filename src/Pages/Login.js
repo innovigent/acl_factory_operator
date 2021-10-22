@@ -71,21 +71,20 @@ const Login = () => {
 								{err}
 							</Alert>
 						) : null}
-						<div className="rowlogin">
-							<label>EPF no</label>
+						<div className="rowlogin" style={{ paddingTop: "3rem" }}>
+							<label>EPF Number</label>
 							<input
-								type="number"
+								type="text"
 								min="0"
-								autoFocus
-								placeholder="Enter your epf no"
+								placeholder="Enter your EPF number"
 								value={Epf}
 								onChange={e => setEpf(e.target.value)}
 							/>
 						</div>
 						<div className="rowlogin">
-							<label>Employye Id</label>
+							<label>Employee ID</label>
 							<input
-								type="number"
+								type="text"
 								min="0"
 								placeholder="Enter your employee number"
 								value={Employeeno}
