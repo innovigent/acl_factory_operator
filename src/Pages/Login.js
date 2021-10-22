@@ -54,13 +54,15 @@ const Login = () => {
 	return (
 		<>
 			<div className="layout__content-main">
-				<h1
-					className="page-header login-header accent-header"
-					data-aos="zoom-out"
-					style={{ marginBottom: "0px" }}
-				>
-					Welcome Back
-				</h1>
+				<div style={{ textAlign: "center", position: "relative", marginTop: "6rem" }}>
+					<h1
+						className="page-header login-header accent-header"
+						data-aos="zoom-out"
+						style={{ marginBottom: "0px" }}
+					>
+						Welcome Back
+					</h1>
+				</div>
 				<div id="loginform">
 					<div>
 						{err ? (

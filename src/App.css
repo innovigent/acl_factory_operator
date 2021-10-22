@@ -32,9 +32,9 @@
 	font-weight: 800 !important;
 	font-size: 3.8rem !important;
 	position: relative;
+	display: inline;
 	letter-spacing: 2px;
 	text-align: center;
-	padding-top: 6rem;
 }
 
 .accent-header::after {
@@ -43,8 +43,8 @@
 	height: 1.2rem;
 	background: linear-gradient(to right, var(--main-color-blue), var(--second-color));
 	position: absolute;
-	bottom: 2%;
-	right: 36%;
+	bottom: 4%;
+	right: -8%;
 	z-index: -1;
 }
 
