@@ -22,7 +22,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		axios(txt).then((res) => {
+		axios(txt).then(res => {
 			setText(res.data);
 			console.log(res.data);
 		});
@@ -37,7 +37,7 @@ const Login = () => {
 		event.preventDefault();
 	}
 
-	const submit = async (e) => {
+	const submit = async e => {
 		//e.preventDefault();
 		setErr("");
 
@@ -54,8 +54,14 @@ const Login = () => {
 	return (
 		<>
 			<div className="layout__content-main">
+				<h1
+					className="page-header login-header accent-header"
+					data-aos="zoom-out"
+					style={{ marginBottom: "0px" }}
+				>
+					Welcome Back
+				</h1>
 				<div id="loginform">
-					<h2 id="headerTitle">Login</h2>
 					<div>
 						{err ? (
 							<Alert severity="error">
@@ -71,7 +77,7 @@ const Login = () => {
 								autoFocus
 								placeholder="Enter your epf no"
 								value={Epf}
-								onChange={(e) => setEpf(e.target.value)}
+								onChange={e => setEpf(e.target.value)}
 							/>
 						</div>
 						<div className="rowlogin">
@@ -81,7 +87,7 @@ const Login = () => {
 								min="0"
 								placeholder="Enter your employee number"
 								value={Employeeno}
-								onChange={(e) => setEmployeeno(e.target.value)}
+								onChange={e => setEmployeeno(e.target.value)}
 							/>
 						</div>
 
