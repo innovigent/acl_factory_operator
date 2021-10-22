@@ -40,7 +40,6 @@ html {
 	box-sizing: border-box;
 	border: none;
 	font-size: 1.3rem;
-	padding-left: 1.5rem;
 	padding-bottom: 1rem;
 	box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 	transition: box-shadow 0.2s ease-in;
@@ -56,7 +55,7 @@ input:focus {
 	border-style: none;
 }
 .rowlogin input:focus {
-	box-shadow: inset 0px -3px 0px 0px rgb(98, 180, 255);
+	box-shadow: inset 0px -3px 0px 0px var(--main-color-blue);
 	outline: none;
 	border: none;
 	border-style: none;
@@ -65,6 +64,10 @@ input:focus {
 .rowlogin input::-webkit-input-placeholder {
 	opacity: 1;
 	transition: opacity 0.25s ease-out;
+	font-size: 1rem;
+	font-family: "work sans", sans-serif;
+	font-weight: 500;
+	color: rgba(202, 202, 202, 0.9);
 }
 
 .rowlogin input:hover::-webkit-input-placeholder,
@@ -74,9 +77,11 @@ input:focus {
 
 .rowlogin label {
 	align-self: start;
-	padding-left: 4.5rem;
+	padding-left: 4rem;
 	padding-bottom: 0.5rem;
-	color: rgba(187, 187, 187, 0.9);
+	color: #1f2937;
+	font-weight: 600;
+	font-size: 1.2rem;
 }
 
 .rowlogin button {
@@ -87,7 +92,6 @@ input:focus {
 	font-size: 1.3rem;
 	color: white;
 	font-weight: 600;
-	background: rgb(6, 81, 140);
 	background: linear-gradient(to right, var(--main-color-blue), var(--second-color));
 	color: var(--txt-white);
 	border: 0px;
