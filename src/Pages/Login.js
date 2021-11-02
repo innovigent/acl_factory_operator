@@ -3,7 +3,7 @@ import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
@@ -96,6 +96,13 @@ const Login = () => {
 							<button disabled={!validateForm()} onClick={submit}>
 								Log in
 							</button>
+						</div>
+						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
+							<label style={{ textAlign: "center" }}>
+								<Link to="/" style={{ color: "#3dbc84", fontWeight: "500", textAlign: "center" }}>
+									Login with Machine Login
+								</Link>
+							</label>
 						</div>
 					</div>
 				</div>
