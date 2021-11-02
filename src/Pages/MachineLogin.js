@@ -99,7 +99,7 @@ const MachineLogin = () => {
 						</div>
 						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
 							<label>
-								<Link to="/Login" style={{ color: "#3dbc84", fontWeight: "600" }}>
+								<Link to="/Login" style={{ color: "#3dbc84", textAlign: "center" }}>
 									Login as Operator
 								</Link>
 							</label>
