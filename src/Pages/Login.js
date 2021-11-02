@@ -56,11 +56,11 @@ const Login = () => {
 			<div className="layout__content-main">
 				<div style={{ textAlign: "center", position: "relative", marginTop: "6rem" }}>
 					<h1
-						className="page-header login-header accent-header"
+						className="page-header login-header"
 						data-aos="zoom-out"
 						style={{ marginBottom: "0px" }}
 					>
-						Welcome Back
+						Operator Login
 					</h1>
 				</div>
 				<div id="loginform">
@@ -82,11 +82,11 @@ const Login = () => {
 							/>
 						</div>
 						<div className="rowlogin">
-							<label>Employee ID</label>
+							<label>Authorization Code</label>
 							<input
-								type="text"
+								type="password"
 								min="0"
-								placeholder="Enter your employee number"
+								placeholder="Enter your authorization code"
 								value={Employeeno}
 								onChange={e => setEmployeeno(e.target.value)}
 							/>
@@ -98,7 +98,6 @@ const Login = () => {
 							</button>
 						</div>
 					</div>
-					<div id="alternativeLogin"></div>
 				</div>
 			</div>
 		</>
