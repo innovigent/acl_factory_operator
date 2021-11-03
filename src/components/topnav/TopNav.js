@@ -22,17 +22,17 @@ const sidebar_items = [
 	{
 		display_name: "Down time",
 		route: "/Downtime",
-		icon: "bx bx-category-alt",
+		icon: "bx bx-time",
 	},
 	{
 		display_name: "Home",
 		route: "/Home",
-		icon: "bx bx-category-alt",
+		icon: "bx bx-home-alt",
 	},
 	{
 		display_name: "Operator Action",
 		route: "/OperatorActionTable",
-		icon: "bx bx-category-alt",
+		icon: "bx bx-pointer",
 	},
 ];
 

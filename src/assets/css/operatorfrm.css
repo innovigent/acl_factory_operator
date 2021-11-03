@@ -93,8 +93,8 @@ input.error {
 	margin-bottom: 22px;
 }
 .textFieldContainer1 label {
-	font-family: "Roboto", sans-serif;
 	font-size: medium;
+	font-weight: 500;
 }
 /*   
   .firstName,
@@ -231,22 +231,19 @@ input.error {
 }
 
 .submita {
-	position: absolute;
-	right: 6%;
-
-	background: linear-gradient(to right, var(--main-color-green), var(--second-color-green));
-	border-radius: 10px;
+	background: linear-gradient(to right, var(--main-color-blue), var(--second-color));
+	border-radius: 5px;
 	color: #fff;
-	border: 2px solid #fff;
-
-	/* margin-top: 1em; */
-	padding: 8px 0px;
-	font-size: 1em;
-	font-weight: lighter;
-	letter-spacing: 1px;
-	width: 15%;
-	justify-content: end;
+	border: none;
+	font-size: 1.1rem;
+	font-family: "Work sans", sans-serif;
+	font-weight: 600;
+	padding: 1rem 4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
 .submitb {
 	position: absolute;
 
@@ -264,7 +261,32 @@ input.error {
 	justify-content: end;
 }
 .position {
-	margin-top: 20%;
-	left: auto;
-	right: auto;
+	margin-top: 4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.status {
+	padding: 0.5rem 2rem;
+	color: white;
+	width: 9rem;
+}
+
+.target {
+	padding: 0.5rem 2rem;
+	color: white;
+	display: flex;
+	justify-content: center;
+}
+
+.success {
+	background: #0bab64;
+}
+.pending {
+	background: #f3ce28;
+}
+.stopped {
+	background: #ea2121;
 }

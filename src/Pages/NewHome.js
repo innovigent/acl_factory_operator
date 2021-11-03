@@ -192,18 +192,32 @@ const Changeover = () => {
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Product Name</label>
-								<input className="a" placeholder="" type="text" name="" />
+								<input className="a" placeholder="" type="text" name="" value={epfNo} disabled />
+							</div>
+							<div className="textFieldContainer1">
+								<label htmlFor="epf">Operator Information</label>
+								<input className="a" placeholder="" type="text" name="" value={epfNo} disabled />
+							</div>
+							<div className="textFieldContainer1">
+								<label htmlFor="epf">Target Achieved</label>
+								<div className="target">
+									<p>100%</p>
+								</div>
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Status</label>
-								<div className="status pending">
-									<p>Pending</p>
+								<div className="status">
+									<p>Running</p>
 								</div>
 							</div>
 							{/* to make space*/}
 							<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 								<button onClick={submit} className="submita">
-									Submit
+									<i
+										className="bx bx-dots-vertical-rounded"
+										style={{ fontSize: "1.2rem", paddingRight: "1rem" }}
+									></i>
+									Options
 								</button>
 							</div>
 							<div className="textFieldContiner1"></div>
