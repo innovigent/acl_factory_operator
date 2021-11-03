@@ -122,6 +122,7 @@ input:focus {
 
 .card.full-height {
 	height: calc(100% - 30px);
+	position: relative;
 }
 
 .card__header {
