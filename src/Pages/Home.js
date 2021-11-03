@@ -14,6 +14,7 @@ const Home = () => {
 	const macaddress = localStorage.getItem("macaddress");
 	const productionrunId = localStorage.getItem("productionrunId");
 	const epfNo = localStorage.getItem("epfno");
+	const [stop, setStop] = useState(false);
 
 	const notifications = [
 		{
@@ -144,8 +145,8 @@ const Home = () => {
 									</div>
 									<div className="textFieldContainer1">
 										<label htmlFor="epf">Status</label>
-										<div className="status success">
-											<p>Running</p>
+										<div className={stop ? "status stopped indicator" : "status success"}>
+											<p>{stop ? "Stopped" : "Running"}</p>
 										</div>
 									</div>
 								</>

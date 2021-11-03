@@ -94,7 +94,7 @@ input.error {
 }
 .textFieldContainer1 label {
 	font-size: medium;
-	font-weight: 500;
+	font-weight: 600;
 }
 /*   
   .firstName,
@@ -289,4 +289,17 @@ input.error {
 }
 .stopped {
 	background: #ea2121;
+}
+
+.indicator {
+	animation: flash ease-in-out 0.5s infinite alternate;
+}
+
+@keyframes flash {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
