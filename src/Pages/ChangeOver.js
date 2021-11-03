@@ -145,7 +145,7 @@ const Changeover = () => {
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Change Over</div>
-					<div className="card full-height col-8">
+					<div className="card full-height col-6">
 						<div style={{ padding: "0 2rem" }}>
 							{err ? (
 								<Alert severity="error">

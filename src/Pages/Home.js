@@ -13,6 +13,7 @@ const Home = () => {
 	const [loading, setLoading] = useState(true);
 	const macaddress = localStorage.getItem("macaddress");
 	const productionrunId = localStorage.getItem("productionrunId");
+	const epfNo = localStorage.getItem("epfno");
 
 	const notifications = [
 		{
@@ -85,8 +86,9 @@ const Home = () => {
 		<>
 			<div id="container">
 				<div className="position">
+					<h1 className="page-header">Home</h1>
 					<>
-						<div className="card full-height">
+						<div className="card full-height col-6">
 							{listData.lists.map((country, key) => (
 								<>
 									<div className="textFieldContainer1">
@@ -95,55 +97,57 @@ const Home = () => {
 											<Dropdown
 												icon="bx bx-message-edit"
 												contentData={notifications}
-												renderItems={(item, index) =>
-													renderNotificationItem(item, index)
-												}
+												renderItems={(item, index) => renderNotificationItem(item, index)}
 											/>
 										</div>
-										<div className="right-corner">Status:</div>
 									</div>
 									<div className="textFieldContainer1"></div>
 									{/* to make space*/}
-
 									<div className="textFieldContainer1">
-										<label htmlFor="productionorder">
-											<h1>Production Order</h1>
-										</label>
-										<label htmlFor="productionorder">
-											<h2>{country.productionorderId}</h2>
-										</label>
+										<label htmlFor="epf">Production Order Code</label>
+										<input
+											className="a"
+											placeholder=""
+											type="text"
+											name=""
+											value={country.productionorderId}
+											disabled
+										/>
 									</div>
 									<div className="textFieldContainer1">
-										<label htmlFor="productionorder">
-											<h1>Product</h1>
-										</label>
-										<label htmlFor="productionorder">
-											<h2>{country.productInfos.productCode}</h2>
-										</label>
+										<label htmlFor="epf">Product Name</label>
+										<input
+											className="a"
+											placeholder=""
+											type="text"
+											name=""
+											value={country.productInfos.productCode}
+											disabled
+										/>
 									</div>
 									<div className="textFieldContainer1">
-										<label htmlFor="productionorder">
-											<h1>Machine speed</h1>
-										</label>
-										<label htmlFor="productionorder">
-											<h2>{country.machineSpeed}</h2>
-										</label>
+										<label htmlFor="epf">Operator Information</label>
+										<input
+											className="a"
+											placeholder=""
+											type="text"
+											name=""
+											value={epfNo}
+											disabled
+										/>
 									</div>
 									<div className="textFieldContainer1">
-										<label htmlFor="productionorder">
-											<h1>Planned total</h1>
-										</label>
-										<label htmlFor="productionorder">
-											<h2>{country.outputQuantity}</h2>
-										</label>
+										<label htmlFor="epf">Target Achieved</label>
+										<div className="target success">
+											<p>100%</p>
+										</div>
 									</div>
-
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
+									<div className="textFieldContainer1">
+										<label htmlFor="epf">Status</label>
+										<div className="status success">
+											<p>Running</p>
+										</div>
+									</div>
 								</>
 							))}
 						</div>

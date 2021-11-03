@@ -51,7 +51,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	font-family: Arial, Helvetica, sans;
 	background: transparent;
 	height: 100%;
 	width: 100%;
@@ -88,6 +87,8 @@ ul {
 input {
 	/*border: 1px solid;*/
 	/*outline: 0;*/
+	font-family: "work sans", sans-serif;
+	font-size: 0.9rem;
 }
 
 input:focus {
