@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/Usercreate.css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
-import Dropdown from "../components/dropdown/Dropdown";
+import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import { Link } from "react-router-dom";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
@@ -93,18 +93,6 @@ const Home = () => {
 							{listData.lists.map((country, key) => (
 								<>
 									<div className="textFieldContainer1">
-										{/* <div className="right-corner">Date:</div> */}
-										<div className="left-corner">
-											<Dropdown
-												icon="bx bx-message-edit"
-												contentData={notifications}
-												renderItems={(item, index) => renderNotificationItem(item, index)}
-											/>
-										</div>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1">
 										<label htmlFor="epf">Production Order Code</label>
 										<input
 											className="a"
@@ -148,6 +136,14 @@ const Home = () => {
 										<div className={stop ? "status stopped indicator" : "status success"}>
 											<p>{stop ? "Stopped" : "Running"}</p>
 										</div>
+									</div>
+									<div className="left-corner">
+										<DropdownWithButton
+											icon="bx bx-dots-vertical-rounded"
+											title="Options"
+											contentData={notifications}
+											renderItems={(item, index) => renderNotificationItem(item, index)}
+										/>
 									</div>
 								</>
 							))}

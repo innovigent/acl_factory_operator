@@ -16,7 +16,7 @@ const clickOutsideRef = (content_ref, toggle_ref) => {
 	});
 };
 
-const Dropdown = props => {
+const DropdownWithButton = props => {
 	const dropdown_toggle_el = useRef(null);
 	const dropdown_content_el = useRef(null);
 
@@ -24,7 +24,7 @@ const Dropdown = props => {
 
 	return (
 		<div className="dropdown">
-			<button ref={dropdown_toggle_el} className="dropdown__toggle">
+			<button ref={dropdown_toggle_el} className="dropdown__toggle_button submita">
 				{props.icon ? <i className={props.icon}></i> : ""}
 				{props.title ? props.title : ""}
 				{props.badge ? <span className="dropdown__toggle-badge">{props.badge}</span> : ""}
@@ -40,4 +40,4 @@ const Dropdown = props => {
 	);
 };
 
-export default Dropdown;
+export default DropdownWithButton;
