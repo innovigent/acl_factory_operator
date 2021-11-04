@@ -58,6 +58,7 @@
 
 .notification-item:hover {
 	background-color: var(--second-bg);
+	color: var(--main-color-blue);
 }
 
 .notification-item > i {

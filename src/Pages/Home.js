@@ -6,6 +6,7 @@ import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+import OptionModal from "../components/modals/OptionModal";
 
 const Home = () => {
 	const [listData, setListData] = useState({ lists: [] });
@@ -16,6 +17,7 @@ const Home = () => {
 	const productionrunId = localStorage.getItem("productionrunId");
 	const epfNo = localStorage.getItem("epfno");
 	const [stop, setStop] = useState(false);
+	const [optionModal, setOptionModal] = useState(false);
 
 	const notifications = [
 		{
@@ -106,6 +108,7 @@ const Home = () => {
 	return (
 		<>
 			<div id="container">
+				{optionModal && <OptionModal setOptionModal={setOptionModal} />}
 				<div className="position">
 					<h1 className="page-header">Home</h1>
 					<>
@@ -157,7 +160,7 @@ const Home = () => {
 											<p>{stop ? "Stopped" : "Running"}</p>
 										</div>
 									</div>
-									<div className="left-corner">
+									<div className="left-corner" onClick={() => setOptionModal(true)}>
 										<DropdownWithButton
 											icon="bx bx-dots-vertical-rounded"
 											title="Options"
