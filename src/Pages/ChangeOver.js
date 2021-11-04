@@ -10,6 +10,7 @@ import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from "react-router-dom";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { HashLoader } from "react-spinners";
+import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
@@ -39,6 +40,7 @@ const Changeover = () => {
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [podata, setpodata] = useState([]);
+	const [authModal, setAuthModal] = useState(false);
 	const community = localStorage.getItem("community");
 
 	//
@@ -147,6 +149,7 @@ const Changeover = () => {
 
 	return (
 		<>
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Change Over</div>
@@ -207,7 +210,7 @@ const Changeover = () => {
 							</div>
 							{/* to make space*/}
 							<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-								<button onClick={submit} className="submita">
+								<button onClick={() => setAuthModal(true)} className="submita">
 									Submit
 								</button>
 							</div>
