@@ -70,7 +70,7 @@ const DowntimeReason = () => {
 		fetchData();
 	}, []);
 
-	const submit = async (e) => {
+	const submit = async e => {
 		//e.preventDefault();
 		const token = await axios(txt);
 
@@ -101,7 +101,7 @@ const DowntimeReason = () => {
 		}
 	};
 
-	const transfer = async (e) => {
+	const transfer = async e => {
 		history.push({
 			pathname: "/Downtimetransfer",
 			state: dataproduction,
@@ -124,7 +124,7 @@ const DowntimeReason = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} />
+				<HashLoader loading={loading} size={150} color="#0bab64" />
 			</div>
 		);
 	}
@@ -156,10 +156,7 @@ const DowntimeReason = () => {
 									</div>
 									<div className="textFieldContainer1">
 										<label>Reason</label>
-										<select
-											value={reasonId}
-											onChange={(e) => setreasonId(e.target.value)}
-										>
+										<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
 											<option value="" selected>
 												please select Reason
 											</option>

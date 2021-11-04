@@ -164,7 +164,7 @@ const Administration = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} />
+				<HashLoader loading={loading} size={150} color="#0bab64" />
 			</div>
 		);
 	}

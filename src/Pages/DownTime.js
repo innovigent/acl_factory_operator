@@ -158,94 +158,92 @@ const Downtime = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} />
+				<HashLoader loading={loading} size={150} color="#0bab64" />
 			</div>
 		);
 	}
 	return (
 		<>
 			<div className="layout__content-main">
-				<div className="row">
-					<div className="col-12">
-						<div className="position">
-							<div className="page-header">Downtime</div>
-							<div className="card full-height col-6">
-								<div>
-									{err ? (
-										<Alert severity="error">
-											<AlertTitle>Error</AlertTitle>
-											{err}
-										</Alert>
-									) : null}
-									<div className="textFieldContainer1">
-										<div className="right-corner">Date:</div>
-										<div className="middle">Line No:</div>
+				<div className="col-12">
+					<div className="position">
+						<div className="page-header">Downtime</div>
+						<div className="card full-height col-6">
+							<div>
+								{err ? (
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										{err}
+									</Alert>
+								) : null}
+								<div className="textFieldContainer1">
+									<div className="right-corner">Date:</div>
+									<div className="middle">Line No:</div>
 
-										<div className="left-corner">Status:</div>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1">
-										<label>Employee ID</label>
-										<input value={epfNo} disabled></input>
-									</div>
-									<div className="textFieldContainer1">
-										<label>Production Order</label>
-										<input value={productionorder} disabled></input>
-									</div>
-									<div className="textFieldContainer1">
-										<label htmlFor="Department">Department</label>
+									<div className="left-corner">Status:</div>
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1">
+									<label>Employee ID</label>
+									<input value={epfNo} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label>Production Order</label>
+									<input value={productionorder} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label htmlFor="Department">Department</label>
 
-										<div className="wrapper1">
+									<div className="wrapper1">
+										<RadioGroup
+											aria-label="type"
+											name="type"
+											value={type}
+											onChange={handleChange}
+											row
+										>
+											<FormControlLabel
+												value="uncategorized"
+												control={<Radio color="primary" />}
+												label="uncategorized"
+											/>
+											<FormControlLabel
+												value="EndShift"
+												control={<Radio color="primary" />}
+												label="End Shift"
+											/>
+										</RadioGroup>
+									</div>
+								</div>
+								<div className="textFieldContainer1">
+									<div className="wrapper1">
+										{listData.lists.map((country, key) => (
 											<RadioGroup
 												aria-label="type"
 												name="type"
-												value={type}
-												onChange={handleChange}
+												value={specialcaseId}
+												onChange={e => handleChange(country.id)}
 												row
 											>
 												<FormControlLabel
-													value="uncategorized"
+													value={country.id}
 													control={<Radio color="primary" />}
-													label="uncategorized"
-												/>
-												<FormControlLabel
-													value="EndShift"
-													control={<Radio color="primary" />}
-													label="End Shift"
+													label={country.name}
 												/>
 											</RadioGroup>
-										</div>
+										))}
 									</div>
-									<div className="textFieldContainer1">
-										<div className="wrapper1">
-											{listData.lists.map((country, key) => (
-												<RadioGroup
-													aria-label="type"
-													name="type"
-													value={specialcaseId}
-													onChange={e => handleChange(country.id)}
-													row
-												>
-													<FormControlLabel
-														value={country.id}
-														control={<Radio color="primary" />}
-														label={country.name}
-													/>
-												</RadioGroup>
-											))}
-										</div>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<button onClick={submit} className="submita">
-										submit
-									</button>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
 								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<button onClick={submit} className="submita">
+									submit
+								</button>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
 							</div>
 						</div>
 					</div>

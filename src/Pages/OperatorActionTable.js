@@ -12,14 +12,7 @@ import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
-const fields = [
-	"Production Order",
-	"Production line",
-	"Start time",
-	"reason",
-	"Reslove",
-	"Report",
-];
+const fields = ["Production Order", "Production line", "Start time", "reason", "Reslove", "Report"];
 
 const rows = [
 	{
@@ -48,15 +41,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const SingleValue = ({
-	cx,
-	getStyles,
-	selectProps,
-	data,
-	isDisabled,
-	className,
-	...props
-}) => {
+const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
 	return (
 		<div
@@ -83,21 +68,21 @@ const ActionTable = () => {
 	const [loading, setLoading] = useState(true);
 	const [reasonType, setreasonType] = useState("");
 
-	const onUpdate = (item) => {
+	const onUpdate = item => {
 		history.push({
 			pathname: "/Downtime",
 			state: item,
 		});
 	};
 
-	const onPush = (item) => {
+	const onPush = item => {
 		history.push({
 			pathname: "/VerifyIssue",
 			state: item,
 		});
 	};
 
-	const onPushSlowdown = (item) => {
+	const onPushSlowdown = item => {
 		history.push({
 			pathname: "/VerifySlowdown",
 			state: item,
@@ -165,9 +150,7 @@ const ActionTable = () => {
 				setListData({ lists: result.data.data.productRunLog });
 
 				if (listData.lists.length > 0) {
-					setreasonType(
-						result.data.data.productRunLog[0].downtime[0].reportedReasonId
-					);
+					setreasonType(result.data.data.productRunLog[0].downtime[0].reportedReasonId);
 				}
 				setLoading(false);
 			} catch (err) {
@@ -197,7 +180,7 @@ const ActionTable = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} />
+				<HashLoader loading={loading} size={150} color="#0bab64" />
 			</div>
 		);
 	}

@@ -74,11 +74,11 @@ const OperatorBreakdown = () => {
 		fetchData();
 	}, []);
 
-	const handleChange = (id) => {
+	const handleChange = id => {
 		setspecialcaseId(id);
 	};
 
-	const submit = async (e) => {
+	const submit = async e => {
 		//e.preventDefault();
 		const token = await axios(txt);
 
@@ -122,7 +122,7 @@ const OperatorBreakdown = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} />
+				<HashLoader loading={loading} size={150} color="#0bab64" />
 			</div>
 		);
 	}
@@ -160,7 +160,7 @@ const OperatorBreakdown = () => {
 													aria-label="type"
 													name="type"
 													value={specialcaseId}
-													onChange={(e) => handleChange(country.id)}
+													onChange={e => handleChange(country.id)}
 													row
 												>
 													<FormControlLabel

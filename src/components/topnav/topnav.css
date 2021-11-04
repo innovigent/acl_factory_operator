@@ -5,10 +5,11 @@
 	justify-content: space-between;
 	height: var(--topnav-height);
 	bottom: 0;
+	left: 0;
 	/*overflow: hidden;*/
 	position: fixed;
 	background-color: white;
-	box-shadow: var(--box-shadow);
+	box-shadow: rgba(149, 157, 165, 0.5) 20px 8px 80px;
 	width: 100%;
 }
 

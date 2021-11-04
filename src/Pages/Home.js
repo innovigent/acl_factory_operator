@@ -4,6 +4,7 @@ import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import { Link } from "react-router-dom";
+import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const Home = () => {
@@ -82,6 +83,25 @@ const Home = () => {
 			</div>
 		</Link>
 	);
+
+	if (loading) {
+		return (
+			<div
+				style={{
+					padding: "10px 20px",
+					textAlign: "center",
+					justifyContent: "center",
+					display: "flex",
+					alignItems: "center",
+					width: "100%",
+					height: "100vh",
+					backgroundColor: "#FFFFFF",
+				}}
+			>
+				<HashLoader loading={loading} size={150} color="#0bab64" />
+			</div>
+		);
+	}
 
 	return (
 		<>
