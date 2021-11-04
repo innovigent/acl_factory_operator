@@ -17,6 +17,7 @@ import SlowDownSpeed from "./Pages/SlowDownSpeed";
 import StatusChanged from "./Pages/StatusChanged";
 import VerifyIssue from "./Pages/VerifyIssue";
 import VerifySlowdown from "./Pages/VerifySlowdown";
+import Administration from "./Pages/Adminstration";
 
 const Routes = () => {
 	return (
@@ -30,6 +31,7 @@ const Routes = () => {
 				<Route path="/OperatorActionTable" component={OperatorActionTable} />
 				<Route path="/OperatorExperiment" component={OperatorExperiment} />
 				<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
+				<Route path="/Administration" component={Administration} />
 				<Route path="/StatusChanged" component={StatusChanged} />
 				<Route path="/Home" component={Home} />
 				<Route path="/VerifyIssue" component={VerifyIssue} />
