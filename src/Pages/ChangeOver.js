@@ -35,6 +35,7 @@ const Changeover = () => {
 	const [text, setText] = useState("");
 	const epfNo = localStorage.getItem("epfno");
 	const [productionId, setproductionId] = useState("");
+	const [productID, setProductID] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [podata, setpodata] = useState([]);
@@ -70,6 +71,7 @@ const Changeover = () => {
 				`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${tokentxt}/getall`,
 				headers
 			);
+			console.log(result.data);
 			setListData({ lists: result.data.data.productionOrders });
 			setLoading(false);
 		};
@@ -117,8 +119,11 @@ const Changeover = () => {
 
 	const handleChange = (newValue: any, actionMeta: any) => {
 		let value = newValue.value;
-
 		setproductionId(value);
+		console.log(listData.lists, value);
+		const selectedID = listData.lists.filter(item => item.id === value);
+		console.log(selectedID);
+		setProductID(selectedID[0].productInfos ? selectedID[0].productInfos.productCode : "");
 	};
 
 	if (loading) {
@@ -192,7 +197,7 @@ const Changeover = () => {
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Product Name</label>
-								<input className="a" placeholder="" type="text" name="" />
+								<input className="a" placeholder="" type="text" name="" value={productID} />
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Status</label>
