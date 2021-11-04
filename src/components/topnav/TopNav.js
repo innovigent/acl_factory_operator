@@ -34,6 +34,11 @@ const sidebar_items = [
 		route: "/OperatorActionTable",
 		icon: "bx bx-pointer",
 	},
+	{
+		display_name: "Administration",
+		route: "/Administration",
+		icon: "bx bx-collection",
+	},
 ];
 
 const notifications = [

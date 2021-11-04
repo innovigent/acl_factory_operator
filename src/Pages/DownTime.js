@@ -15,15 +15,7 @@ import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
-const SingleValue = ({
-	cx,
-	getStyles,
-	selectProps,
-	data,
-	isDisabled,
-	className,
-	...props
-}) => {
+const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
 	return (
 		<div
@@ -94,7 +86,7 @@ const Downtime = () => {
 		fetchData();
 	}, []);
 
-	const submit = async (e) => {
+	const submit = async e => {
 		e.preventDefault();
 		const token = await axios(txt);
 
@@ -148,7 +140,7 @@ const Downtime = () => {
 		}
 	};
 
-	const handleChange = (id) => {
+	const handleChange = id => {
 		setspecialcaseId(id);
 	};
 
@@ -176,7 +168,8 @@ const Downtime = () => {
 				<div className="row">
 					<div className="col-12">
 						<div className="position">
-							<div className="card full-height">
+							<div className="page-header">Downtime</div>
+							<div className="card full-height col-6">
 								<div>
 									{err ? (
 										<Alert severity="error">
@@ -193,7 +186,7 @@ const Downtime = () => {
 									<div className="textFieldContainer1"></div>
 									{/* to make space*/}
 									<div className="textFieldContainer1">
-										<label>Employee Id</label>
+										<label>Employee ID</label>
 										<input value={epfNo} disabled></input>
 									</div>
 									<div className="textFieldContainer1">
@@ -231,7 +224,7 @@ const Downtime = () => {
 													aria-label="type"
 													name="type"
 													value={specialcaseId}
-													onChange={(e) => handleChange(country.id)}
+													onChange={e => handleChange(country.id)}
 													row
 												>
 													<FormControlLabel
