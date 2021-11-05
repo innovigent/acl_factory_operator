@@ -9,6 +9,7 @@ import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+import AuthModel from "../components/modals/AuthModel";
 
 const DowntimeReason = () => {
 	const history = useHistory();
@@ -27,6 +28,7 @@ const DowntimeReason = () => {
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [listData, setListData] = useState({ lists: [] });
 	const [dataproduction, setdataproduction] = useState([]);
+	const [authModal, setAuthModal] = useState(false);
 
 	function validateForm() {
 		return reportedExecutiveId.length > 0;
@@ -124,6 +126,7 @@ const DowntimeReason = () => {
 	}
 	return (
 		<>
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -142,7 +145,7 @@ const DowntimeReason = () => {
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 								<div className="textFieldContainer1">
-									<label>Reason</label>
+									<label>Slow Run Reasons</label>
 									<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
 										<option value="" selected>
 											Please Select a Reason
@@ -158,7 +161,7 @@ const DowntimeReason = () => {
 								{/* to make space*/}
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
-								<button onClick={submit} className="submita">
+								<button onClick={() => setAuthModal(true)} className="submita">
 									Submit
 								</button>
 								<div className="textFieldContainer1"></div>
