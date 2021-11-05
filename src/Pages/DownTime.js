@@ -3,10 +3,8 @@ import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import { css } from "@emotion/css";
-import CreatableSelect from "react-select/creatable";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
-import moment from "moment";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -228,13 +226,11 @@ const Downtime = () => {
 										))}
 									</div>
 								</div>
-								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
-								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
-								<button onClick={() => setAuthModal(true)} className="submita">
-									Submit
-								</button>
+								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+									<button onClick={() => setAuthModal(true)} className="submita">
+										Submit
+									</button>
+								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 							</div>
