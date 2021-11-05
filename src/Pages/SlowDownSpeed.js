@@ -40,7 +40,7 @@ const DowntimeReason = () => {
 		console.log(location);
 		console.log(data);
 		setdataproduction(data);
-		setdowntimeId(data.id);
+		// setdowntimeId(data.id);
 		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
@@ -125,62 +125,50 @@ const DowntimeReason = () => {
 	return (
 		<>
 			<div className="layout__content-main">
-				<div className="row">
-					<div className="col-12">
-						<div className="position">
-							<div className="card full-height">
-								<div>
-									{err ? (
-										<Alert severity="error">
-											<AlertTitle>Error</AlertTitle>
-											{err}
-										</Alert>
-									) : null}
-									<div className="textFieldContainer1">
-										<div className="right-corner">Date:</div>
-										<div className="middle">Line No:</div>
-
-										<div className="left-corner">Status:</div>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1">
-										<label>Production order</label>
-										<input value={productionrunId} disabled></input>
-									</div>
-									<div className="textFieldContainer1">
-										<label>Reason</label>
-										<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
-											<option value="" selected>
-												please select Reason
-											</option>
-											{listData.lists.map((country, key) => (
-												<option key={key} value={country.id}>
-													{country.faultreason}
-												</option>
-											))}
-										</select>
-									</div>
-									<div className="textFieldContainer1">
-										<label>Executive name</label>
-										<input value={name} disabled></input>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<button onClick={submit} className="submita">
-										submit
-									</button>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
+				<div className="col-12">
+					<div className="position">
+						<div className="page-header">Slow Run Reasoning</div>
+						<div className="card full-height col-6">
+							<div>
+								{err ? (
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										{err}
+									</Alert>
+								) : null}
+								<div className="textFieldContainer1">
+									<div className="right-corner">Date: {new Date().toDateString()}</div>
 								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1">
+									<label>Reason</label>
+									<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
+										<option value="" selected>
+											Please Select a Reason
+										</option>
+										{listData.lists.map((country, key) => (
+											<option key={key} value={country.id}>
+												{country.faultreason}
+											</option>
+										))}
+									</select>
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<button onClick={submit} className="submita">
+									Submit
+								</button>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
 							</div>
 						</div>
 					</div>
 				</div>
-				<TopNav />
 			</div>
+			<TopNav />
 		</>
 	);
 };
