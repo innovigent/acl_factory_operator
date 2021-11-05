@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
@@ -61,14 +62,37 @@ const Administration = () => {
 
 	const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
 
-	const renderOrderBody = (item, index) => (
+	const renderOrderBodyDownTime = (item, index) => (
+		<tr key={index}>
+			<td>{item.id}</td>
+			<td>{item.name}</td>
+			<td>
+				<Link to="/DownTimeTransfer">
+					<button
+						className="submita"
+						style={{
+							background: "transparent",
+							border: "1px solid #3ab78e",
+							color: "#3ab78e",
+							padding: "5px",
+							fontSize: "0.8rem",
+						}}
+					>
+						Transfer
+					</button>
+				</Link>
+			</td>
+		</tr>
+	);
+
+	const renderOrderBodySlowRun = (item, index) => (
 		<tr key={index}>
 			<td>{item.id}</td>
 			<td>{item.name}</td>
 		</tr>
 	);
 
-	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status"];
+	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
 	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status"];
 
 	useEffect(() => {
@@ -195,7 +219,7 @@ const Administration = () => {
 									headData={fieldsDowntime}
 									renderHead={(item, index) => renderOrderHead(item, index)}
 									bodyData={sample}
-									renderBody={(item, index) => renderOrderBody(item, index)}
+									renderBody={(item, index) => renderOrderBodyDownTime(item, index)}
 								/>
 							) : (
 								""
@@ -214,7 +238,7 @@ const Administration = () => {
 									headData={fieldsSlowSpeed}
 									renderHead={(item, index) => renderOrderHead(item, index)}
 									bodyData={sample}
-									renderBody={(item, index) => renderOrderBody(item, index)}
+									renderBody={(item, index) => renderOrderBodySlowRun(item, index)}
 								/>
 							) : (
 								""
