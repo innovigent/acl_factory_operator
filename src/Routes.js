@@ -19,6 +19,7 @@ import VerifyIssue from "./Pages/VerifyIssue";
 import VerifySlowdown from "./Pages/VerifySlowdown";
 import Administration from "./Pages/Adminstration";
 import ShiftChange from "./Pages/ShiftChange";
+import TransferDowntime from "./Pages/TransferDownTime";
 
 const Routes = () => {
 	return (
@@ -38,7 +39,7 @@ const Routes = () => {
 				<Route path="/Home" component={Home} />
 				<Route path="/VerifyIssue" component={VerifyIssue} />
 				<Route path="/DowntimeReason" component={DowntimeReason} />
-				<Route path="/Downtimetransfer" component={Downtimetransfer} />
+				<Route path="/Downtimetransfer" component={TransferDowntime} />
 				<Route path="/OperatorBrakdown" component={OperatorBrakdown} />
 				<Route path="/VerifySlowdown" component={VerifySlowdown} />
 			</Switch>
