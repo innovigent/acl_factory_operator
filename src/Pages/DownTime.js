@@ -14,6 +14,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
@@ -47,6 +48,7 @@ const Downtime = () => {
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const macaddress = localStorage.getItem("macaddress");
 	const empid = +localStorage.getItem("empid");
+	const [authModal, setAuthModal] = useState(false);
 	// const data = location.state;
 
 	useEffect(() => {
@@ -164,6 +166,7 @@ const Downtime = () => {
 	}
 	return (
 		<>
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -229,7 +232,7 @@ const Downtime = () => {
 								{/* to make space*/}
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
-								<button onClick={submit} className="submita">
+								<button onClick={() => setAuthModal(true)} className="submita">
 									Submit
 								</button>
 								<div className="textFieldContainer1"></div>

@@ -30,8 +30,13 @@ const sidebar_items = [
 		icon: "bx bx-collection",
 	},
 	{
-		display_name: "Down time",
+		display_name: "Downtime",
 		route: "/Downtime",
+		icon: "bx bx-time",
+	},
+	{
+		display_name: "Slow Run",
+		route: "/SlowRun",
 		icon: "bx bx-time",
 	},
 	{
