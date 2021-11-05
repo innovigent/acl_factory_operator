@@ -18,6 +18,7 @@ import StatusChanged from "./Pages/StatusChanged";
 import VerifyIssue from "./Pages/VerifyIssue";
 import VerifySlowdown from "./Pages/VerifySlowdown";
 import Administration from "./Pages/Adminstration";
+import ShiftChange from "./Pages/ShiftChange";
 
 const Routes = () => {
 	return (
@@ -29,6 +30,7 @@ const Routes = () => {
 				<Route path="/Downtime" component={Downtime} />
 				<Route path="/FaultDetection" component={FaultDetection} />
 				<Route path="/OperatorActionTable" component={OperatorActionTable} />
+				<Route path="/ShiftChange" component={ShiftChange} />
 				<Route path="/OperatorExperiment" component={OperatorExperiment} />
 				<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
 				<Route path="/Administration" component={Administration} />
