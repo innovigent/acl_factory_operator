@@ -167,7 +167,7 @@ const Downtime = () => {
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
-						<div className="page-header">Downtime</div>
+						<div className="page-header">Downtime Detection</div>
 						<div className="card full-height col-6">
 							<div>
 								{err ? (
@@ -177,23 +177,12 @@ const Downtime = () => {
 									</Alert>
 								) : null}
 								<div className="textFieldContainer1">
-									<div className="right-corner">Date:</div>
-									<div className="middle">Line No:</div>
-
-									<div className="left-corner">Status:</div>
+									<div className="right-corner">Date: {new Date().toDateString()}</div>
 								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 								<div className="textFieldContainer1">
-									<label>Employee ID</label>
-									<input value={epfNo} disabled></input>
-								</div>
-								<div className="textFieldContainer1">
-									<label>Production Order</label>
-									<input value={productionorder} disabled></input>
-								</div>
-								<div className="textFieldContainer1">
-									<label htmlFor="Department">Department</label>
+									<label htmlFor="Department">Normal Stoppages</label>
 
 									<div className="wrapper1">
 										<RadioGroup
@@ -206,7 +195,7 @@ const Downtime = () => {
 											<FormControlLabel
 												value="uncategorized"
 												control={<Radio color="primary" />}
-												label="uncategorized"
+												label="Change Over"
 											/>
 											<FormControlLabel
 												value="EndShift"
@@ -217,6 +206,7 @@ const Downtime = () => {
 									</div>
 								</div>
 								<div className="textFieldContainer1">
+									<label htmlFor="Department">Downtime Cases</label>
 									<div className="wrapper1">
 										{listData.lists.map((country, key) => (
 											<RadioGroup
@@ -240,7 +230,7 @@ const Downtime = () => {
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 								<button onClick={submit} className="submita">
-									submit
+									Submit
 								</button>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
