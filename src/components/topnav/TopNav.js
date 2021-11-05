@@ -20,14 +20,19 @@ const sidebar_items = [
 		icon: "bx bx-transfer-alt",
 	},
 	{
-		display_name: "Down time",
-		route: "/Downtime",
-		icon: "bx bx-time",
-	},
-	{
 		display_name: "Home",
 		route: "/Home",
 		icon: "bx bx-home-alt",
+	},
+	{
+		display_name: "Administration",
+		route: "/Administration",
+		icon: "bx bx-collection",
+	},
+	{
+		display_name: "Down time",
+		route: "/Downtime",
+		icon: "bx bx-time",
 	},
 	{
 		display_name: "Operator Action",
@@ -35,9 +40,9 @@ const sidebar_items = [
 		icon: "bx bx-pointer",
 	},
 	{
-		display_name: "Administration",
-		route: "/Administration",
-		icon: "bx bx-collection",
+		display_name: "Shift Change",
+		route: "/ShiftChange",
+		icon: "bx bx-repost",
 	},
 ];
 
