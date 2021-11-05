@@ -36,8 +36,8 @@ const sidebar_items = [
 	},
 	{
 		display_name: "Slow Run",
-		route: "/SlowRun",
-		icon: "bx bx-time",
+		route: "/SlowDownSpeed",
+		icon: "bx bx-down-arrow-circle",
 	},
 	{
 		display_name: "Operator Action",
