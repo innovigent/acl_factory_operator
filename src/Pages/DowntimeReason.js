@@ -12,6 +12,8 @@ import Radio from "@material-ui/core/Radio";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import AuthModel from "../components/modals/AuthModel";
 // I am doing coding
 
 const DowntimeReason = () => {
@@ -30,6 +32,7 @@ const DowntimeReason = () => {
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [listData, setListData] = useState({ lists: [] });
 	const [dataproduction, setdataproduction] = useState([]);
+	const [authModal, setAuthModal] = useState(false);
 
 	function validateForm() {
 		return reportedExecutiveId.length > 0;
@@ -42,7 +45,7 @@ const DowntimeReason = () => {
 		const permissionId = location.permissionId;
 		console.log(data);
 		setdataproduction(data);
-		setdowntimeId(data.id);
+		// setdowntimeId(data.id);
 		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
@@ -130,66 +133,79 @@ const DowntimeReason = () => {
 	}
 	return (
 		<>
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
-				<div className="row">
-					<div className="col-12">
-						<div className="position">
-							<div className="card full-height">
-								<div>
-									{err ? (
-										<Alert severity="error">
-											<AlertTitle>Error</AlertTitle>
-											{err}
-										</Alert>
-									) : null}
-									<div className="textFieldContainer1">
-										<div className="right-corner">Date:</div>
-										<div className="middle">Line No:</div>
-
-										<div className="left-corner">Status:</div>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1">
-										<label>Production order</label>
-										<input value={productionrunId} disabled></input>
-									</div>
-									<div className="textFieldContainer1">
-										<label>Reason</label>
-										<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
-											<option value="" selected>
-												please select Reason
-											</option>
-											{listData.lists.map((country, key) => (
-												<option key={key} value={country.id}>
-													{country.faultreason}
-												</option>
-											))}
-										</select>
-									</div>
-									<div className="textFieldContainer1">
-										<label>Executive name</label>
-										<input value={name} disabled></input>
-									</div>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
-									<button onClick={transfer} className="submitb">
-										Transfer
-									</button>
-									<button onClick={submit} className="submita">
-										submit
-									</button>
-									<div className="textFieldContainer1"></div>
-									{/* to make space*/}
+				<div className="col-12">
+					<div className="position">
+						<div className="page-header">Downtime Reasoning</div>
+						<div className="card full-height col-6">
+							<div>
+								{err ? (
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										{err}
+									</Alert>
+								) : null}
+								<div className="textFieldContainer1">
+									<div className="right-corner">Date: {new Date().toDateString()}</div>
 								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1">
+									<label>Production Order Code</label>
+									<input value={productionrunId} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label>Product Name</label>
+									<input value={productionrunId} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label>Executive Information</label>
+									<input value={name} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label>Department/Case</label>
+									<input value={name} disabled></input>
+								</div>
+								<div className="textFieldContainer1">
+									<label>Reason</label>
+									<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
+										<option value="" selected>
+											Please Select a Reason
+										</option>
+										{listData.lists.map((country, key) => (
+											<option key={key} value={country.id}>
+												{country.faultreason}
+											</option>
+										))}
+									</select>
+								</div>
+								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+									<Link to="/DownTimeTransfer">
+										<button
+											style={{
+												background: "transparent",
+												border: "1px solid #3ab78e",
+												color: "#3ab78e",
+												marginRight: "1rem",
+											}}
+											className="submita"
+										>
+											Transfer
+										</button>
+									</Link>
+									<button className="submita" onClick={() => setAuthModal(true)}>
+										Submit
+									</button>
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
 							</div>
 						</div>
 					</div>
 				</div>
-				<TopNav />
 			</div>
+			<TopNav />
 		</>
 	);
 };

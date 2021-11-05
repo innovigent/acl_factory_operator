@@ -168,7 +168,7 @@ const TransferDowntime = () => {
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
-						<div className="page-header">TransferDowntime Detection</div>
+						<div className="page-header">Downtime Transfer</div>
 						<div className="card full-height col-6">
 							<div>
 								{err ? (
@@ -182,30 +182,6 @@ const TransferDowntime = () => {
 								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
-								<div className="textFieldContainer1">
-									<label htmlFor="Department">Normal Stoppages</label>
-
-									<div className="wrapper1">
-										<RadioGroup
-											aria-label="type"
-											name="type"
-											value={type}
-											onChange={handleChange}
-											row
-										>
-											<FormControlLabel
-												value="uncategorized"
-												control={<Radio color="primary" />}
-												label="Change Over"
-											/>
-											<FormControlLabel
-												value="EndShift"
-												control={<Radio color="primary" />}
-												label="End Shift"
-											/>
-										</RadioGroup>
-									</div>
-								</div>
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">TransferDowntime Cases</label>
 									<div className="wrapper1">
