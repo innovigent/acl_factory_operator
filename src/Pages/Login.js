@@ -10,14 +10,14 @@ import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/
 
 const Login = () => {
 	const [Epf, setEpf] = useState("");
-	const [Employeeno, setEmployeeno] = useState("");
+	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 	const history = useHistory();
 	const [text, setText] = useState("");
 
 	const headers = {
 		headers: {
-			Authorization: `Bearer ${text}`,
+			Authorization: `Bearer ${localStorage.getItem("token")}`,
 		},
 	};
 
@@ -30,7 +30,7 @@ const Login = () => {
 	}, []);
 
 	function validateForm() {
-		return Epf.length > 0 && Employeeno.length > 0;
+		return Epf.length > 0 && authCode.length > 0;
 	}
 
 	function handleSubmit(event) {
@@ -38,16 +38,26 @@ const Login = () => {
 	}
 
 	const submit = async e => {
-		//e.preventDefault();
+		e.preventDefault();
 		setErr("");
 
 		try {
-			localStorage.setItem("epfno", Epf);
-			localStorage.setItem("empid", Employeeno);
-			localStorage.setItem("community", 1);
-			history.push("/Changeover");
+			const response = await axios.post(
+				"https://acl-automation.herokuapp.com/api/v1/operator/login",
+				{ operatorId: Epf, password: authCode },
+				headers
+			);
+			console.log(response);
+
+			if (response.status === 200) {
+				localStorage.setItem("epfno", Epf);
+				// localStorage.setItem("empid", authCode);
+				// localStorage.setItem("community", 1);
+				history.push("/Changeover");
+			}
 		} catch (err) {
-			err && setErr(err);
+			console.log(err.response);
+			err && setErr(err.response.data.message);
 		}
 	};
 
@@ -87,8 +97,8 @@ const Login = () => {
 								type="password"
 								min="0"
 								placeholder="Enter your authorization code"
-								value={Employeeno}
-								onChange={e => setEmployeeno(e.target.value)}
+								value={authCode}
+								onChange={e => setAuthCode(e.target.value)}
 							/>
 						</div>
 
