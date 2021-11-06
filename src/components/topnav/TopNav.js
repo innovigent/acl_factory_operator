@@ -39,11 +39,11 @@ const sidebar_items = [
 		route: "/SlowDownSpeed",
 		icon: "bx bx-down-arrow-circle",
 	},
-	{
-		display_name: "Operator Action",
-		route: "/OperatorActionTable",
-		icon: "bx bx-pointer",
-	},
+	// {
+	// 	display_name: "Operator Action",
+	// 	route: "/OperatorActionTable",
+	// 	icon: "bx bx-pointer",
+	// },
 	{
 		display_name: "Shift Change",
 		route: "/ShiftChange",
