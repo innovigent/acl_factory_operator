@@ -9,8 +9,8 @@ import axios from "axios";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const MachineLogin = () => {
-	const [Epf, setEpf] = useState("");
-	const [Employeeno, setEmployeeno] = useState("");
+	const [devicename, setDeviceName] = useState("");
+	const [password, setPassword] = useState("");
 	const [err, setErr] = useState("");
 	const history = useHistory();
 	const [text, setText] = useState("");
@@ -30,7 +30,7 @@ const MachineLogin = () => {
 	}, []);
 
 	function validateForm() {
-		return Epf.length > 0 && Employeeno.length > 0;
+		return devicename.length > 0 && password.length > 0;
 	}
 
 	function handleSubmit(event) {
@@ -38,16 +38,29 @@ const MachineLogin = () => {
 	}
 
 	const submit = async e => {
-		//e.preventDefault();
+		e.preventDefault();
 		setErr("");
 
+		if (devicename === "" || password === "") return setErr("Please fill all fields");
+
 		try {
-			localStorage.setItem("epfno", Epf);
-			localStorage.setItem("empid", Employeeno);
-			localStorage.setItem("community", 1);
-			history.push("/Changeover");
+			const res = await axios.post("https://acl-automation.herokuapp.com/api/v1/device/login", {
+				devicename,
+				password,
+			});
+			console.log(res);
+			if (res.status === 200) {
+				localStorage.setItem("token", res.data.data.token);
+				// localStorage.setItem("epfno", Epf);
+				// localStorage.setItem("empid", password);
+				// localStorage.setItem("community", 1);
+				return history.push("/Changeover");
+			}
+
+			setErr();
 		} catch (err) {
-			err && setErr(err);
+			console.log(err.response);
+			err && setErr(err.response.data.message);
 		}
 	};
 
@@ -77,8 +90,8 @@ const MachineLogin = () => {
 								type="text"
 								min="0"
 								placeholder="Enter machine UUID"
-								value={Epf}
-								onChange={e => setEpf(e.target.value)}
+								value={devicename}
+								onChange={e => setDeviceName(e.target.value)}
 							/>
 						</div>
 						<div className="rowlogin">
@@ -87,15 +100,13 @@ const MachineLogin = () => {
 								type="password"
 								min="0"
 								placeholder="Enter machine password"
-								value={Employeeno}
-								onChange={e => setEmployeeno(e.target.value)}
+								value={password}
+								onChange={e => setPassword(e.target.value)}
 							/>
 						</div>
 
 						<div id="button" className="rowlogin">
-							<button disabled={!validateForm()} onClick={submit}>
-								Log in
-							</button>
+							<button onClick={submit}>Log in</button>
 						</div>
 						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
 							<label>
