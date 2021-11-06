@@ -1,14 +1,28 @@
 import React from "react";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 import "./authmodal.css";
 
-const AuthModel = ({ execute, setAuthModal }) => {
+const AuthModel = ({ execute, setAuthModal, err, setAuthCode, authCode }) => {
 	return (
 		<div className="auth-background">
 			<div className="col-4 card auth-container">
+				{err ? (
+					<Alert severity="error">
+						<AlertTitle>Error</AlertTitle>
+						{err}
+					</Alert>
+				) : null}
 				<div className="textFieldContainer1">
 					<label htmlFor="epf">Authorization Code</label>
-					<input className="a" placeholder="" type="password" name="" />
+					<input
+						className="a"
+						placeholder=""
+						type="password"
+						name=""
+						value={authCode}
+						onChange={e => setAuthCode(e.target.value)}
+					/>
 				</div>
 				{/* to make space*/}
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
@@ -21,6 +35,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 							marginRight: "1rem",
 						}}
 						onClick={() => {
+							setAuthCode("");
 							setAuthModal(false);
 						}}
 					>
