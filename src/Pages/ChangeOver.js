@@ -210,7 +210,16 @@ const Changeover = () => {
 							</div>
 							{/* to make space*/}
 							<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-								<button onClick={() => setAuthModal(true)} className="submita">
+								<button
+									onClick={() => {
+										if (epfNo === "" || productionId === "") {
+											return setErr("Please fill all the fields");
+										}
+										setErr("");
+										setAuthModal(true);
+									}}
+									className="submita"
+								>
 									Submit
 								</button>
 							</div>
