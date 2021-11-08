@@ -1,9 +1,35 @@
 import React from "react";
+import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 import "./authmodal.css";
 
 const AuthModel = ({ execute, setAuthModal, err, setAuthCode, authCode }) => {
+	const headers = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+		},
+	};
+
+	const handleAuth = async () => {
+		console.log(headers, authCode);
+		try {
+			const response = await axios.get(
+				"https://acl-automation.herokuapp.com/api/v1/operator/SystemAuthorization",
+				{ password: authCode },
+				headers
+			);
+			console.log(response);
+			if (response.status === 200) {
+				execute();
+				setAuthModal(false);
+			}
+		} catch (err) {
+			console.log(err.response);
+			// err && setErr(err.response.data.message);
+		}
+	};
+
 	return (
 		<div className="auth-background">
 			<div className="col-4 card auth-container">
@@ -41,7 +67,7 @@ const AuthModel = ({ execute, setAuthModal, err, setAuthCode, authCode }) => {
 					>
 						Close
 					</button>
-					<button className="submita" onClick={execute}>
+					<button className="submita" onClick={handleAuth}>
 						OK
 					</button>
 				</div>
