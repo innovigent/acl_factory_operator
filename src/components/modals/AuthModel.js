@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 import "./authmodal.css";
 
-const AuthModel = ({ execute, setAuthModal, err, setAuthCode, authCode }) => {
+const AuthModel = ({ execute, setAuthModal }) => {
+	const [authCode, setAuthCode] = useState("");
+	const [err, setErr] = useState("");
+
 	const headers = {
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -12,7 +15,11 @@ const AuthModel = ({ execute, setAuthModal, err, setAuthCode, authCode }) => {
 	};
 
 	const handleAuth = async () => {
+		setErr("");
 		console.log(headers, authCode);
+		if (authCode === "") {
+			return setErr("Please enter auth code");
+		}
 		try {
 			const response = await axios.get(
 				"https://acl-automation.herokuapp.com/api/v1/operator/SystemAuthorization",
