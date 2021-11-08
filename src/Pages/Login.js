@@ -39,7 +39,7 @@ const Login = () => {
 		try {
 			const res = await axios.get(
 				`https://acl-automation.herokuapp.com/api/v1/operator/${localStorage.getItem(
-					"organization"
+					"community"
 				)}/listOperatorIPC`,
 				headers
 			);
