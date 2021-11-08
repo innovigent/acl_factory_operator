@@ -18,7 +18,7 @@ const Login = () => {
 
 	const headers = {
 		headers: {
-			Authorization: `Bearer ${localStorage.getItem("token")}`,
+			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 		},
 	};
 
