@@ -94,7 +94,7 @@ const Changeover = () => {
 		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
@@ -214,7 +214,14 @@ const Changeover = () => {
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Product Name</label>
-								<input className="a" placeholder="" type="text" name="" value={productID} />
+								<input
+									className="a"
+									placeholder=""
+									type="text"
+									name=""
+									value={productID}
+									disabled
+								/>
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Status</label>
