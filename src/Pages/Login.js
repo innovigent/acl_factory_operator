@@ -10,6 +10,7 @@ import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/
 
 const Login = () => {
 	const [Epf, setEpf] = useState("");
+	const [epfList, setEpfList] = useState([]);
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 	const history = useHistory();
@@ -22,6 +23,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		getEpfList();
 		axios(txt).then(res => {
 			setText(res.data);
 			console.log(res.data);
@@ -33,8 +35,18 @@ const Login = () => {
 		return Epf.length > 0 && authCode.length > 0;
 	}
 
-	function handleSubmit(event) {
-		event.preventDefault();
+	async function getEpfList() {
+		try {
+			const res = await axios.get(
+				`https://acl-automation.herokuapp.com/api/v1/operator/${localStorage.getItem(
+					"organization"
+				)}/listOperatorIPC`,
+				headers
+			);
+			setEpfList(res.data.data.OperatorsDetails);
+		} catch (err) {
+			console.log(err.response);
+		}
 	}
 
 	const submit = async e => {
@@ -47,7 +59,6 @@ const Login = () => {
 				{ operatorId: Epf, password: authCode },
 				headers
 			);
-			console.log(response);
 
 			if (response.status === 200) {
 				localStorage.setItem("epfno", Epf);
@@ -88,8 +99,13 @@ const Login = () => {
 								min="0"
 								placeholder="Enter your EPF number"
 								value={Epf}
+								list="epfList"
 								onChange={e => setEpf(e.target.value)}
 							/>
+							<datalist id="epfList">
+								{epfList.length > 0 &&
+									epfList.map(epf => <option value={epf.id}>{"EPF No - " + epf.epfNo}</option>)}
+							</datalist>
 						</div>
 						<div className="rowlogin">
 							<label>Authorization Code</label>
