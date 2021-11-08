@@ -13,7 +13,7 @@ import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
-	console.log(props);
+	// console.log(props);
 	return (
 		<div
 			className={cx(
@@ -37,7 +37,6 @@ const Changeover = () => {
 	const epfNo = localStorage.getItem("epfno");
 	const [productionId, setproductionId] = useState("");
 	const [productID, setProductID] = useState("");
-	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [podata, setpodata] = useState([]);
@@ -101,10 +100,6 @@ const Changeover = () => {
 		try {
 			const body = { epfNo, productionId };
 
-			if (authCode === "") {
-				return setErr("Please enter auth code");
-			}
-
 			//! previous route - https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create
 			const loginResponse = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${community}/create`,
@@ -155,15 +150,7 @@ const Changeover = () => {
 
 	return (
 		<>
-			{authModal && (
-				<AuthModel
-					setAuthModal={setAuthModal}
-					execute={submit}
-					err={err}
-					setAuthCode={setAuthCode}
-					authCode={authCode}
-				/>
-			)}
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Change Over</div>
