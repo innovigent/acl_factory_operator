@@ -28,13 +28,17 @@ const AuthModel = ({ execute, setAuthModal }) => {
 				headers,
 			);
 			console.log(response);
+
 			if (response.status === 200) {
 				execute(e, response.data.data.id);
 				setAuthModal(false);
+			} else {
+				setErr("Please check authorization code");
 			}
+
 		} catch (err) {
 			console.log(err.response);
-			// err && setErr(err.response.data.message);
+			err && setErr("Please check authorization code");
 		}
 	};
 
@@ -59,7 +63,8 @@ const AuthModel = ({ execute, setAuthModal }) => {
 					/>
 				</div>
 				{/* to make space*/}
-				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+				<form>
+								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 					<button
 						className="submita"
 						style={{
@@ -79,6 +84,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 						OK
 					</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	);
