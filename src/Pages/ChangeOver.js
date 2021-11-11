@@ -86,7 +86,8 @@ const Changeover = () => {
 		return { value: city.id, label: city.productionorderCode };
 	});
 
-	const submit = async e => {
+	const submit = async (e, id) => {
+		console.log(id)
 		e.preventDefault();
 		const token = await axios(txt);
 
@@ -98,7 +99,7 @@ const Changeover = () => {
 		};
 		setErr("");
 		try {
-			const body = { epfNo, productionId };
+			const body = { epfNo: id, productionId };
 
 			//! previous route - https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create
 			const loginResponse = await axios.post(
