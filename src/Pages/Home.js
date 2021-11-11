@@ -66,13 +66,18 @@ const Home = () => {
 					Authorization: `Bearer ${tokentxt}`,
 				},
 			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
-				headers
-			);
-			console.log(result.data);
-			setListData({ lists: result.data.data.productionOrders });
-			setLoading(false);
+
+			try {
+				const result = await axios(
+					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
+					headers
+				);
+				console.log(result.data);
+				setListData({ lists: result.data.data.productionOrders });
+				setLoading(false);
+			} catch (err) {
+				console.log(err.response);
+			}
 		};
 		fetchData();
 	}, []);
