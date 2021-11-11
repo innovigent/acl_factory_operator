@@ -8,27 +8,28 @@ const AuthModel = ({ execute, setAuthModal }) => {
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 
-	const headers = {
-		headers: {
-			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
-		},
-	};
-
-	const handleAuth = async () => {
+	const handleAuth = async e => {
+		e.preventDefault();
 		setErr("");
-		console.log(headers, authCode);
-		if (authCode === "") {
-			return setErr("Please enter auth code");
-		}
+
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+			},
+		};
 		try {
-			const response = await axios.get(
+			console.log(headers, authCode);
+			if (authCode === "") {
+				return setErr("Please enter auth code");
+			}
+			const response = await axios.post(
 				"https://acl-automation.herokuapp.com/api/v1/operator/SystemAuthorization",
 				{ password: authCode },
-				headers
+				headers,
 			);
 			console.log(response);
 			if (response.status === 200) {
-				execute();
+				execute(e, response.data.data.id);
 				setAuthModal(false);
 			}
 		} catch (err) {
@@ -74,7 +75,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 					>
 						Close
 					</button>
-					<button className="submita" onClick={handleAuth}>
+					<button className="submita" onClick={e => handleAuth(e)}>
 						OK
 					</button>
 				</div>
