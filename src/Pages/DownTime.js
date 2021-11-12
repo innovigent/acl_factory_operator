@@ -76,9 +76,10 @@ const Downtime = () => {
 			};
 			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
 			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getall`,
+				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
+			console.log(result.data);
 			setListData({ lists: result.data.data.specialCase });
 			setLoading(false);
 		};
