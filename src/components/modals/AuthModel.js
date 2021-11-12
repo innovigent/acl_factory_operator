@@ -25,7 +25,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 			const response = await axios.post(
 				"https://acl-automation.herokuapp.com/api/v1/operator/SystemAuthorization",
 				{ password: authCode },
-				headers,
+				headers
 			);
 			console.log(response);
 
@@ -35,7 +35,6 @@ const AuthModel = ({ execute, setAuthModal }) => {
 			} else {
 				setErr("Please check authorization code");
 			}
-
 		} catch (err) {
 			console.log(err.response);
 			err && setErr("Please check authorization code");
@@ -63,8 +62,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 					/>
 				</div>
 				{/* to make space*/}
-				<form>
-								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 					<button
 						className="submita"
 						style={{
@@ -84,7 +82,6 @@ const AuthModel = ({ execute, setAuthModal }) => {
 						OK
 					</button>
 				</div>
-				</form>
 			</div>
 		</div>
 	);
