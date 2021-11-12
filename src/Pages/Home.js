@@ -51,6 +51,7 @@ const Home = () => {
 				setLoading(false);
 			} catch (err) {
 				console.log(err);
+				window.location.href = "/changeover";
 			}
 		};
 		fetchData();
