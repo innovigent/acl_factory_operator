@@ -9,10 +9,9 @@ import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 
 const Administration = () => {
-	const [slowSpeedListData, setSlowSpeedListData] = useState({ lists: [] });
-	const [downtimeListData, setDowntimeListData] = useState({ lists: [] });
+	const [downtimeListData, setDowntimeListData] = useState([]);
+	const [slowSpeedListData, setSlowSpeedListData] = useState([]);
 	const [loading, setLoading] = useState(true);
-
 	const headers = {
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -20,45 +19,44 @@ const Administration = () => {
 	};
 
 	useEffect(() => {
-		getDowntimeList();
-		getSlowSpeedList();
-		setLoading(false);
+		getTableData();
 	}, []);
 
-	const getDowntimeList = async () => {
+	const getTableData = async () => {
 		try {
-			const res = await axios.get(
+			const res1 = await axios.get(
 				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${localStorage.getItem(
 					"productionrunId"
 				)}/getall`,
 				headers
 			);
-			setDowntimeListData(res.data.data.productionRunLog);
-		} catch (error) {
-			console.log(error.response);
-		}
-	};
-
-	const getSlowSpeedList = async () => {
-		try {
-			const res = await axios.get(
+			const res2 = await axios.get(
 				`https://acl-automation.herokuapp.com/api/v1/slowSpeedDetection/${localStorage.getItem(
 					"productionrunId"
 				)}/getListSlowspeed`,
 				headers
 			);
-			setSlowSpeedListData(res.data.data.productionRunLog);
+			console.log(res1.data);
+			setDowntimeListData(res1.data.data.productRunLog);
+			setSlowSpeedListData(res2.data.data.productRunLog);
+			setLoading(false);
 		} catch (error) {
 			console.log(error.response);
 		}
 	};
+
+	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
+	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status"];
 
 	const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
 
 	const renderOrderBodyDownTime = (item, index) => (
 		<tr key={index}>
 			<td>{item.id}</td>
-			<td>{item.name}</td>
+			<td>{item.downtimeStartTime}</td>
+			<td>{item.downtimeEndTime}</td>
+			<td>{item.specialCases.name}</td>
+			<td>{item.statusId}</td>
 			<td>
 				<Link to="/DownTimeTransfer">
 					<button
@@ -84,9 +82,6 @@ const Administration = () => {
 			<td>{item.name}</td>
 		</tr>
 	);
-
-	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
-	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status"];
 
 	if (loading) {
 		return (
@@ -115,7 +110,7 @@ const Administration = () => {
 					<div className="full-height col-8">
 						<div className="card" style={{ position: "relative", minHeight: "20vh" }}>
 							<h2 style={{ textAlign: "left", paddingBottom: "1rem" }}>Downtime</h2>
-							{loading ? (
+							{downtimeListData.length > 0 ? (
 								<Table
 									limit="5"
 									headData={fieldsDowntime}
@@ -130,7 +125,7 @@ const Administration = () => {
 						<div style={{ paddingBottom: "1rem" }}></div>
 						<div className="card" style={{ position: "relative", minHeight: "20vh" }}>
 							<h2 style={{ textAlign: "left", paddingBottom: "1rem" }}>Slow Speed</h2>
-							{loading ? (
+							{slowSpeedListData.length > 0 ? (
 								<Table
 									limit="5"
 									headData={fieldsSlowSpeed}
