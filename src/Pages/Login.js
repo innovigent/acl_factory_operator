@@ -61,9 +61,12 @@ const Login = () => {
 			);
 
 			if (response.status === 200) {
-				console.log(response.data)
+				console.log(response.data);
 				localStorage.setItem("epfNo", response.data.data.allRecords.epfNo);
-				localStorage.setItem("operatorName", response.data.data.allRecords.firstName + " " + response.data.data.allRecords.lastName);
+				localStorage.setItem(
+					"operatorName",
+					response.data.data.allRecords.firstName + " " + response.data.data.allRecords.lastName
+				);
 				history.push("/Changeover");
 			} else {
 				setErr("Please check your details");
