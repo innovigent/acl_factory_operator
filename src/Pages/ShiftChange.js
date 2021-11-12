@@ -6,11 +6,9 @@ import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import CreatableSelect from "react-select/creatable/dist/react-select.esm";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { HashLoader } from "react-spinners";
-import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
@@ -42,44 +40,17 @@ const ShiftChange = () => {
 	const [podata, setpodata] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 	const community = localStorage.getItem("community");
-
-	//
-	// useEffect(()=>{
-	//     setLoading(true)
-	//     axios(txt).then(res => setText(res.data)); // This will have your text inside data attribute
-	// },[])
+	const [Epf, setEpf] = useState("");
+	const [epfList, setEpfList] = useState([]);
+	const [authCode, setAuthCode] = useState("");
+	const headers = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+		},
+	};
 
 	useEffect(() => {
-		const fetchData = async () => {
-			setLoading(true);
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
-			setText(token.data);
-			setLoading(false);
-		};
-		const fetchData1 = async () => {
-			setLoading(true);
-
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${tokentxt}`,
-				},
-			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${tokentxt}/getall`,
-				headers
-			);
-			console.log(result.data);
-			setListData({ lists: result.data.data.productionOrders });
-			setLoading(false);
-		};
-
-		fetchData();
-		fetchData1();
+		getEpfList();
 	}, []);
 
 	let options = listData.lists.map(function (city) {
@@ -88,31 +59,45 @@ const ShiftChange = () => {
 
 	const submit = async e => {
 		e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
-		const headers = {
-			headers: {
-				Authorization: `Bearer ${tokentxt}`,
-			},
-		};
 		setErr("");
-		try {
-			const body = { epfNo, productionId };
 
-			//! previous route - https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create
-			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${community}/create`,
-				body,
+		try {
+			const response = await axios.post(
+				"https://acl-automation.herokuapp.com/api/v1/operator/login",
+				{ operatorId: Epf, password: authCode },
 				headers
 			);
-			console.log(loginResponse.data);
-			localStorage.setItem("productionrunId", loginResponse.data.data.id);
-			history.push("/Home");
+
+			if (response.status === 200) {
+				console.log(response.data);
+				localStorage.setItem("epfNo", response.data.data.allRecords.epfNo);
+				localStorage.setItem(
+					"operatorName",
+					response.data.data.allRecords.firstName + " " + response.data.data.allRecords.lastName
+				);
+				history.push("/Changeover");
+			} else {
+				setErr("Please check your details");
+			}
 		} catch (err) {
-			err.response.data.message && setErr(err.response.data.message);
+			err && setErr("Please check your details");
 		}
 	};
+
+	async function getEpfList() {
+		try {
+			const res = await axios.get(
+				`https://acl-automation.herokuapp.com/api/v1/operator/${localStorage.getItem(
+					"community"
+				)}/listOperatorIPC`,
+				headers
+			);
+			setEpfList(res.data.data.OperatorsDetails);
+			setLoading(false);
+		} catch (err) {
+			console.log(err.response);
+		}
+	}
 
 	function removeDuplicates(arr) {
 		arr.forEach(value => podata.push({ value: value.id, label: value.productionorderCode }));
@@ -127,6 +112,9 @@ const ShiftChange = () => {
 		console.log(selectedID);
 		setProductID(selectedID[0].productInfos ? selectedID[0].productInfos.productCode : "");
 	};
+	function validateForm() {
+		return Epf.length > 0 && authCode.length > 0;
+	}
 
 	if (loading) {
 		return (
@@ -149,50 +137,48 @@ const ShiftChange = () => {
 
 	return (
 		<>
-			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Shift Change</div>
-					<div className="card full-height col-6">
-						<div style={{ padding: "0 2rem" }}>
+					<div className="card full-height col-4">
+						<div>
 							{err ? (
 								<Alert severity="error">
 									<AlertTitle>Error</AlertTitle>
 									{err}
 								</Alert>
 							) : null}
-							<div className="textFieldContainer1">
-								<div className="right-corner">Date: {new Date().toDateString()}</div>
+							<div className="rowlogin" style={{ paddingTop: "3rem" }}>
+								<label>EPF Number</label>
+								<input
+									type="text"
+									min="0"
+									placeholder="Enter your EPF number"
+									value={Epf}
+									list="epfList"
+									onChange={e => setEpf(e.target.value)}
+								/>
+								<datalist id="epfList">
+									{epfList.length > 0 &&
+										epfList.map(epf => <option value={epf.id}>{"EPF No - " + epf.epfNo}</option>)}
+								</datalist>
 							</div>
-							<div className="textFieldContainer1"></div>
-							{/* to make space*/}
-							<div className="textFieldContainer1">
-								<div className="textFieldContainer1">
-									<label htmlFor="epf">EPF Number</label>
-									<input className="a" placeholder="" type="text" name="" value={productID} />
-								</div>
-								{/*<input*/}
-								{/*    className="a"*/}
-								{/*    placeholder=""*/}
-								{/*    type="text"*/}
-								{/*    name=""*/}
-								{/*    value={productionId}*/}
-								{/*    onChange={(e) => setproductionId(e.target.value)}*/}
-								{/*/>*/}
+							<div className="rowlogin">
+								<label>Authorization Code</label>
+								<input
+									type="password"
+									min="0"
+									placeholder="Enter your authorization code"
+									value={authCode}
+									onChange={e => setAuthCode(e.target.value)}
+								/>
 							</div>
-							<div className="textFieldContainer1">
-								<label htmlFor="epf">Authorization Code</label>
-								<input className="a" placeholder="" type="text" name="" value={productID} />
-							</div>
-							{/* to make space*/}
-							<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-								<button onClick={() => setAuthModal(true)} className="submita">
-									Submit
+
+							<div id="button" className="rowlogin">
+								<button disabled={!validateForm()} onClick={submit}>
+									Log in
 								</button>
 							</div>
-							<div className="textFieldContiner1"></div>
-							{/* to make space*/}
-							<br />
 						</div>
 					</div>
 				</div>
