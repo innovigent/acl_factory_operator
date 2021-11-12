@@ -87,7 +87,7 @@ const Changeover = () => {
 	});
 
 	const submit = async (e, id) => {
-		console.log(id)
+		console.log(id);
 		e.preventDefault();
 		const token = await axios(txt);
 
@@ -127,7 +127,13 @@ const Changeover = () => {
 		console.log(listData.lists, value);
 		const selectedID = listData.lists.filter(item => item.id === value);
 		console.log(selectedID);
-		setProductID(selectedID[0].productInfos ? selectedID[0].productInfos.productCode : "");
+		setProductID(
+			selectedID[0].productInfos
+				? selectedID[0].productInfos.productCode +
+						" " +
+						selectedID[0].productInfos.productDescription
+				: ""
+		);
 	};
 
 	if (loading) {
