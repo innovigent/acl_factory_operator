@@ -149,7 +149,9 @@ const Home = () => {
 											placeholder=""
 											type="text"
 											name=""
-											value={epfNo}
+											value={
+												localStorage.getItem("epfNo") + " - " + localStorage.getItem("operatorName")
+											}
 											disabled
 										/>
 									</div>
