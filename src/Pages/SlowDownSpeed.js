@@ -61,7 +61,7 @@ const DowntimeReason = () => {
 			};
 			try {
 				const result = await axios(
-					`https://acl-automation.herokuapp.com/api/v1/faultreason/device/getall`,
+					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 					headers
 				);
 				console.log(result);
