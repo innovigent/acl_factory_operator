@@ -7,37 +7,19 @@ import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { FormControlLabel, FormLabel, FormControl } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
 
-const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
-	console.log(props);
-	return (
-		<div
-			className={cx(
-				css(getStyles("singleValue", props)),
-				{
-					"single-value": true,
-					"single-value--is-disabled": isDisabled,
-				},
-				className
-			)}
-		>
-			<div>{selectProps.getOptionLabel(data)}</div>
-		</div>
-	);
-};
-
 const Downtime = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [loading, setLoading] = useState(true);
-	const [type, setType] = React.useState("");
-	const [listData, setListData] = useState({ lists: [] });
+	const [type, setType] = useState("change-over");
+	const [listData, setListData] = useState([]);
 	const [downtimeId, setdowntimeId] = useState("");
 	const [epfNo, setepfNo] = useState("");
 	const [specialcaseId, setspecialcaseId] = useState("");
@@ -49,25 +31,25 @@ const Downtime = () => {
 	const [authModal, setAuthModal] = useState(false);
 	// const data = location.state;
 
-	useEffect(() => {
-		console.log(history);
-		console.log(location);
-		const data = location.state;
-		try {
-			console.log(data);
-			setdowntimeId(data.id);
-			setepfNo(data.downtime[0].operatorId);
-			setproductionorder(data.downtime[0].specialcaseId);
-			setLoading(false);
-		} catch (err) {
-			console.log(err);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	console.log(history);
+	// 	console.log(location);
+	// 	const data = location.state;
+	// 	try {
+	// 		console.log(data);
+	// 		setdowntimeId(data.id);
+	// 		setepfNo(data.downtime[0].operatorId);
+	// 		setproductionorder(data.downtime[0].specialcaseId);
+	// 		setLoading(false);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const token = await axios(txt);
-
+			console.log("rendered");
 			const tokentxt = token.data;
 			const headers = {
 				headers: {
@@ -79,7 +61,6 @@ const Downtime = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
-			console.log(result.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -109,8 +90,11 @@ const Downtime = () => {
 					productionorder,
 					empid,
 				};
+				console.log(localStorage.getItem("community"));
 				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/update`,
+					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${localStorage.getItem(
+						"community"
+					)}/update`,
 					body,
 					headers
 				);
@@ -146,8 +130,8 @@ const Downtime = () => {
 		console.log(specialcaseId);
 	};
 
-	const handleTypeChange = id => {
-		setType(id);
+	const handleTypeChange = e => {
+		setType(e.target.value);
 		console.log(type);
 	};
 
@@ -191,27 +175,28 @@ const Downtime = () => {
 								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">Normal Stoppages</label>
-
-									<div className="wrapper1">
-										<RadioGroup
-											aria-label="type"
-											name="type"
-											value={type}
-											onChange={e => handleTypeChange(e.target.value)}
-											row
-										>
+									<FormControl component="fieldset">
+										<RadioGroup value={type} onChange={handleTypeChange} row>
+											<i
+												class="bx bx-transfer-alt"
+												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
+											></i>
 											<FormControlLabel
-												value="uncategorized"
+												value="change-over"
 												control={<Radio color="primary" />}
 												label="Change Over"
 											/>
+											<i
+												class="bx bx-shield-x"
+												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
+											></i>
 											<FormControlLabel
-												value="EndShift"
+												value="end-shift"
 												control={<Radio color="primary" />}
 												label="End Shift"
 											/>
 										</RadioGroup>
-									</div>
+									</FormControl>
 								</div>
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">Downtime Cases</label>
