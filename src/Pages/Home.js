@@ -57,7 +57,7 @@ const Home = () => {
 					} else if (res.data.data.allData.status.key === "downtime") {
 						history.push("/Downtime");
 					}
-				}, 3000);
+				}, 6000);
 			}
 		} catch (err) {
 			console.log(err.response);
