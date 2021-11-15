@@ -36,7 +36,7 @@ const Administration = () => {
 				)}/getListSlowspeed`,
 				headers
 			);
-			console.log(res2.data);
+			console.log(res1.data);
 			setDowntimeListData(res1.data.data.productRunLog);
 			setSlowSpeedListData(res2.data.data.productRunLog);
 			setLoading(false);
@@ -56,7 +56,7 @@ const Administration = () => {
 			<td>{item.downtimeStartTime}</td>
 			<td>{item.downtimeEndTime}</td>
 			<td>{item.specialCases.name}</td>
-			<td>{item.statusId}</td>
+			<td>{item.status.name}</td>
 			<td>
 				<Link to="/DownTimeTransfer">
 					<button
