@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import { FormControlLabel, FormLabel, FormControl } from "@material-ui/core";
-import { useHistory, useLocation } from "react-router-dom";
+import { FormControlLabel, FormControl } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
@@ -16,7 +15,6 @@ import AuthModel from "../components/modals/AuthModel";
 
 const Downtime = () => {
 	const history = useHistory();
-	const location = useLocation();
 	const [loading, setLoading] = useState(true);
 	const [type, setType] = useState("change-over");
 	const [listData, setListData] = useState([]);
@@ -25,26 +23,12 @@ const Downtime = () => {
 	const [specialcaseId, setspecialcaseId] = useState("");
 	const [productionorder, setproductionorder] = useState("");
 	const [err, setErr] = useState("");
-	const productionrunId = +localStorage.getItem("productionrunId");
-	const macaddress = localStorage.getItem("macaddress");
+	const productionrunId = localStorage.getItem("productionrunId");
 	const empid = +localStorage.getItem("empid");
 	const [authModal, setAuthModal] = useState(false);
 	// const data = location.state;
 
-	// useEffect(() => {
-	// 	console.log(history);
-	// 	console.log(location);
-	// 	const data = location.state;
-	// 	try {
-	// 		console.log(data);
-	// 		setdowntimeId(data.id);
-	// 		setepfNo(data.downtime[0].operatorId);
-	// 		setproductionorder(data.downtime[0].specialcaseId);
-	// 		setLoading(false);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// }, []);
+	useEffect(() => {}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -61,6 +45,7 @@ const Downtime = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
+			console.log(result.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -83,7 +68,6 @@ const Downtime = () => {
 			try {
 				const body = {
 					downtimeId,
-					macaddress,
 					epfNo,
 					specialcaseId,
 					productionrunId,
@@ -106,7 +90,6 @@ const Downtime = () => {
 			try {
 				const body = {
 					downtimeId,
-					macaddress,
 					epfNo,
 					specialcaseId,
 					productionrunId,
@@ -114,20 +97,23 @@ const Downtime = () => {
 					empid,
 				};
 				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,
+					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/create`,
 					body,
 					headers
 				);
-				history.push("/Home");
+				history.push("/DowntimeReason");
 			} catch (err) {
 				err.response.data.message && setErr(err.response.data.message);
 			}
 		}
 	};
 
+	const submits = () => {
+		console.log(type, specialcaseId);
+	};
+
 	const handleChange = id => {
 		setspecialcaseId(id);
-		console.log(specialcaseId);
 	};
 
 	const handleTypeChange = e => {
@@ -219,7 +205,7 @@ const Downtime = () => {
 									</div>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<button onClick={() => setAuthModal(true)} className="submita">
+									<button onClick={submits} className="submita">
 										Submit
 									</button>
 								</div>
