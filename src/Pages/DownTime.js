@@ -71,7 +71,7 @@ const Downtime = () => {
 			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
@@ -80,7 +80,7 @@ const Downtime = () => {
 				headers
 			);
 			console.log(result.data);
-			setListData({ lists: result.data.data.specialCase });
+			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
 
@@ -94,7 +94,7 @@ const Downtime = () => {
 		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
@@ -110,11 +110,11 @@ const Downtime = () => {
 					empid,
 				};
 				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`,
+					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/update`,
 					body,
 					headers
 				);
-				history.push("/Home");
+				history.push("/ShiftChange");
 			} catch (err) {
 				err.response.data.message && setErr(err.response.data.message);
 			}
@@ -143,6 +143,12 @@ const Downtime = () => {
 
 	const handleChange = id => {
 		setspecialcaseId(id);
+		console.log(specialcaseId);
+	};
+
+	const handleTypeChange = id => {
+		setType(id);
+		console.log(type);
 	};
 
 	if (loading) {
@@ -191,7 +197,7 @@ const Downtime = () => {
 											aria-label="type"
 											name="type"
 											value={type}
-											onChange={handleChange}
+											onChange={e => handleTypeChange(e.target.value)}
 											row
 										>
 											<FormControlLabel
@@ -210,7 +216,7 @@ const Downtime = () => {
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">Downtime Cases</label>
 									<div className="wrapper1">
-										{listData.lists.map((country, key) => (
+										{listData.map((country, key) => (
 											<RadioGroup
 												aria-label="type"
 												name="type"
