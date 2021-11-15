@@ -3,6 +3,9 @@ import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import { FormControlLabel, FormControl } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
@@ -15,8 +18,6 @@ const DowntimeReason = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [downtimeId, setdowntimeId] = useState("");
-	const [Product, setProduct] = useState("");
-	const [Department, setDepartment] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
 	const [reasonId, setreasonId] = useState("");
 	const [name, setname] = useState("");
@@ -26,7 +27,7 @@ const DowntimeReason = () => {
 	const macaddress = localStorage.getItem("macaddress");
 	const community = localStorage.getItem("community");
 	const productionrunId = +localStorage.getItem("productionrunId");
-	const [listData, setListData] = useState({ lists: [] });
+	const [listData, setListData] = useState([]);
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 
@@ -64,8 +65,7 @@ const DowntimeReason = () => {
 					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 					headers
 				);
-				console.log(result);
-				setListData({ lists: result.data.data.FaultReasonsDetails });
+				setListData(result.data.data.specialCaseslowSpeed);
 				setLoading(false);
 			} catch (err) {
 				console.log(err.response);
@@ -75,6 +75,10 @@ const DowntimeReason = () => {
 		fetchData();
 	}, []);
 
+	const submita = async e => {
+		console.log(reasonId);
+	};
+
 	const submit = async e => {
 		//e.preventDefault();
 		const token = await axios(txt);
@@ -82,13 +86,12 @@ const DowntimeReason = () => {
 		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
 		try {
 			const body = {
-				macaddress,
 				downtimeId,
 				reportedExecutiveId,
 				reasonId,
@@ -96,14 +99,20 @@ const DowntimeReason = () => {
 				permissionId,
 			};
 			const loginResponse = await axios.post(
-				"https://acl-automation.herokuapp.com/api/v1/submitslowrun/create",
+				// "https://acl-automation.herokuapp.com/api/v1/submitslowrun/create",
+				`SlowRunDetection/${productionrunId}/ReportSpecialCase/:slowspeedId/create`,
 				body,
 				headers
 			);
-			history.push("/Home");
+			history.push("/Administration");
 		} catch (err) {
-			err && setErr(err);
+			console.log(err.response);
+			// err && setErr(err);
 		}
+	};
+
+	const handleChange = id => {
+		setreasonId(id);
 	};
 
 	if (loading) {
@@ -146,24 +155,32 @@ const DowntimeReason = () => {
 								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label>Slow Run Reasons</label>
-									<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
-										<option value="" selected>
-											Please Select a Reason
-										</option>
-										{listData.lists.map((country, key) => (
-											<option key={key} value={country.id}>
-												{country.faultreason}
-											</option>
-										))}
-									</select>
+
+									{listData.map((country, key) => (
+										<RadioGroup
+											aria-label="type"
+											name="type"
+											value={reasonId}
+											onChange={e => handleChange(country.id)}
+											row
+										>
+											<FormControlLabel
+												value={country.id}
+												control={<Radio color="primary" />}
+												label={country.name}
+											/>
+										</RadioGroup>
+									))}
 								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
-								<button onClick={() => setAuthModal(true)} className="submita">
-									Submit
-								</button>
+								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+									<button onClick={() => setAuthModal(true)} className="submita">
+										Submit
+									</button>
+								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 							</div>
