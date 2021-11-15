@@ -3,7 +3,7 @@ import "../assets/css/Usercreate.css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import DropdownWithButton from "../components/dropdown/DropdownWithButton";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import OptionModal from "../components/modals/OptionModal";
@@ -18,6 +18,7 @@ const Home = () => {
 	const epfNo = localStorage.getItem("epfno");
 	const [stop, setStop] = useState(false);
 	const [optionModal, setOptionModal] = useState(false);
+	const history = useHistory();
 
 	const notifications = [
 		{
@@ -30,6 +31,42 @@ const Home = () => {
 			content: "Slow Speed",
 		},
 	];
+
+	const detectFaults = async () => {
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+			},
+		};
+
+		try {
+			const res = await axios.get(
+				`https://acl-automation.herokuapp.com/api/v1/productionRun/${productionrunId}/faultIdentification`,
+				headers
+			);
+			console.log(res.data);
+			if (res.status === 200) {
+				setstatus(res.data.data.allData.status.key);
+
+				setTimeout(() => {
+					if (res.data.data.allData.status.key === "slowrun") {
+						history.push("/SlowDownSpeed", {
+							pathname: "/template",
+							state: { data: res.data.data.allData },
+						});
+					} else if (res.data.data.allData.status.key === "downtime") {
+						history.push("/Downtime");
+					}
+				}, 3000);
+			}
+		} catch (err) {
+			console.log(err.response);
+		}
+	};
+
+	setInterval(() => {
+		detectFaults();
+	}, 10000);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -164,8 +201,22 @@ const Home = () => {
 									</div>
 									<div className="textFieldContainer1">
 										<label htmlFor="epf">Status</label>
-										<div className={stop ? "status stopped indicator" : "status success"}>
-											<p>{stop ? "Stopped" : "Running"}</p>
+										<div
+											className={
+												status === "downtime" || status === "slowrun"
+													? "status stopped indicator"
+													: "status success"
+											}
+										>
+											<p>
+												{status === "running"
+													? "Running"
+													: status === "slowrun"
+													? "Slow Running"
+													: status === "downtime"
+													? "Stopped"
+													: "Loading.."}
+											</p>
 										</div>
 									</div>
 									<div className="left-corner" onClick={() => setOptionModal(true)}>
