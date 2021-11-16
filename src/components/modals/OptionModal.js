@@ -61,11 +61,11 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							window.location.href = "/Administration";
+							window.location.href = "/SlowDownSpeed";
 							setOptionModal(false);
 						}}
 					>
-						Administration
+						Slow Run Reasoning
 					</button>
 				</div>
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
