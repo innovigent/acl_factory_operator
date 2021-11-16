@@ -44,12 +44,12 @@ const Home = () => {
 				`https://acl-automation.herokuapp.com/api/v1/productionRun/${productionrunId}/faultIdentification`,
 				headers
 			);
-			console.log(res.data);
+
 			if (res.status === 200) {
 				setstatus(res.data.data.allData.status.key);
 
 				setTimeout(() => {
-					if (res.data.data.allData.status.key === "running") {
+					if (res.data.data.allData.status.key === "slowrun") {
 						history.push({
 							pathname: "/SlowDownSpeed",
 							state: { data: res.data.data.allData },
