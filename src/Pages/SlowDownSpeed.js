@@ -32,7 +32,7 @@ const DowntimeReason = () => {
 	const [authModal, setAuthModal] = useState(false);
 
 	useEffect(() => {
-		setSlowSpeedId(history.location.state.data.id);
+		setSlowSpeedId(localStorage.getItem("slowRunId"));
 		setLoading(false);
 	}, []);
 
@@ -75,7 +75,6 @@ const DowntimeReason = () => {
 				authorziedPersonId: id,
 				specialcaseId,
 			};
-
 			const res = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
 				body,
