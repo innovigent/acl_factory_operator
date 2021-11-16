@@ -4,6 +4,7 @@ import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import TopNav from "../components/topnav/TopNav";
 import Table from "../components/table/Table";
+import Badge from "../components/badge/Badge";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
@@ -37,6 +38,7 @@ const Administration = () => {
 				headers
 			);
 			console.log(res1.data);
+			console.log(res2.data);
 			setDowntimeListData(res1.data.data.productRunLog);
 			setSlowSpeedListData(res2.data.data.productRunLog);
 			setLoading(false);
@@ -46,7 +48,7 @@ const Administration = () => {
 	};
 
 	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
-	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status", "Action"];
+	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Slow Speed Case", "Status", "Action"];
 
 	const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
 
@@ -55,49 +57,149 @@ const Administration = () => {
 			<td>{item.id}</td>
 			<td>{item.downtimeStartTime}</td>
 			<td>{item.downtimeEndTime}</td>
-			<td>{item.specialCases.name}</td>
-			<td>{item.status.name}</td>
+			<td>{item.specialCases ? item.specialCases.name : ""}</td>
 			<td>
-				<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
-					<button
-						className="submita"
-						style={{
-							background: "transparent",
-							border: "1px solid #3ab78e",
-							color: "#3ab78e",
-							padding: "5px",
-							fontSize: "0.8rem",
-						}}
-					>
-						Submit
-					</button>
-				</Link>
+				<Badge
+					content={item.status.name}
+					type={
+						item.status.name === "Operator-Entered" || item.status.name === "Transfer"
+							? "warning"
+							: item.status.name === "Executive-Entered"
+							? "success"
+							: "primary"
+					}
+				/>
 			</td>
+			{item.status.name === "Operator-Entered" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Submit
+						</button>
+					</Link>
+				</td>
+			) : item.status.name === "Created" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Submit
+						</button>
+					</Link>
+				</td>
+			) : item.status.name === "Transfer" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Transfer{" "}
+						</button>
+					</Link>
+				</td>
+			) : (
+				""
+			)}
 		</tr>
 	);
 
 	const renderOrderBodySlowRun = (item, index) => (
 		<tr key={index}>
+			{console.log(item.specialcases)}
 			<td>{item.id}</td>
 			<td>{item.slowrunStartTime}</td>
 			<td>{item.slowrunEndTime}</td>
-			<td>{item.status.name}</td>
+			<td>{item.specialcases ? item.specialcases.name : ""}</td>
 			<td>
-				<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
-					<button
-						className="submita"
-						style={{
-							background: "transparent",
-							border: "1px solid #3ab78e",
-							color: "#3ab78e",
-							padding: "5px",
-							fontSize: "0.8rem",
-						}}
-					>
-						Submit
-					</button>
-				</Link>
+				<Badge
+					content={item.status.name}
+					type={
+						item.status.name === "Operator-Entered" || item.status.name === "Transfer"
+							? "warning"
+							: item.status.name === "Executive-Entered"
+							? "success"
+							: "primary"
+					}
+				/>
 			</td>
+			{item.status.name === "Operator-Entered" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Submit
+						</button>
+					</Link>
+				</td>
+			) : item.status.name === "Created" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Submit
+						</button>
+					</Link>
+				</td>
+			) : item.status.name === "Transfer" ? (
+				<td>
+					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+						<button
+							className="submita"
+							style={{
+								background: "transparent",
+								border: "1px solid #3ab78e",
+								color: "#3ab78e",
+								padding: "5px",
+								fontSize: "0.8rem",
+							}}
+						>
+							Transfer{" "}
+						</button>
+					</Link>
+				</td>
+			) : (
+				""
+			)}
 		</tr>
 	);
 
