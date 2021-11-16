@@ -46,7 +46,7 @@ const Administration = () => {
 	};
 
 	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
-	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status"];
+	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Status", "Action"];
 
 	const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
 
@@ -58,7 +58,7 @@ const Administration = () => {
 			<td>{item.specialCases.name}</td>
 			<td>{item.status.name}</td>
 			<td>
-				<Link to="/DownTimeTransfer">
+				<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
 					<button
 						className="submita"
 						style={{
@@ -69,7 +69,7 @@ const Administration = () => {
 							fontSize: "0.8rem",
 						}}
 					>
-						Transfer
+						Submit
 					</button>
 				</Link>
 			</td>
@@ -82,6 +82,22 @@ const Administration = () => {
 			<td>{item.slowrunStartTime}</td>
 			<td>{item.slowrunEndTime}</td>
 			<td>{item.status.name}</td>
+			<td>
+				<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
+					<button
+						className="submita"
+						style={{
+							background: "transparent",
+							border: "1px solid #3ab78e",
+							color: "#3ab78e",
+							padding: "5px",
+							fontSize: "0.8rem",
+						}}
+					>
+						Submit
+					</button>
+				</Link>
+			</td>
 		</tr>
 	);
 
