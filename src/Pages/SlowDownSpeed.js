@@ -17,7 +17,7 @@ import AuthModel from "../components/modals/AuthModel";
 const DowntimeReason = () => {
 	const history = useHistory();
 	const location = useLocation();
-	const [downtimeId, setdowntimeId] = useState("");
+	const [slowSpeedId, setSlowSpeedId] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
 	const [reasonId, setreasonId] = useState("");
 	const [name, setname] = useState("");
@@ -36,6 +36,8 @@ const DowntimeReason = () => {
 	}
 
 	useEffect(() => {
+		console.log(history);
+		setSlowSpeedId(history.location.state.data.id);
 		const data = location.state;
 		const executive = location.executive;
 		const name = location.name;
@@ -43,7 +45,7 @@ const DowntimeReason = () => {
 		console.log(location);
 		console.log(data);
 		setdataproduction(data);
-		// setdowntimeId(data.id);
+		// setSlowSpeedId(data.id);
 		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
@@ -92,7 +94,7 @@ const DowntimeReason = () => {
 		setErr("");
 		try {
 			const body = {
-				downtimeId,
+				slowSpeedId,
 				reportedExecutiveId,
 				reasonId,
 				productionrunId,
@@ -100,7 +102,7 @@ const DowntimeReason = () => {
 			};
 			const loginResponse = await axios.post(
 				// "https://acl-automation.herokuapp.com/api/v1/submitslowrun/create",
-				`SlowRunDetection/${productionrunId}/ReportSpecialCase/:slowspeedId/create`,
+				`SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
 				body,
 				headers
 			);
