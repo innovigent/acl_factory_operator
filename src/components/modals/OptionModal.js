@@ -41,6 +41,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
+							window.location.href = "/ShiftChange";
 							setOptionModal(false);
 						}}
 					>
@@ -50,6 +51,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
+							window.location.href = "/ChangeOver";
 							setOptionModal(false);
 						}}
 					>
@@ -59,10 +61,11 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
+							window.location.href = "/Administration";
 							setOptionModal(false);
 						}}
 					>
-						Slow Speed Reasoning
+						Administration
 					</button>
 				</div>
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
