@@ -5,7 +5,7 @@ import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import { FormControlLabel, FormControl } from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
@@ -31,24 +31,8 @@ const DowntimeReason = () => {
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 
-	function validateForm() {
-		return reportedExecutiveId.length > 0;
-	}
-
 	useEffect(() => {
-		console.log(history);
 		setSlowSpeedId(history.location.state.data.id);
-		const data = location.state;
-		const executive = location.executive;
-		const name = location.name;
-		const permissionId = location.permissionId;
-		console.log(location);
-		console.log(data);
-		setdataproduction(data);
-		// setSlowSpeedId(data.id);
-		setreportedExecutiveId(executive);
-		setname(name);
-		setpermissionId(permissionId);
 		setLoading(false);
 	}, []);
 
