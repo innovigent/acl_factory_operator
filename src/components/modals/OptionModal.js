@@ -13,7 +13,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						placeholder=""
 						type="text"
 						name=""
-						value={data.speed ? data.speed : "Loading.."}
+						value={data.speed ? data.speed + " m/min" : "Loading.."}
 						disabled
 					/>
 				</div>
@@ -24,7 +24,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						placeholder=""
 						type="text"
 						name=""
-						value={data.output ? data.output : "Loading.."}
+						value={data.output ? data.output + " m" : "Loading.."}
 						disabled
 					/>
 				</div>
