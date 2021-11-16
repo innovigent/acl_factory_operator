@@ -45,7 +45,6 @@ const Home = () => {
 			);
 
 			if (res.status === 200) {
-				console.log(res.data);
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,
 					output: res.data.data.allData.outputQuantity,
@@ -77,7 +76,7 @@ const Home = () => {
 				const tokentxt = token.data;
 				const headers = {
 					headers: {
-						Authorization: `Bearer ${tokentxt}`,
+						Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 					},
 				};
 				const result = await axios(
@@ -96,32 +95,6 @@ const Home = () => {
 		setInterval(() => {
 			detectFaults();
 		}, 10000);
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${tokentxt}`,
-				},
-			};
-
-			try {
-				const result = await axios(
-					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
-					headers
-				);
-				console.log(result.data);
-				setListData({ lists: result.data.data.productionOrders });
-				setLoading(false);
-			} catch (err) {
-				console.log(err.response);
-			}
-		};
-		fetchData();
 	}, []);
 
 	const renderNotificationItem = (item, index) => (
