@@ -18,7 +18,6 @@ const AuthModel = ({ execute, setAuthModal }) => {
 			},
 		};
 		try {
-			console.log(headers, authCode);
 			if (authCode === "") {
 				return setErr("Please enter auth code");
 			}
@@ -27,7 +26,6 @@ const AuthModel = ({ execute, setAuthModal }) => {
 				{ password: authCode },
 				headers
 			);
-			console.log(response);
 
 			if (response.status === 200) {
 				execute(e, response.data.data.id);
