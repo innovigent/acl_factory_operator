@@ -15,7 +15,14 @@ const OptionModal = ({ setOptionModal }) => {
 					<input className="a" placeholder="" type="text" name="" value="6000m" disabled />
 				</div>
 				{/* to make space*/}
-				<div style={{ display: "flex", justifyContent: "space-between" }}>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						flexWrap: "wrap",
+					}}
+				>
 					<button
 						style={{ margin: "1rem" }}
 						className="submita"
