@@ -53,12 +53,14 @@ const Home = () => {
 
 				setTimeout(() => {
 					if (res.data.data.allData.status.key === "slowrun") {
+						localStorage.setItem("slowRunId", res.data.data.allData.id);
 						history.push({
 							pathname: "/SlowDownSpeed",
 							state: { data: res.data.data.allData },
 						});
 					} else if (res.data.data.allData.status.key === "downtime") {
-						history.push("/Downtime");
+						localStorage.setItem("downtimeId", res.data.data.allData.id);
+						history.push({ pathname: "/Downtime", state: { data: res.data.data.allData } });
 					}
 				}, 6000);
 			}
