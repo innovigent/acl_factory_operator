@@ -49,9 +49,9 @@ const Home = () => {
 				setstatus(res.data.data.allData.status.key);
 
 				setTimeout(() => {
-					if (res.data.data.allData.status.key === "slowrun") {
-						history.push("/SlowDownSpeed", {
-							pathname: "/template",
+					if (res.data.data.allData.status.key === "running") {
+						history.push({
+							pathname: "/SlowDownSpeed",
 							state: { data: res.data.data.allData },
 						});
 					} else if (res.data.data.allData.status.key === "downtime") {
@@ -63,6 +63,8 @@ const Home = () => {
 			console.log(err.response);
 		}
 	};
+
+	detectFaults();
 
 	setInterval(() => {
 		detectFaults();
