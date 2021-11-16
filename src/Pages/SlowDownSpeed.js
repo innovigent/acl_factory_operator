@@ -19,7 +19,7 @@ const DowntimeReason = () => {
 	const location = useLocation();
 	const [slowSpeedId, setSlowSpeedId] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
-	const [reasonId, setreasonId] = useState("");
+	const [specialcaseId, setSpecialCaseId] = useState("");
 	const [name, setname] = useState("");
 	const [permissionId, setpermissionId] = useState("");
 	const [err, setErr] = useState("");
@@ -77,15 +77,8 @@ const DowntimeReason = () => {
 		fetchData();
 	}, []);
 
-	const submita = async e => {
-		console.log(reasonId);
-	};
-
-	const submit = async e => {
-		//e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
+	const submit = async (e, id) => {
+		e.preventDefault();
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -95,26 +88,29 @@ const DowntimeReason = () => {
 		try {
 			const body = {
 				slowSpeedId,
-				reportedExecutiveId,
-				reasonId,
-				productionrunId,
-				permissionId,
+				authorziedPersonId: id,
+				specialcaseId,
 			};
-			const loginResponse = await axios.post(
-				// "https://acl-automation.herokuapp.com/api/v1/submitslowrun/create",
-				`SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
+
+			const res = await axios.post(
+				`https://acl-automation.herokuapp.com/api/v1/SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
 				body,
 				headers
 			);
-			history.push("/Administration");
+
+			if (res.status === 200) {
+				history.push("/Home");
+			} else {
+				setErr("Something went wrong");
+			}
 		} catch (err) {
 			console.log(err.response);
-			// err && setErr(err);
+			setErr("Something went wrong");
 		}
 	};
 
 	const handleChange = id => {
-		setreasonId(id);
+		setSpecialCaseId(id);
 	};
 
 	if (loading) {
@@ -162,7 +158,7 @@ const DowntimeReason = () => {
 										<RadioGroup
 											aria-label="type"
 											name="type"
-											value={reasonId}
+											value={specialcaseId}
 											onChange={e => handleChange(country.id)}
 											row
 										>
