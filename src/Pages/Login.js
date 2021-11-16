@@ -62,6 +62,7 @@ const Login = () => {
 
 			if (response.status === 200) {
 				console.log(response.data);
+				localStorage.setItem("token", response.data.data.token);
 				localStorage.setItem("epfNo", response.data.data.allRecords.epfNo);
 				localStorage.setItem(
 					"operatorName",
