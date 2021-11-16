@@ -7,16 +7,16 @@ import axios from "axios";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { FormControlLabel, FormControl } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
 
 const Downtime = () => {
 	const history = useHistory();
+	const location = useLocation();
 	const [loading, setLoading] = useState(true);
-	const [type, setType] = useState("change-over");
+	const [type, setType] = useState("");
 	const [listData, setListData] = useState([]);
 	const [downtimeId, setdowntimeId] = useState("");
 	const [epfNo, setepfNo] = useState("");
@@ -26,15 +26,19 @@ const Downtime = () => {
 	const productionrunId = localStorage.getItem("productionrunId");
 	const empid = +localStorage.getItem("empid");
 	const [authModal, setAuthModal] = useState(false);
-	// const data = location.state;
 
-	useEffect(() => {}, []);
+	const setId = () => {
+		console.log(location.state.id);
+		if (!location.state.id) {
+			setdowntimeId(localStorage.getItem("downtimeId"));
+		} else {
+			setdowntimeId(location.state.id);
+		}
+	};
 
 	useEffect(() => {
+		setId();
 		const fetchData = async () => {
-			const token = await axios(txt);
-			console.log("rendered");
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -55,9 +59,6 @@ const Downtime = () => {
 
 	const submit = async e => {
 		e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -74,7 +75,6 @@ const Downtime = () => {
 					productionorder,
 					empid,
 				};
-				console.log(localStorage.getItem("community"));
 				const loginResponse = await axios.post(
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${localStorage.getItem(
 						"community"
@@ -97,7 +97,7 @@ const Downtime = () => {
 					empid,
 				};
 				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/create`,
+					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${productionrunId}/ReportSpecialCase/${downtimeId}/create`,
 					body,
 					headers
 				);
@@ -164,7 +164,7 @@ const Downtime = () => {
 									<FormControl component="fieldset">
 										<RadioGroup value={type} onChange={handleTypeChange} row>
 											<i
-												class="bx bx-transfer-alt"
+												className="bx bx-transfer-alt"
 												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
 											></i>
 											<FormControlLabel
@@ -173,7 +173,7 @@ const Downtime = () => {
 												label="Change Over"
 											/>
 											<i
-												class="bx bx-shield-x"
+												className="bx bx-shield-x"
 												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
 											></i>
 											<FormControlLabel
@@ -205,7 +205,7 @@ const Downtime = () => {
 									</div>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<button onClick={submits} className="submita">
+									<button onClick={() => setAuthModal(true)} className="submita">
 										Submit
 									</button>
 								</div>
