@@ -5,6 +5,7 @@ import axios from "axios";
 import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import OptionModal from "../components/modals/OptionModal";
 
@@ -13,10 +14,8 @@ const Home = () => {
 	const [err, setErr] = useState("");
 	const [status, setstatus] = useState("");
 	const [loading, setLoading] = useState(true);
-	const macaddress = localStorage.getItem("macaddress");
+	const [faultDetectionData, setFaultDetectionData] = useState({});
 	const productionrunId = localStorage.getItem("productionrunId");
-	const epfNo = localStorage.getItem("epfno");
-	const [stop, setStop] = useState(false);
 	const [optionModal, setOptionModal] = useState(false);
 	const history = useHistory();
 
@@ -46,6 +45,11 @@ const Home = () => {
 			);
 
 			if (res.status === 200) {
+				console.log(res.data);
+				setFaultDetectionData({
+					speed: res.data.data.allData.machineSpeed,
+					output: res.data.data.allData.outputQuantity,
+				});
 				setstatus(res.data.data.allData.status.key);
 
 				setTimeout(() => {
@@ -61,14 +65,9 @@ const Home = () => {
 			}
 		} catch (err) {
 			console.log(err.response);
+			setErr("Something went wrong while receiving data");
 		}
 	};
-
-	detectFaults();
-
-	setInterval(() => {
-		detectFaults();
-	}, 10000);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -85,7 +84,6 @@ const Home = () => {
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 					headers
 				);
-				console.log(result);
 				setListData({ lists: result.data.data.productionOrders });
 				setLoading(false);
 			} catch (err) {
@@ -94,6 +92,10 @@ const Home = () => {
 			}
 		};
 		fetchData();
+		detectFaults();
+		setInterval(() => {
+			detectFaults();
+		}, 10000);
 	}, []);
 
 	useEffect(() => {
@@ -153,14 +155,20 @@ const Home = () => {
 	return (
 		<>
 			<div id="container">
-				{optionModal && <OptionModal setOptionModal={setOptionModal} />}
+				{optionModal && <OptionModal setOptionModal={setOptionModal} data={faultDetectionData} />}
 				<div className="position">
 					<h1 className="page-header">Home</h1>
 					<>
 						<div className="card full-height col-6">
-							{listData.lists.map((country, key) => (
+							{err ? (
+								<Alert severity="error">
+									<AlertTitle>Error</AlertTitle>
+									{err}
+								</Alert>
+							) : null}
+							{listData.lists.map((country, index) => (
 								<>
-									<div className="textFieldContainer1">
+									<div className="textFieldContainer1" id={index}>
 										<label htmlFor="epf">Production Order Code</label>
 										<input
 											className="a"
