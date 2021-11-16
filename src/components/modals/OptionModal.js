@@ -2,17 +2,31 @@ import React from "react";
 
 import "./authmodal.css";
 
-const OptionModal = ({ setOptionModal }) => {
+const OptionModal = ({ setOptionModal, data }) => {
 	return (
 		<div className="auth-background">
 			<div className="col-6 card auth-container">
 				<div className="textFieldContainer1">
 					<label htmlFor="epf">Machine Speed</label>
-					<input className="a" placeholder="" type="text" name="" value="200m/min" disabled />
+					<input
+						className="a"
+						placeholder=""
+						type="text"
+						name=""
+						value={data.speed ? data.speed : "Loading.."}
+						disabled
+					/>
 				</div>
 				<div className="textFieldContainer1">
 					<label htmlFor="epf">Output</label>
-					<input className="a" placeholder="" type="text" name="" value="6000m" disabled />
+					<input
+						className="a"
+						placeholder=""
+						type="text"
+						name=""
+						value={data.output ? data.output : "Loading.."}
+						disabled
+					/>
 				</div>
 				{/* to make space*/}
 				<div
