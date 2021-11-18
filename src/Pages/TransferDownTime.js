@@ -84,7 +84,7 @@ const TransferDowntime = () => {
 		fetchData();
 	}, []);
 
-	const submit = async e => {
+	const submit = async (e, id) => {
 		e.preventDefault();
 		const headers = {
 			headers: {
@@ -97,6 +97,7 @@ const TransferDowntime = () => {
 			const body = {
 				downtimeId,
 				macaddress,
+				reportedExecutiveId: id,
 				epfNo,
 				specialcaseId,
 				productionrunId,
@@ -104,13 +105,14 @@ const TransferDowntime = () => {
 				empid,
 			};
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,
+				`https://acl-automation.herokuapp.com/api/v1/transferreasoning/create`,
 				body,
 				headers
 			);
 			history.push("/Home");
 		} catch (err) {
-			err.response.data.message && setErr(err.response.data.message);
+			console.log(err.response);
+			setErr("Something went wrong");
 		}
 	};
 
