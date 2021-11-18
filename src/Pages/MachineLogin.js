@@ -6,7 +6,7 @@ import "../assets/css/Login.css";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const MachineLogin = () => {
 	const [devicename, setDeviceName] = useState("");
@@ -14,28 +14,6 @@ const MachineLogin = () => {
 	const [err, setErr] = useState("");
 	const history = useHistory();
 	const [text, setText] = useState("");
-
-	const headers = {
-		headers: {
-			Authorization: `Bearer ${text}`,
-		},
-	};
-
-	useEffect(() => {
-		axios(txt).then(res => {
-			setText(res.data);
-			console.log(res.data);
-		});
-		// This will have your text inside data attribute
-	}, []);
-
-	function validateForm() {
-		return devicename.length > 0 && password.length > 0;
-	}
-
-	function handleSubmit(event) {
-		event.preventDefault();
-	}
 
 	const submit = async e => {
 		e.preventDefault();

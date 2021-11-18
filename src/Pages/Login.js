@@ -6,7 +6,6 @@ import "../assets/css/Login.css";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const Login = () => {
 	const [Epf, setEpf] = useState("");
@@ -24,11 +23,6 @@ const Login = () => {
 
 	useEffect(() => {
 		getEpfList();
-		axios(txt).then(res => {
-			setText(res.data);
-			console.log(res.data);
-		});
-		// This will have your text inside data attribute
 	}, []);
 
 	function validateForm() {

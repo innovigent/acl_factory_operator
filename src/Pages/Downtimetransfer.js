@@ -11,7 +11,6 @@ import { HashLoader } from "react-spinners";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const DowntimeReason = () => {
 	const history = useHistory();
@@ -50,12 +49,9 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			const result1 = await axios(
@@ -70,19 +66,15 @@ const DowntimeReason = () => {
 	}, []);
 
 	const submit = async e => {
-		//e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
+		e.preventDefault();
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
 		try {
 			const body = {
-				macaddress,
 				downtimeId,
 				reportedExecutiveId,
 				reasonId,

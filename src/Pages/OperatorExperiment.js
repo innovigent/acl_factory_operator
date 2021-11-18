@@ -5,7 +5,7 @@ import "../assets/css/operatorfrm.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 function createData(name, empty) {
 	return { name, empty };
@@ -25,15 +25,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const SingleValue = ({
-	cx,
-	getStyles,
-	selectProps,
-	data,
-	isDisabled,
-	className,
-	...props
-}) => {
+const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
 	return (
 		<div
@@ -102,7 +94,7 @@ const ProductOrder = () => {
 									autoFocus
 									placeholder=""
 									value={uuid}
-									onChange={(e) => setUuid(e.target.value)}
+									onChange={e => setUuid(e.target.value)}
 								/>
 							</div>
 
@@ -113,7 +105,7 @@ const ProductOrder = () => {
 									autoFocus
 									placeholder=""
 									value={uuid}
-									onChange={(e) => setUuid(e.target.value)}
+									onChange={e => setUuid(e.target.value)}
 								/>
 							</div>
 

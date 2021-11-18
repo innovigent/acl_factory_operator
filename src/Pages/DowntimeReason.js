@@ -6,12 +6,8 @@ import "../assets/css/Login.css";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AuthModel from "../components/modals/AuthModel";
 // I am doing coding
@@ -34,16 +30,11 @@ const DowntimeReason = () => {
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 
-	function validateForm() {
-		return reportedExecutiveId.length > 0;
-	}
-
 	useEffect(() => {
 		const data = location.state;
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
-		console.log(data);
 		setdataproduction(data);
 		// setdowntimeId(data.id);
 		setreportedExecutiveId(executive);
@@ -54,12 +45,9 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			const result = await axios(
@@ -74,19 +62,15 @@ const DowntimeReason = () => {
 	}, []);
 
 	const submit = async e => {
-		//e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
+		e.preventDefault();
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
 		try {
 			const body = {
-				macaddress,
 				downtimeId,
 				reportedExecutiveId,
 				reasonId,

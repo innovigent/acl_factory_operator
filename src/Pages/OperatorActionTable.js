@@ -10,7 +10,7 @@ import Table from "../components/table/Table";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const fields = ["Production Order", "Production line", "Start time", "reason", "Reslove", "Report"];
 
@@ -134,16 +134,15 @@ const ActionTable = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const token = await axios(txt);
-				const tokentxt = token.data;
-
 				const headers = {
 					headers: {
-						Authorization: `Bearer ${tokentxt}`,
+						Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 					},
 				};
 				const result = await axios(
-					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${tokentxt}/${productionrunId}/getall`,
+					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${localStorage.getItem(
+						"device-token"
+					)}/${productionrunId}/getall`,
 					headers
 				);
 				console.log(result);

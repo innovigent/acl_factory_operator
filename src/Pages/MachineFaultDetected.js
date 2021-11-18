@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { css } from "@emotion/css";
 import CreatableSelect from "react-select/creatable";
 import TopNav from "../components/topnav/TopNav";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 function createData(name, empty) {
 	return { name, empty };
@@ -24,15 +24,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const SingleValue = ({
-	cx,
-	getStyles,
-	selectProps,
-	data,
-	isDisabled,
-	className,
-	...props
-}) => {
+const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
 	return (
 		<div
@@ -60,14 +52,12 @@ const FaultDetection = () => {
 
 	let interval = useRef();
 
-	const startTimer = (countdownDate) => {
+	const startTimer = countdownDate => {
 		const now = new Date().getTime();
 		const distance = countdownDate - now;
 
 		const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		const hours = Math.floor(
-			(distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-		);
+		const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -178,7 +168,7 @@ const FaultDetection = () => {
 								autoFocus
 								placeholder=""
 								value={Product}
-								onChange={(e) => setProduct(e.target.value)}
+								onChange={e => setProduct(e.target.value)}
 							/>
 						</div>
 

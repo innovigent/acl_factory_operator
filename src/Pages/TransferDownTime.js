@@ -11,7 +11,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
@@ -66,12 +66,9 @@ const TransferDowntime = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
@@ -88,12 +85,9 @@ const TransferDowntime = () => {
 
 	const submit = async e => {
 		e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");

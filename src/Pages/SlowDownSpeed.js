@@ -11,7 +11,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
 
 const DowntimeReason = () => {
@@ -38,12 +38,9 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			try {

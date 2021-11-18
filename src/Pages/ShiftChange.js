@@ -7,7 +7,6 @@ import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useHistory, Link } from "react-router-dom";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { HashLoader } from "react-spinners";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {

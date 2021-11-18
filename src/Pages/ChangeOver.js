@@ -8,7 +8,6 @@ import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from "react-router-dom";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 
@@ -33,7 +32,6 @@ const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, 
 const Changeover = () => {
 	const history = useHistory();
 	const [listData, setListData] = useState({ lists: [] });
-	const [text, setText] = useState("");
 	const epfNo = localStorage.getItem("epfno");
 	const [productionId, setproductionId] = useState("");
 	const [productID, setProductID] = useState("");
@@ -43,43 +41,25 @@ const Changeover = () => {
 	const [authModal, setAuthModal] = useState(false);
 	const community = localStorage.getItem("community");
 
-	//
-	// useEffect(()=>{
-	//     setLoading(true)
-	//     axios(txt).then(res => setText(res.data)); // This will have your text inside data attribute
-	// },[])
-
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
-			setText(token.data);
-			setLoading(false);
-		};
-		const fetchData1 = async () => {
-			setLoading(true);
-
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${tokentxt}/getall`,
+				`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${localStorage.getItem(
+					"device-token"
+				)}/getall`,
 				headers
 			);
-			console.log(result.data);
 			setListData({ lists: result.data.data.productionOrders });
 			setLoading(false);
 		};
 
 		fetchData();
-		fetchData1();
 	}, []);
 
 	let options = listData.lists.map(function (city) {
@@ -87,11 +67,7 @@ const Changeover = () => {
 	});
 
 	const submit = async (e, id) => {
-		console.log(id);
 		e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -101,13 +77,12 @@ const Changeover = () => {
 		try {
 			const body = { epfNo: id, productionId };
 
-			//! previous route - https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/1/create
 			const loginResponse = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${community}/create`,
 				body,
 				headers
 			);
-			console.log(loginResponse.data);
+
 			localStorage.setItem("productionrunId", loginResponse.data.data.id);
 			history.push("/Home");
 		} catch (err) {
@@ -115,11 +90,6 @@ const Changeover = () => {
 			err.response.data.message && setErr(err.response.data.message);
 		}
 	};
-
-	function removeDuplicates(arr) {
-		arr.forEach(value => podata.push({ value: value.id, label: value.productionorderCode }));
-		console.log(podata);
-	}
 
 	const handleChange = (newValue: any, actionMeta: any) => {
 		let value = newValue.value;

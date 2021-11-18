@@ -11,7 +11,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const OperatorBreakdown = () => {
 	const history = useHistory();
@@ -50,12 +50,9 @@ const OperatorBreakdown = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = await axios(txt);
-
-			const tokentxt = token.data;
 			const headers = {
 				headers: {
-					Authorization: `Bearer ${tokentxt}`,
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
 			const result = await axios(
@@ -80,12 +77,9 @@ const OperatorBreakdown = () => {
 
 	const submit = async e => {
 		//e.preventDefault();
-		const token = await axios(txt);
-
-		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");

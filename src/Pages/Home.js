@@ -6,7 +6,6 @@ import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import OptionModal from "../components/modals/OptionModal";
 
 const Home = () => {
@@ -73,9 +72,6 @@ const Home = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const token = await axios(txt);
-
-				const tokentxt = token.data;
 				const headers = {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem("device-token")}`,

@@ -6,7 +6,7 @@ import "../assets/css/Login.css";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
-import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const VerifyIssue = () => {
 	const history = useHistory();
@@ -24,14 +24,12 @@ const VerifyIssue = () => {
 		setdataproduction(location.state);
 	}, []);
 
-	const submit = async (e) => {
+	const submit = async e => {
 		//e.preventDefault();
-		const token = await axios(txt);
 
-		const tokentxt = token.data;
 		const headers = {
 			headers: {
-				Authorization: `Bearer ${tokentxt}`,
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
@@ -72,7 +70,7 @@ const VerifyIssue = () => {
 								type="text"
 								placeholder="Enter your Verification number"
 								value={verificationCode}
-								onChange={(e) => setverificationCode(e.target.value)}
+								onChange={e => setverificationCode(e.target.value)}
 							/>
 						</div>
 
