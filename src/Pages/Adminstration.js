@@ -47,14 +47,34 @@ const Administration = () => {
 		}
 	};
 
-	const fieldsDowntime = ["ID", "Start Time", "End Time", "Down Time Case", "Status", "Action"];
-	const fieldsSlowSpeed = ["ID", "Start Time", "End Time", "Slow Speed Case", "Status", "Action"];
+	const fieldsDowntime = [
+		"ID",
+		"Production Order Code",
+		"Product Code",
+		"Start Time",
+		"End Time",
+		"Down Time Case",
+		"Status",
+		"Action",
+	];
+	const fieldsSlowSpeed = [
+		"ID",
+		"Production Order Code",
+		"Product Code",
+		"Start Time",
+		"End Time",
+		"Slow Speed Case",
+		"Status",
+		"Action",
+	];
 
 	const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
 
 	const renderOrderBodyDownTime = (item, index) => (
 		<tr key={index}>
 			<td>{item.id}</td>
+			<td>{item.productionOrders ? item.productionOrders.productionorderCode : ""}</td>
+			<td>{item.productionOrders ? item.productionOrders.productInfos.productCode : ""}</td>
 			<td>{item.downtimeStartTime}</td>
 			<td>{item.downtimeEndTime}</td>
 			<td>{item.specialCases ? item.specialCases.name : ""}</td>
@@ -129,8 +149,9 @@ const Administration = () => {
 
 	const renderOrderBodySlowRun = (item, index) => (
 		<tr key={index}>
-			{console.log(item.specialcases)}
 			<td>{item.id}</td>
+			<td>{item.productionRuns ? item.productionRuns.productionorders.productionorderCode : ""}</td>
+			<td>{item.productionRuns ? item.productionRuns.productInfos.productCode : ""}</td>
 			<td>{item.slowrunStartTime}</td>
 			<td>{item.slowrunEndTime}</td>
 			<td>{item.specialcases ? item.specialcases.name : ""}</td>
@@ -227,7 +248,7 @@ const Administration = () => {
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Administration</div>
-					<div className="full-height col-8">
+					<div className="full-height col-10">
 						<div className="card" style={{ position: "relative", minHeight: "20vh" }}>
 							<h2 style={{ textAlign: "left", paddingBottom: "1rem" }}>Downtime</h2>
 							{downtimeListData.length > 0 ? (
