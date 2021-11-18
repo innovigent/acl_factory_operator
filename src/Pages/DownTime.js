@@ -81,7 +81,6 @@ const Downtime = () => {
 					body,
 					headers
 				);
-				console.log(loginResponse.data);
 
 				if (loginResponse.data.status === 200) {
 					history.push("/ChangeOver");
@@ -107,7 +106,7 @@ const Downtime = () => {
 					body,
 					headers
 				);
-				console.log(loginResponse.data);
+				localStorage.setItem("specialcaseId", specialcaseId);
 				history.push("/DowntimeReason");
 			} catch (err) {
 				console.log(err.repsonse);
