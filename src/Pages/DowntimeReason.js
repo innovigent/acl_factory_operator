@@ -137,15 +137,20 @@ const DowntimeReason = () => {
 								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label>Production Order Code</label>
-									<input value={productionrunId} disabled></input>
+									<input value={localStorage.getItem("productionOrderCode")} disabled></input>
 								</div>
 								<div className="textFieldContainer1">
 									<label>Product Name</label>
-									<input value={productionrunId} disabled></input>
+									<input value={localStorage.getItem("productDetails")} disabled></input>
 								</div>
 								<div className="textFieldContainer1">
 									<label>Executive Information</label>
-									<input value={name} disabled></input>
+									<input
+										value={
+											localStorage.getItem("epfNo") + " - " + localStorage.getItem("operatorName")
+										}
+										disabled
+									></input>
 								</div>
 								<div className="textFieldContainer1">
 									<label>Department/Case</label>
@@ -157,11 +162,8 @@ const DowntimeReason = () => {
 										<option value="" selected>
 											Please Select a Reason
 										</option>
-										{listData.lists.map((country, key) => (
-											<option key={key} value={country.id}>
-												{country.faultreason}
-											</option>
-										))}
+
+										<option value="completed">Resolved</option>
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>

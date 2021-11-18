@@ -146,7 +146,7 @@ const Home = () => {
 											placeholder=""
 											type="text"
 											name=""
-											value={country.productionorderId}
+											value={localStorage.getItem("productionOrderCode")}
 											disabled
 										/>
 									</div>
@@ -157,7 +157,7 @@ const Home = () => {
 											placeholder=""
 											type="text"
 											name=""
-											value={country.productInfos.productCode}
+											value={localStorage.getItem("productDetails")}
 											disabled
 										/>
 									</div>

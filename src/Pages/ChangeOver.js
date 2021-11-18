@@ -12,7 +12,6 @@ import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
-	// console.log(props);
 	return (
 		<div
 			className={cx(
@@ -37,6 +36,7 @@ const Changeover = () => {
 	const [productID, setProductID] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [productionOrderCode, setProductionOrderCode] = useState("");
 	const [podata, setpodata] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 	const community = localStorage.getItem("community");
@@ -84,6 +84,8 @@ const Changeover = () => {
 			);
 
 			localStorage.setItem("productionrunId", loginResponse.data.data.id);
+			localStorage.setItem("productionOrderCode", productionOrderCode);
+			localStorage.setItem("productDetails", productID);
 			history.push("/Home");
 		} catch (err) {
 			console.log(err.response);
@@ -96,7 +98,6 @@ const Changeover = () => {
 		setproductionId(value);
 		console.log(listData.lists, value);
 		const selectedID = listData.lists.filter(item => item.id === value);
-		console.log(selectedID);
 		setProductID(
 			selectedID[0].productInfos
 				? selectedID[0].productInfos.productCode +
@@ -104,6 +105,7 @@ const Changeover = () => {
 						selectedID[0].productInfos.productDescription
 				: ""
 		);
+		setProductionOrderCode(selectedID[0].productionorderCode);
 	};
 
 	if (loading) {
