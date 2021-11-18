@@ -44,12 +44,10 @@ const Downtime = () => {
 					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
-			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
 			const result = await axios(
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
-			console.log(result.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -59,13 +57,14 @@ const Downtime = () => {
 
 	const submit = async e => {
 		e.preventDefault();
+		console.log(type, specialcaseId);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
 		setErr("");
-		if (specialcaseId === "Endshift") {
+		if (type === "change-over") {
 			try {
 				const body = {
 					downtimeId,
@@ -82,10 +81,17 @@ const Downtime = () => {
 					body,
 					headers
 				);
-				history.push("/ShiftChange");
+				console.log(loginResponse.data);
+
+				if (loginResponse.data.status === 200) {
+					history.push("/ChangeOver");
+				}
 			} catch (err) {
-				err.response.data.message && setErr(err.response.data.message);
+				console.log(err.repsonse);
+				setErr("Something went wrong");
 			}
+		} else if (type === "end-shift") {
+			history.push("/ShiftChange");
 		} else {
 			try {
 				const body = {
@@ -101,15 +107,13 @@ const Downtime = () => {
 					body,
 					headers
 				);
+				console.log(loginResponse.data);
 				history.push("/DowntimeReason");
 			} catch (err) {
-				err.response.data.message && setErr(err.response.data.message);
+				console.log(err.repsonse);
+				setErr("Something went wrong");
 			}
 		}
-	};
-
-	const submits = () => {
-		console.log(type, specialcaseId);
 	};
 
 	const handleChange = id => {

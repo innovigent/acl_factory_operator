@@ -163,13 +163,13 @@ const Administration = () => {
 							? "warning"
 							: item.status.name === "Executive-Entered"
 							? "success"
-							: "primary"
+							: "danger"
 					}
 				/>
 			</td>
 			{item.status.name === "Operator-Entered" ? (
 				<td>
-					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+					<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
 						<button
 							className="submita"
 							style={{
@@ -186,7 +186,7 @@ const Administration = () => {
 				</td>
 			) : item.status.name === "Created" ? (
 				<td>
-					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+					<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
 						<button
 							className="submita"
 							style={{
