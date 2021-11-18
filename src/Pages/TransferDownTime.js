@@ -73,10 +73,11 @@ const TransferDowntime = () => {
 			};
 			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
 			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getall`,
+				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
-			setListData({ lists: result.data.data.specialCase });
+			console.log(result.data);
+			setListData({ lists: result.data.data.specialCaseDowntime });
 			setLoading(false);
 		};
 
@@ -91,46 +92,25 @@ const TransferDowntime = () => {
 			},
 		};
 		setErr("");
-		if (specialcaseId === "Endshift") {
-			try {
-				const body = {
-					downtimeId,
-					macaddress,
-					epfNo,
-					specialcaseId,
-					productionrunId,
-					productionorder,
-					empid,
-				};
-				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${macaddress}/update`,
-					body,
-					headers
-				);
-				history.push("/Home");
-			} catch (err) {
-				err.response.data.message && setErr(err.response.data.message);
-			}
-		} else {
-			try {
-				const body = {
-					downtimeId,
-					macaddress,
-					epfNo,
-					specialcaseId,
-					productionrunId,
-					productionorder,
-					empid,
-				};
-				const loginResponse = await axios.post(
-					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,
-					body,
-					headers
-				);
-				history.push("/Home");
-			} catch (err) {
-				err.response.data.message && setErr(err.response.data.message);
-			}
+
+		try {
+			const body = {
+				downtimeId,
+				macaddress,
+				epfNo,
+				specialcaseId,
+				productionrunId,
+				productionorder,
+				empid,
+			};
+			const loginResponse = await axios.post(
+				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${macaddress}/create`,
+				body,
+				headers
+			);
+			history.push("/Home");
+		} catch (err) {
+			err.response.data.message && setErr(err.response.data.message);
 		}
 	};
 
