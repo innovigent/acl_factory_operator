@@ -18,18 +18,6 @@ const Home = () => {
 	const [optionModal, setOptionModal] = useState(false);
 	const history = useHistory();
 
-	const notifications = [
-		{
-			icon: "bx bx-error",
-			content: "BreakDown",
-			route: "/OperatorBrakdown",
-		},
-		{
-			icon: "bx bx-edit-alt",
-			content: "Slow Speed",
-		},
-	];
-
 	const detectFaults = async () => {
 		const headers = {
 			headers: {
@@ -201,12 +189,7 @@ const Home = () => {
 										</div>
 									</div>
 									<div className="left-corner" onClick={() => setOptionModal(true)}>
-										<DropdownWithButton
-											icon="bx bx-dots-vertical-rounded"
-											title="Options"
-											contentData={notifications}
-											renderItems={(item, index) => renderNotificationItem(item, index)}
-										/>
+										<DropdownWithButton icon="bx bx-dots-vertical-rounded" title="Options" />
 									</div>
 								</>
 							))}
