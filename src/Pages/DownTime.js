@@ -85,11 +85,12 @@ const Downtime = () => {
 					headers
 				);
 
-				if (loginResponse.data.status === 200) {
+				console.log(loginResponse);
+				if (loginResponse.status === 200) {
 					history.push("/ChangeOver");
 				}
 			} catch (err) {
-				console.log(err.repsonse);
+				console.log(err.response);
 				setErr("Something went wrong");
 			}
 		} else if (type === "end-shift") {
