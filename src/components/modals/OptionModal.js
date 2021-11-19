@@ -1,8 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import "./authmodal.css";
 
 const OptionModal = ({ setOptionModal, data }) => {
+	const history = useHistory();
+
 	return (
 		<div className="auth-background">
 			<div className="col-6 card auth-container">
@@ -41,7 +44,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							window.location.href = "/ShiftChange";
+							history.push("/ShiftChange", {});
 							setOptionModal(false);
 						}}
 					>
@@ -51,7 +54,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							window.location.href = "/ChangeOver";
+							history.push("/ChangeOver", {});
 							setOptionModal(false);
 						}}
 					>
@@ -61,7 +64,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							window.location.href = "/SlowDownSpeed";
+							history.push("/SlowDownSpeed", {});
 							setOptionModal(false);
 						}}
 					>
