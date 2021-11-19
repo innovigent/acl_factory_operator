@@ -42,25 +42,39 @@ const Changeover = () => {
 	const community = localStorage.getItem("community");
 
 	useEffect(() => {
-		const fetchData = async () => {
-			setLoading(true);
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
-				},
-			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${localStorage.getItem(
-					"device-token"
-				)}/getall`,
-				headers
-			);
-			setListData({ lists: result.data.data.productionOrders });
-			setLoading(false);
-		};
-
 		fetchData();
+		// setTempValues();
 	}, []);
+
+	const fetchData = async () => {
+		setLoading(true);
+
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+			},
+		};
+		const result = await axios(
+			`https://acl-automation.herokuapp.com/api/v1/ProductionOrderscontroller/listproductorderIPC/${localStorage.getItem(
+				"device-token"
+			)}/getall`,
+			headers
+		);
+		setListData({ lists: result.data.data.productionOrders });
+		setLoading(false);
+	};
+
+	const setTempValues = () => {
+		const tempProductDetails = localStorage.getItem("productDetails");
+		const tempProductionId = localStorage.getItem("productionId");
+		const tempProductionCode = localStorage.getItem("productionOrderCode");
+		// eslint-disable-next-line no-unused-expressions
+		tempProductDetails ? setProductID(tempProductDetails) : "";
+		// eslint-disable-next-line no-unused-expressions
+		tempProductionId
+			? handleChange({ value: parseInt(tempProductionId), label: tempProductionCode })
+			: "";
+	};
 
 	let options = listData.lists.map(function (city) {
 		return { value: city.id, label: city.productionorderCode };
@@ -86,6 +100,7 @@ const Changeover = () => {
 			localStorage.setItem("productionrunId", loginResponse.data.data.id);
 			localStorage.setItem("productionOrderCode", productionOrderCode);
 			localStorage.setItem("productDetails", productID);
+			localStorage.setItem("productionId", productionId);
 			history.push("/Home");
 		} catch (err) {
 			console.log(err.response);
@@ -93,7 +108,8 @@ const Changeover = () => {
 		}
 	};
 
-	const handleChange = (newValue: any, actionMeta: any) => {
+	const handleChange = (newValue, actionMeta) => {
+		console.log(newValue);
 		let value = newValue.value;
 		setproductionId(value);
 		console.log(listData.lists, value);
