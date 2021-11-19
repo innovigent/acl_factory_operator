@@ -1,17 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./topnav.css";
 import "../sidebar/sidebar.css";
 import { Link } from "react-router-dom";
 import Dropdown from "../dropdown/Dropdown";
-
-const sidebar_items1 = [
-	{
-		display_name: "Logout",
-		route: "/Changeover",
-		onClick: ClearLocalStorage,
-		icon: "bx bx-log-out",
-	},
-];
 
 const sidebar_items = [
 	{
@@ -39,15 +30,15 @@ const sidebar_items = [
 		route: "/SlowDownSpeed",
 		icon: "bx bx-down-arrow-circle",
 	},
-	// {
-	// 	display_name: "Operator Action",
-	// 	route: "/OperatorActionTable",
-	// 	icon: "bx bx-pointer",
-	// },
 	{
 		display_name: "Shift Change",
 		route: "/ShiftChange",
 		icon: "bx bx-repost",
+	},
+	{
+		icon: "bx bx-log-out-circle bx-rotate-180",
+		route: "/Home",
+		display_name: "Logout",
 	},
 ];
 
@@ -74,57 +65,14 @@ const notifications = [
 	},
 ];
 
-const user_menu = [
-	{
-		icon: "bx bx-user",
-		content: "Profile",
-	},
-	{
-		icon: "bx bx-wallet-alt",
-		content: "My Wallet",
-	},
-	{
-		icon: "bx bx-cog",
-		content: "Settings",
-	},
-	{
-		icon: "bx bx-log-out-circle bx-rotate-180",
-		onClick: ClearLocalStorage,
-		route: "/Home",
-		content: "Logout",
-	},
-];
-
-const curr_user = {
-	display_name: "Tuat Tran",
-	// image: user_image
-};
-
 function ClearLocalStorage() {
 	localStorage.clear();
+	window.location.href = "/";
 }
 
 const renderNotificationItem = (item, index) => (
 	<Link to={{ pathname: item.route, state: {} }} key={index}>
 		<div className="notification-item" key={index}>
-			<i className={item.icon}></i>
-			<span>{item.content}</span>
-		</div>
-	</Link>
-);
-
-const renderUserToggle = user => (
-	<div className="topnav__right-user">
-		<div className="topnav__right-user__image">
-			<img src={user.image} alt="" />
-		</div>
-		<div className="topnav__right-user__name">{user.display_name}</div>
-	</div>
-);
-
-const renderUserMenu = (item, index) => (
-	<Link to={{ pathname: item.route, state: {} }} key={index}>
-		<div className="notification-item" onClick={item.onClick}>
 			<i className={item.icon}></i>
 			<span>{item.content}</span>
 		</div>
@@ -150,20 +98,32 @@ const Topnav = () => {
 	return (
 		<div className="topnav">
 			<div className="topnav__search">
-				{sidebar_items.map((item, index) => (
-					<Link to={{ pathname: item.route, state: {} }} key={index}>
-						<SidebarItem title={item.display_name} icon={item.icon} active={index === activeItem} />
-					</Link>
-				))}
-				{sidebar_items1.map((item, index) => (
-					<Link to={{ pathname: item.route, state: {} }} key={index} onClick={item.onClick}>
-						<SidebarItem
-							title={item.display_name}
-							icon={item.icon}
-							//active={index === activeItem}
-						/>
-					</Link>
-				))}
+				{sidebar_items.map((item, index) =>
+					item.display_name === "Logout" ? (
+						<Link
+							onClick={() => {
+								if (window.confirm("Are you sure you want to logout?")) {
+									ClearLocalStorage();
+								}
+							}}
+							key={index}
+						>
+							<SidebarItem
+								title={item.display_name}
+								icon={item.icon}
+								active={index === activeItem}
+							/>
+						</Link>
+					) : (
+						<Link to={{ pathname: item.route, state: {} }} key={index}>
+							<SidebarItem
+								title={item.display_name}
+								icon={item.icon}
+								active={index === activeItem}
+							/>
+						</Link>
+					)
+				)}
 			</div>
 			<div className="topnav__right">
 				<div className="topnav__right-item">
