@@ -28,9 +28,12 @@ const Downtime = () => {
 	const [authModal, setAuthModal] = useState(false);
 
 	const setId = () => {
-		console.log(location.state.id);
-		if (!location.state.id) {
-			setdowntimeId(localStorage.getItem("downtimeId"));
+		if (Object.keys(location.state).length === 0) {
+			if (localStorage.getItem("downtimeId")) {
+				setdowntimeId(localStorage.getItem("downtimeId"));
+			} else {
+				setdowntimeId("");
+			}
 		} else {
 			setdowntimeId(location.state.id);
 		}
@@ -49,6 +52,7 @@ const Downtime = () => {
 				headers
 			);
 			setListData(result.data.data.specialCaseDowntime);
+			console.log(downtimeId, "Hi");
 			setLoading(false);
 		};
 
