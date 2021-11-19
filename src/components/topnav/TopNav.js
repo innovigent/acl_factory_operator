@@ -105,7 +105,7 @@ function ClearLocalStorage() {
 }
 
 const renderNotificationItem = (item, index) => (
-	<Link to={item.route} key={index}>
+	<Link to={{ pathname: item.route, state: {} }} key={index}>
 		<div className="notification-item" key={index}>
 			<i className={item.icon}></i>
 			<span>{item.content}</span>
@@ -123,7 +123,7 @@ const renderUserToggle = user => (
 );
 
 const renderUserMenu = (item, index) => (
-	<Link to={item.route} key={index}>
+	<Link to={{ pathname: item.route, state: {} }} key={index}>
 		<div className="notification-item" onClick={item.onClick}>
 			<i className={item.icon}></i>
 			<span>{item.content}</span>
@@ -151,12 +151,12 @@ const Topnav = () => {
 		<div className="topnav">
 			<div className="topnav__search">
 				{sidebar_items.map((item, index) => (
-					<Link to={item.route} key={index}>
+					<Link to={{ pathname: item.route, state: {} }} key={index}>
 						<SidebarItem title={item.display_name} icon={item.icon} active={index === activeItem} />
 					</Link>
 				))}
 				{sidebar_items1.map((item, index) => (
-					<Link to={item.route} key={index} onClick={item.onClick}>
+					<Link to={{ pathname: item.route, state: {} }} key={index} onClick={item.onClick}>
 						<SidebarItem
 							title={item.display_name}
 							icon={item.icon}
