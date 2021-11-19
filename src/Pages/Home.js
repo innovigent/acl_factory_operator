@@ -3,7 +3,7 @@ import "../assets/css/Usercreate.css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import DropdownWithButton from "../components/dropdown/DropdownWithButton";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import OptionModal from "../components/modals/OptionModal";
@@ -32,6 +32,7 @@ const Home = () => {
 			);
 
 			if (res.status === 200) {
+				console.log(res.data);
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,
 					output: res.data.data.allData.outputQuantity,
@@ -69,10 +70,11 @@ const Home = () => {
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 					headers
 				);
+				console.log(result.data.data.productionOrders);
 				setListData({ lists: result.data.data.productionOrders });
 				setLoading(false);
 			} catch (err) {
-				console.log(err);
+				console.log(err.response);
 				window.location.href = "/changeover";
 			}
 		};
@@ -82,15 +84,6 @@ const Home = () => {
 			detectFaults();
 		}, 10000);
 	}, []);
-
-	const renderNotificationItem = (item, index) => (
-		<Link to={item.route} key={index}>
-			<div className="notification-item" key={index}>
-				<i className={item.icon}></i>
-				<span>{item.content}</span>
-			</div>
-		</Link>
-	);
 
 	if (loading) {
 		return (
@@ -164,8 +157,24 @@ const Home = () => {
 									</div>
 									<div className="textFieldContainer1">
 										<label htmlFor="epf">Target Achieved</label>
-										<div className="target success">
-											<p>100%</p>
+										<div
+											className="target success"
+											style={{
+												width:
+													(parseFloat(listData.lists[0].outputQuantity) /
+														parseFloat(listData.lists[0].productionorders.orderQuantity)) *
+														100 +
+													"%",
+											}}
+										>
+											<p style={{ whiteSpace: "nowrap" }}>
+												{listData.lists.length > 0
+													? (parseFloat(listData.lists[0].outputQuantity) /
+															parseFloat(listData.lists[0].productionorders.orderQuantity)) *
+															100 +
+													  "	%"
+													: "Loading..."}
+											</p>
 										</div>
 									</div>
 									<div className="textFieldContainer1">
