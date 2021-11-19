@@ -52,7 +52,6 @@ const Downtime = () => {
 				headers
 			);
 			setListData(result.data.data.specialCaseDowntime);
-			console.log(downtimeId, "Hi");
 			setLoading(false);
 		};
 
