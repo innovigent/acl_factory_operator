@@ -47,7 +47,7 @@ const Administration = () => {
 
 	const fieldsDowntime = [
 		"ID",
-		"Production Order Code",
+		"POC",
 		"Product Code",
 		"Start Time",
 		"End Time",
@@ -57,7 +57,7 @@ const Administration = () => {
 	];
 	const fieldsSlowSpeed = [
 		"ID",
-		"Production Order Code",
+		"POC",
 		"Product Code",
 		"Start Time",
 		"End Time",
