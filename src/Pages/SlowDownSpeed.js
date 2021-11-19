@@ -31,13 +31,26 @@ const DowntimeReason = () => {
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 
+	const setId = () => {
+		if (Object.keys(location.state).length === 0) {
+			if (localStorage.getItem("slowRunId")) {
+				setSlowSpeedId(localStorage.getItem("slowRunId"));
+			} else {
+				setSlowSpeedId("");
+			}
+		} else {
+			setSlowSpeedId(location.state.id);
+		}
+	};
+
 	useEffect(() => {
-		setSlowSpeedId(localStorage.getItem("slowRunId"));
+		setId();
 		setLoading(false);
 	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
+			setLoading(true);
 			const headers = {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
