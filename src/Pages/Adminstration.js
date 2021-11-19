@@ -37,8 +37,6 @@ const Administration = () => {
 				)}/getListSlowspeed`,
 				headers
 			);
-			console.log(res1.data);
-			console.log(res2.data);
 			setDowntimeListData(res1.data.data.productRunLog);
 			setSlowSpeedListData(res2.data.data.productRunLog);
 			setLoading(false);
