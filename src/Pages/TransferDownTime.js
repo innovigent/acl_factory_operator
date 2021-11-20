@@ -11,8 +11,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
-import AuthModel from "../components/modals/AuthModel";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	console.log(props);
@@ -46,7 +44,6 @@ const TransferDowntime = () => {
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const macaddress = localStorage.getItem("macaddress");
 	const empid = +localStorage.getItem("empid");
-	const [authModal, setAuthModal] = useState(false);
 	const data = location.state;
 
 	useEffect(() => {
@@ -108,7 +105,7 @@ const TransferDowntime = () => {
 			history.push("/Home");
 		} catch (err) {
 			console.log(err.response);
-			setErr("Something went wrong");
+			setErr(err.response.data.message);
 		}
 	};
 
@@ -136,7 +133,6 @@ const TransferDowntime = () => {
 	}
 	return (
 		<>
-			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -175,7 +171,7 @@ const TransferDowntime = () => {
 									</div>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<button onClick={() => setAuthModal(true)} className="submita">
+									<button onClick={submit} className="submita">
 										Submit
 									</button>
 								</div>
