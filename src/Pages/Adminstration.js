@@ -6,12 +6,17 @@ import TopNav from "../components/topnav/TopNav";
 import Table from "../components/table/Table";
 import Badge from "../components/badge/Badge";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import AuthModel from "../components/modals/ExecutiveAuthModal";
 
 const Administration = () => {
+	const history = useHistory();
 	const [downtimeListData, setDowntimeListData] = useState([]);
 	const [slowSpeedListData, setSlowSpeedListData] = useState([]);
+	const [authModalSlowSpeed, setAuthModalSlowSpeed] = useState(false);
+	const [authModalDowntime, setAuthModalDowntime] = useState(false);
+	const [transferId, setTransferId] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const headers = {
 		headers: {
@@ -70,6 +75,14 @@ const Administration = () => {
 
 	const renderOrderBodyDownTime = (item, index) => (
 		<tr key={index}>
+			{authModalDowntime && transferId === item.id ? (
+				<AuthModel
+					setAuthModal={setAuthModalDowntime}
+					execute={() => history.push("/Downtimetransfer", { id: item.id })}
+				/>
+			) : (
+				""
+			)}
 			<td>{item.id}</td>
 			<td>{item.productionOrders ? item.productionOrders.productionorderCode : ""}</td>
 			<td>{item.productionOrders ? item.productionOrders.productInfos.productCode : ""}</td>
@@ -124,7 +137,12 @@ const Administration = () => {
 				</td>
 			) : item.status.name === "Transfer" ? (
 				<td>
-					<Link to={{ pathname: "/Downtimetransfer", state: { id: item.id } }}>
+					<Link
+						onClick={() => {
+							setTransferId(item.id);
+							setAuthModalDowntime(true);
+						}}
+					>
 						<button
 							className="submita"
 							style={{
@@ -135,7 +153,7 @@ const Administration = () => {
 								fontSize: "0.8rem",
 							}}
 						>
-							Transfer{" "}
+							Transfer
 						</button>
 					</Link>
 				</td>
@@ -147,6 +165,14 @@ const Administration = () => {
 
 	const renderOrderBodySlowRun = (item, index) => (
 		<tr key={index}>
+			{authModalSlowSpeed && transferId === item.id ? (
+				<AuthModel
+					setAuthModal={setAuthModalSlowSpeed}
+					execute={() => history.push("/SlowSpeedTransfer", { id: item.id })}
+				/>
+			) : (
+				""
+			)}
 			<td>{item.id}</td>
 			<td>{item.productionRuns ? item.productionRuns.productionorders.productionorderCode : ""}</td>
 			<td>{item.productionRuns ? item.productionRuns.productInfos.productCode : ""}</td>
@@ -201,7 +227,12 @@ const Administration = () => {
 				</td>
 			) : item.status.name === "Transfer" ? (
 				<td>
-					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+					<Link
+						onClick={() => {
+							setTransferId(item.id);
+							setAuthModalSlowSpeed(true);
+						}}
+					>
 						<button
 							className="submita"
 							style={{
