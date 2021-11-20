@@ -98,11 +98,16 @@ const TransferDowntime = () => {
 				empid,
 			};
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${id}/downtime/${data.id}/TransferDowntime`,
+				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${localStorage.getItem(
+					"executiveId"
+				)}/downtime/${data.id}/TransferDowntime`,
 				body,
 				headers
 			);
-			history.push("/Home");
+
+			if (loginResponse.status === 200) {
+				history.push("/Home");
+			}
 		} catch (err) {
 			console.log(err.response);
 			setErr(err.response.data.message);
