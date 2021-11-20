@@ -28,7 +28,14 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 			);
 
 			if (response.status === 200) {
+				console.log(response.data);
 				localStorage.setItem("executiveId", response.data.data.allData.id);
+				localStorage.setItem(
+					"executiveName",
+					response.data.data.allData.firstName + " " + response.data.data.allData.lastName
+				);
+				localStorage.setItem("executiveEpfNo", response.data.data.allData.epfNo);
+				localStorage.setItem("department", response.data.data.allData.departments.departmentName);
 				execute(e, response.data.data.allData.id);
 				setAuthModal(false);
 			} else {
