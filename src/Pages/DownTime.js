@@ -10,7 +10,7 @@ import { FormControlLabel, FormControl } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import AuthModel from "../components/modals/AuthModel";
+import AuthModel from "../components/modals/ExecutiveAuthModal";
 
 const Downtime = () => {
 	const history = useHistory();
@@ -60,7 +60,6 @@ const Downtime = () => {
 
 	const submit = async e => {
 		e.preventDefault();
-		console.log(type, specialcaseId);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
