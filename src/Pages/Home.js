@@ -32,7 +32,6 @@ const Home = () => {
 			);
 
 			if (res.status === 200) {
-				console.log(res.data);
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,
 					output: res.data.data.allData.outputQuantity,
@@ -70,7 +69,6 @@ const Home = () => {
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 					headers
 				);
-				console.log(result.data.data.productionOrders);
 				setListData({ lists: result.data.data.productionOrders });
 				setLoading(false);
 			} catch (err) {
@@ -82,6 +80,7 @@ const Home = () => {
 		detectFaults();
 		setInterval(() => {
 			detectFaults();
+			fetchData();
 		}, 10000);
 	}, []);
 
@@ -172,7 +171,7 @@ const Home = () => {
 													? (parseFloat(listData.lists[0].outputQuantity) /
 															parseFloat(listData.lists[0].productionorders.orderQuantity)) *
 															100 +
-													  "	%"
+													  "%"
 													: "Loading..."}
 											</p>
 										</div>
