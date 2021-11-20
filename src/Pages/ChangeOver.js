@@ -109,10 +109,8 @@ const Changeover = () => {
 	};
 
 	const handleChange = (newValue, actionMeta) => {
-		console.log(newValue);
 		let value = newValue.value;
 		setproductionId(value);
-		console.log(listData.lists, value);
 		const selectedID = listData.lists.filter(item => item.id === value);
 		setProductID(
 			selectedID[0].productInfos
