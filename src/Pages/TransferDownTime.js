@@ -47,12 +47,9 @@ const TransferDowntime = () => {
 	const macaddress = localStorage.getItem("macaddress");
 	const empid = +localStorage.getItem("empid");
 	const [authModal, setAuthModal] = useState(false);
-	// const data = location.state;
+	const data = location.state;
 
 	useEffect(() => {
-		console.log(history);
-		console.log(location);
-		const data = location.state;
 		try {
 			console.log(data);
 			setdowntimeId(data.id);
@@ -71,7 +68,6 @@ const TransferDowntime = () => {
 					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 				},
 			};
-			//! previous route - `https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/${macaddress}/getall`
 			const result = await axios(
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
@@ -105,7 +101,7 @@ const TransferDowntime = () => {
 				empid,
 			};
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/transferreasoning/create`,
+				`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${id}/downtime/${data.id}/TransferDowntime`,
 				body,
 				headers
 			);
