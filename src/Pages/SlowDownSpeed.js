@@ -14,7 +14,7 @@ import { HashLoader } from "react-spinners";
 // import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
 
-const DowntimeReason = () => {
+const SlowDownSpeed = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [slowSpeedId, setSlowSpeedId] = useState("");
@@ -184,4 +184,4 @@ const DowntimeReason = () => {
 	);
 };
 
-export default DowntimeReason;
+export default SlowDownSpeed;
