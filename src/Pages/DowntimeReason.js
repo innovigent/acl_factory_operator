@@ -10,14 +10,11 @@ import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AuthModel from "../components/modals/AuthModel";
-// I am doing coding
 
 const DowntimeReason = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [downtimeId, setdowntimeId] = useState("");
-	const [Product, setProduct] = useState("");
-	const [Department, setDepartment] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
 	const [reasonId, setreasonId] = useState("");
 	const [name, setname] = useState("");
@@ -26,7 +23,6 @@ const DowntimeReason = () => {
 	const [loading, setLoading] = useState(true);
 	const macaddress = localStorage.getItem("macaddress");
 	const productionrunId = +localStorage.getItem("productionrunId");
-	const [listData, setListData] = useState({ lists: [] });
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
 
@@ -41,24 +37,6 @@ const DowntimeReason = () => {
 		setname(name);
 		setpermissionId(permissionId);
 		setLoading(false);
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
-				},
-			};
-			const result = await axios(
-				`https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,
-				headers
-			);
-			setListData({ lists: result.data.data.FaultReasonsDetails });
-			setLoading(false);
-		};
-
-		fetchData();
 	}, []);
 
 	const submit = async e => {
@@ -130,9 +108,6 @@ const DowntimeReason = () => {
 										{err}
 									</Alert>
 								) : null}
-								<div className="textFieldContainer1">
-									<div className="right-corner">Date: {new Date().toDateString()}</div>
-								</div>
 								<div className="textFieldContainer1"></div>
 								{/* to make space*/}
 								<div className="textFieldContainer1">
@@ -147,14 +122,16 @@ const DowntimeReason = () => {
 									<label>Executive Information</label>
 									<input
 										value={
-											localStorage.getItem("epfNo") + " - " + localStorage.getItem("operatorName")
+											localStorage.getItem("executiveEpfNo") +
+											" - " +
+											localStorage.getItem("executiveName")
 										}
 										disabled
 									></input>
 								</div>
 								<div className="textFieldContainer1">
 									<label>Department/Case</label>
-									<input value={name} disabled></input>
+									<input value={localStorage.getItem("department")} disabled></input>
 								</div>
 								<div className="textFieldContainer1">
 									<label>Reason</label>
