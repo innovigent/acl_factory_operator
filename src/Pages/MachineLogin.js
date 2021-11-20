@@ -26,13 +26,10 @@ const MachineLogin = () => {
 				devicename,
 				password,
 			});
-			console.log(res);
+
 			if (res.status === 200) {
 				localStorage.setItem("device-token", res.data.data.token);
 				localStorage.setItem("community", res.data.data.user.organizationId);
-				// localStorage.setItem("epfno", Epf);
-				// localStorage.setItem("empid", password);
-				// localStorage.setItem("community", 1);
 				return history.push("/Changeover");
 			}
 
