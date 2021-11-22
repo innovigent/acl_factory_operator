@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
-import "../assets/css/Login.css";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
+import Spinner from "../components/spinner/Spinner";
+
+import "../assets/css/Usercreate.css";
+import "../assets/css/chooseButton.css";
+import "../assets/css/operatorfrm.css";
+import "../assets/css/Login.css";
+
 const Login = () => {
-	const [Epf, setEpf] = useState("");
+	const history = useHistory();
+	const [epf, setEpf] = useState("");
 	const [epfList, setEpfList] = useState([]);
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
-	const history = useHistory();
-	const [text, setText] = useState("");
+	const [btnState, setBtnState] = useState(false);
 
 	const headers = {
 		headers: {
@@ -22,35 +25,36 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		async function getEpfList() {
+			try {
+				const res = await axios.get(
+					`https://acl-automation.herokuapp.com/api/v1/operator/${localStorage.getItem(
+						"community"
+					)}/listOperatorIPC`,
+					headers
+				);
+				setEpfList(res.data.data.OperatorsDetails);
+			} catch (err) {
+				console.log(err.response);
+			}
+		}
+
 		getEpfList();
 	}, []);
 
 	function validateForm() {
-		return Epf.length > 0 && authCode.length > 0;
-	}
-
-	async function getEpfList() {
-		try {
-			const res = await axios.get(
-				`https://acl-automation.herokuapp.com/api/v1/operator/${localStorage.getItem(
-					"community"
-				)}/listOperatorIPC`,
-				headers
-			);
-			setEpfList(res.data.data.OperatorsDetails);
-		} catch (err) {
-			console.log(err.response);
-		}
+		return epf.length > 0 && authCode.length > 0;
 	}
 
 	const submit = async e => {
 		e.preventDefault();
+		setBtnState(true);
 		setErr("");
 
 		try {
 			const response = await axios.post(
 				"https://acl-automation.herokuapp.com/api/v1/operator/login",
-				{ operatorId: Epf, password: authCode },
+				{ operatorId: epf, password: authCode },
 				headers
 			);
 
@@ -64,9 +68,12 @@ const Login = () => {
 				history.push("/Changeover");
 			} else {
 				setErr("Please check your details");
+				setBtnState(false);
 			}
 		} catch (err) {
+			console.log(err.response);
 			err && setErr("Please check your details");
+			setBtnState(false);
 		}
 	};
 
@@ -96,9 +103,10 @@ const Login = () => {
 								type="text"
 								min="0"
 								placeholder="Enter your EPF number"
-								value={Epf}
+								value={epf}
 								list="epfList"
 								onChange={e => setEpf(e.target.value)}
+								disabled={btnState}
 							/>
 							<datalist id="epfList">
 								{epfList.length > 0 &&
@@ -113,12 +121,13 @@ const Login = () => {
 								placeholder="Enter your authorization code"
 								value={authCode}
 								onChange={e => setAuthCode(e.target.value)}
+								disabled={btnState}
 							/>
 						</div>
 
 						<div id="button" className="rowlogin">
 							<button disabled={!validateForm()} onClick={submit}>
-								Log in
+								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
 						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
