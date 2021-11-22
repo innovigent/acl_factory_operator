@@ -71,8 +71,7 @@ const Login = () => {
 				setBtnState(false);
 			}
 		} catch (err) {
-			console.log(err.response);
-			err && setErr("Please check your details");
+			err && setErr(err.response.data.message);
 			setBtnState(false);
 		}
 	};
@@ -110,7 +109,11 @@ const Login = () => {
 							/>
 							<datalist id="epfList">
 								{epfList.length > 0 &&
-									epfList.map(epf => <option value={epf.id}>{"EPF No - " + epf.epfNo}</option>)}
+									epfList.map(epf => (
+										<option key={epf.id} value={epf.id}>
+											{"EPF No - " + epf.epfNo}
+										</option>
+									))}
 							</datalist>
 						</div>
 						<div className="rowlogin">
