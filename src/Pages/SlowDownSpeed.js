@@ -1,170 +1,187 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
-import {useHistory, useLocation} from 'react-router-dom';
-import {Alert, AlertTitle} from '@material-ui/lab';
-import axios from 'axios';
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import { FormControlLabel } from "@material-ui/core";
+import { useHistory, useLocation } from "react-router-dom";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
-import {HashLoader} from "react-spinners";
-import txt from "C:/Users/Gayath/OneDrive/Documents/token.txt";
+import { HashLoader } from "react-spinners";
+// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
+import AuthModel from "../components/modals/AuthModel";
 
-const DowntimeReason = () => {
+const SlowDownSpeed = () => {
+	const history = useHistory();
+	const location = useLocation();
+	const [slowSpeedId, setSlowSpeedId] = useState("");
+	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
+	const [specialcaseId, setSpecialCaseId] = useState("");
+	const [name, setname] = useState("");
+	const [permissionId, setpermissionId] = useState("");
+	const [err, setErr] = useState("");
+	const [loading, setLoading] = useState(true);
+	const macaddress = localStorage.getItem("macaddress");
+	const community = localStorage.getItem("community");
+	const productionrunId = +localStorage.getItem("productionrunId");
+	const [listData, setListData] = useState([]);
+	const [dataproduction, setdataproduction] = useState([]);
+	const [authModal, setAuthModal] = useState(false);
 
-    const history = useHistory();
-    const location = useLocation();
-    const [downtimeId, setdowntimeId] = useState('');
-    const [Product, setProduct] = useState('');
-    const [Department, setDepartment] = useState('');
-    const [reportedExecutiveId, setreportedExecutiveId] = useState('');
-    const [reasonId, setreasonId] = useState('');
-    const [name, setname] = useState('');
-    const [permissionId, setpermissionId] = useState('');
-    const [err, setErr] = useState("");
-    const [loading, setLoading] = useState(true);
-    const macaddress = localStorage.getItem('macaddress');
-    const productionrunId = +localStorage.getItem('productionrunId');
-    const [listData, setListData] = useState({lists: []});
-    const [dataproduction, setdataproduction] = useState([])
+	const setId = () => {
+		if (Object.keys(location.state).length === 0) {
+			if (localStorage.getItem("slowRunId")) {
+				setSlowSpeedId(localStorage.getItem("slowRunId"));
+			} else {
+				setSlowSpeedId("");
+			}
+		} else {
+			setSlowSpeedId(location.state.id);
+		}
+	};
 
-    function validateForm() {
-        return reportedExecutiveId.length > 0;
-    }
+	useEffect(() => {
+		setId();
+		setLoading(false);
+	}, []);
 
-    useEffect(() => {
-        const data = location.state;
-        const executive = location.executive;
-        const name = location.name;
-        const permissionId = location.permissionId;
-        console.log(data)
-        setdataproduction(data)
-        setdowntimeId(data.id)
-        setreportedExecutiveId(executive)
-        setname(name)
-        setpermissionId(permissionId)
-        setLoading(false);
-    }, []);
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true);
+			const headers = {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+				},
+			};
+			try {
+				const result = await axios(
+					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
+					headers
+				);
+				setListData(result.data.data.specialCaseslowSpeed);
+				setLoading(false);
+			} catch (err) {
+				console.log(err.response);
+			}
+		};
 
-    useEffect(() => {
+		fetchData();
+	}, []);
 
-        const fetchData = async () => {
-            const token = await axios(txt);
+	const submit = async (e, id) => {
+		e.preventDefault();
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+			},
+		};
+		setErr("");
+		try {
+			const body = {
+				slowSpeedId,
+				authorziedPersonId: id,
+				specialcaseId,
+			};
+			const res = await axios.post(
+				`https://acl-automation.herokuapp.com/api/v1/SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
+				body,
+				headers
+			);
 
-            const tokentxt = token.data
-            const headers = {
+			if (res.status === 200) {
+				history.push("/Home");
+			} else {
+				setErr("Something went wrong");
+			}
+		} catch (err) {
+			console.log(err.response);
+			setErr("Something went wrong");
+		}
+	};
 
-                headers: {
+	const handleChange = id => {
+		setSpecialCaseId(id);
+	};
 
-                    "Authorization":`Bearer ${tokentxt}`
-                }
-            };
-            const result = await axios(
-                `https://acl-automation.herokuapp.com/api/v1/faultreason/device/${macaddress}/getall`,headers,
-            );
-            setListData({lists: result.data.data.FaultReasonsDetails});
-            setLoading(false);
-        };
+	if (loading) {
+		return (
+			<div
+				style={{
+					padding: "10px 20px",
+					textAlign: "center",
+					justifyContent: "center",
+					display: "flex",
+					alignItems: "center",
+					width: "100%",
+					height: "100vh",
+					backgroundColor: "#FFFFFF",
+				}}
+			>
+				<HashLoader loading={loading} size={150} color="#0bab64" />
+			</div>
+		);
+	}
+	return (
+		<>
+			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
+			<div className="layout__content-main">
+				<div className="col-12">
+					<div className="position">
+						<div className="page-header">Slow Run Reasoning</div>
+						<div className="card full-height col-6">
+							<div>
+								{err ? (
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										{err}
+									</Alert>
+								) : null}
+								<div className="textFieldContainer1">
+									<div className="right-corner">Date: {new Date().toDateString()}</div>
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1">
+									<label>Slow Run Reasons</label>
 
-        fetchData();
-    }, []);
+									{listData.map((country, key) => (
+										<RadioGroup
+											aria-label="type"
+											name="type"
+											value={specialcaseId}
+											onChange={e => handleChange(country.id)}
+											row
+										>
+											<FormControlLabel
+												value={country.id}
+												control={<Radio color="primary" />}
+												label={country.name}
+											/>
+										</RadioGroup>
+									))}
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+									<button onClick={() => setAuthModal(true)} className="submita">
+										Submit
+									</button>
+								</div>
+								<div className="textFieldContainer1"></div>
+								{/* to make space*/}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<TopNav />
+		</>
+	);
+};
 
-    const submit = async (e) => {
-        //e.preventDefault();
-        const token = await axios(txt);
-
-        const tokentxt = token.data
-        const headers = {
-
-            headers: {
-
-                "Authorization":`Bearer ${tokentxt}`
-            }
-        };
-        setErr("");
-        try {
-            const body = {macaddress, downtimeId, reportedExecutiveId, reasonId, productionrunId, permissionId};
-            const loginResponse = await axios.post("https://acl-automation.herokuapp.com/api/v1/submitslowrun/create", body,headers);
-            history.push("/Home")
-
-        } catch (err) {
-            err && setErr(err)
-        }
-    };
-
-    if (loading) {
-        return (
-            <div style={{
-                padding: "10px 20px",
-                textAlign: "center",
-                justifyContent: "center",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                height: "100vh",
-                backgroundColor: "#FFFFFF"
-            }}>
-                <HashLoader loading={loading} size={150}/>
-            </div>
-        )
-    }
-    return (
-        <>
-            <div className="layout__content-main">
-                <div className="row">
-                    <div className='col-12'>
-                        <div className="position">
-                            <div className="card full-height">
-                                <div>
-                                    {err ? (
-                                        <Alert severity="error">
-                                            <AlertTitle>Error</AlertTitle>
-                                            {err}
-                                        </Alert>
-                                    ) : null}
-                                    <div className="textFieldContainer1">
-                                        <div className="right-corner">Date:</div>
-                                        <div className="middle">Line No:</div>
-
-                                        <div className="left-corner">Status:</div>
-                                    </div>
-                                    <div className="textFieldContainer1"></div>
-                                    {/* to make space*/}
-                                    <div className="textFieldContainer1">
-                                        <label>Production order</label>
-                                        <input value={productionrunId} disabled></input>
-                                    </div>
-                                    <div className="textFieldContainer1">
-                                        <label>Reason</label>
-                                        <select value={reasonId} onChange={(e) => setreasonId(e.target.value)}>
-                                            <option value="" selected>please select Reason</option>
-                                            {listData.lists.map((country, key) => (
-                                                <option key={key} value={country.id}>
-                                                    {country.faultreason}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="textFieldContainer1">
-                                        <label>Executive name</label>
-                                        <input value={name} disabled></input>
-                                    </div>
-                                    <div className="textFieldContainer1"></div>
-                                    {/* to make space*/}
-                                    <div className="textFieldContainer1"></div>
-                                    {/* to make space*/}
-                                    <button onClick={submit} className="submita">submit</button>
-                                    <div className="textFieldContainer1"></div>
-                                    {/* to make space*/}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <TopNav/>
-            </div>
-        </>
-    )
-}
-
-export default DowntimeReason
+export default SlowDownSpeed;

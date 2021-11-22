@@ -1,114 +1,103 @@
-
 .wrapper {
-    height: 90vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* background-color: #258ea6; */
-    margin-top: 8%;
-    padding: 30px;
-  }
-  
-  .form-wrapper {
-    height: 80vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 50px #555;
-    background-color: #ffffff;
- 
-  }
-  
-  form {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 3.1rem 0;
-
-
-    
-  
-  }
-  
-  h1 {
-    text-align: center;
-    border-radius: 10px;
-    background-image: linear-gradient(
-            to right,
-            var(--main-color-blue),
-            var(--second-color)
-    );
-    width: 100%;
-    color: #111;
-
-    font-family: "Nexa";
-  }
-h2 {
-  text-align: center;
-  width: 100%;
-  color: #111;
-
-  font-family: "Nexa";
+	height: 90vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 8%;
+	padding: 30px;
 }
-  
-  label {
-    font-size: 15px;
-    margin-bottom: 0.25em;
-    color: #222;
-  }
-  
-  input {
-    padding: 10px 10px;
-    border-radius: 5px;
-    border: 1px solid #cfcfcf;
-  }
-  select {
-    padding: 10px 10px;
-    border-radius: 5px;
-    border: 1px solid #cfcfcf;
-  }
-  option {
-    width: 250px;
-  }
-  input::placeholder {
-    font-size: 1.2em;
-    font-weight: lighter;
-    color: #999;
-  }
-  
-  input.error {
-    border: 1px solid red;
-  }
-  
-  .errorMessage {
-    color: red;
-    font-size: 0.75em;
-    display: relative;
-  }
-  
-  /* .firstName {
+
+.login-form {
+	overflow: hidden;
+}
+
+.form-wrapper {
+	height: 80vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 40px;
+	border-radius: 10px;
+	box-shadow: 0px 10px 50px #555;
+	background-color: #ffffff;
+}
+
+form {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 3.1rem 0;
+}
+
+/* h1 {
+	text-align: center;
+	border-radius: 10px;
+	background-image: linear-gradient(to right, var(--main-color-blue), var(--second-color));
+	width: 100%;
+	color: #111;
+} */
+h2 {
+	text-align: center;
+	width: 100%;
+	color: #1f2937;
+}
+
+label {
+	font-size: 15px;
+	margin-bottom: 0.25em;
+	color: #222;
+}
+
+input {
+	padding: 10px 10px;
+	border-radius: 5px;
+	border: 1px solid #cfcfcf;
+}
+select {
+	padding: 10px 10px;
+	border-radius: 5px;
+	border: 1px solid #cfcfcf;
+}
+option {
+	width: 250px;
+}
+input::placeholder {
+	font-size: 1.2em;
+	font-weight: lighter;
+	color: #999;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+.errorMessage {
+	color: red;
+	font-size: 0.75em;
+	display: relative;
+}
+
+/* .firstName {
     margin-right: 1%;
   } */
-  
-  /* .lastName {
+
+/* .lastName {
     margin-left: 1%;
   } */
-  
-  /* .firstName,
+
+/* .firstName,
   .lastName, */
-  .textFieldContainer1,
-  .textFieldContainer2 {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 22px;
-  }
-.textFieldContainer1 label{
-  font-family: "Roboto", sans-serif;
-  font-size: medium;
+.textFieldContainer1,
+.textFieldContainer2 {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 22px;
+}
+.textFieldContainer1 label {
+	font-size: medium;
+	font-weight: 600;
 }
 /*   
   .firstName,
@@ -116,212 +105,205 @@ h2 {
     width: 49%;
   }
    */
-  .textFieldContainer1,
-  .textFieldContainer2{
-    width: 100%;
-  }
-  
-  .SubmitButton {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    position:fixed;
-    bottom: 15%;
-    right: 8%;
+.textFieldContainer1,
+.textFieldContainer2 {
+	width: 100%;
+}
 
+.SubmitButton {
+	width: 15%;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	bottom: 15%;
+	right: 8%;
+}
 
-  }
-
-  .SubmitButtonA {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    position:fixed;
-    /* bottom: 15%;
+.SubmitButtonA {
+	width: 15%;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	/* bottom: 15%;
     right: 8%; */
-  }
+}
 
-  .SubmitButtonB {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    position:fixed;
-    bottom: 15%;
-    right: 30%;
+.SubmitButtonB {
+	width: 15%;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	bottom: 15%;
+	right: 30%;
+}
 
+.SubmitButtonA button {
+	background: linear-gradient(to right, var(--main-color-green), var(--second-color-green));
+	color: #fff;
+	border: 2px solid #fff;
+	width: 100%;
+	/* margin-top: 1em; */
+	padding: 8px 0px;
+	font-size: 1em;
+	font-weight: lighter;
+	letter-spacing: 1px;
+	/* margin-bottom: 0.25em; */
+}
 
-  }
+.SubmitButtonB button {
+	background: linear-gradient(to right, var(--main-color-green), var(--second-color-green));
+	color: #fff;
+	border: 2px solid #fff;
+	width: 100%;
+	margin-top: 1em;
+	padding: 8px 0px;
+	font-size: 1em;
+	font-weight: lighter;
+	letter-spacing: 1px;
+	margin-bottom: 0.25em;
+}
 
+.SubmitButtonA button:hover {
+	color: #519e8a;
+	background: linear-gradient(to right, var(--main-color-green), var(--second-color-green));
+	border: 2px solid #519e8a;
+}
+.SubmitButtonB button:hover {
+	color: #519e8a;
+	background-color: #fff;
+	border: 2px solid #519e8a;
+}
 
-
-  
-  .SubmitButtonA button {
-    background: linear-gradient(
-            to right,
-            var(--main-color-green),
-            var(--second-color-green)
-    );
-    color: #fff;
-    border: 2px solid #fff;
-    width: 100%;
-    /* margin-top: 1em; */
-    padding: 8px 0px;
-    font-size: 1em;
-    font-weight: lighter;
-    letter-spacing: 1px;
-    /* margin-bottom: 0.25em; */
-  }
-
-  
-  .SubmitButtonB button {
-    background: linear-gradient(
-            to right,
-            var(--main-color-green),
-            var(--second-color-green)
-    );
-    color: #fff;
-    border: 2px solid #fff;
-    width: 100%;
-    margin-top: 1em;
-    padding: 8px 0px;
-    font-size: 1em;
-    font-weight: lighter;
-    letter-spacing: 1px;
-    margin-bottom: 0.25em;
-  }
-  
-  .SubmitButtonA button:hover {
-    color: #519e8a;
-    background: linear-gradient(
-            to right,
-            var(--main-color-green),
-            var(--second-color-green)
-    );
-    border: 2px solid #519e8a;
-  }
-  .SubmitButtonB button:hover {
-    color: #519e8a;
-    background-color: #fff;
-    border: 2px solid #519e8a;
-  }
-  
-  .SubmitButtonA small {
-    color: #999;
-    font-weight: lighter;
-  }
-  .SubmitButtonB small {
-    color: #999;
-    font-weight: lighter;
-  }
+.SubmitButtonA small {
+	color: #999;
+	font-weight: lighter;
+}
+.SubmitButtonB small {
+	color: #999;
+	font-weight: lighter;
+}
 
 .left-corner {
-
-  position: absolute;
-right:7%;
-font-size: 18px;
-border-radius: 8px;
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	border-radius: 8px;
 }
 
 .right-corner {
-
-font-size: 18px;
+	font-size: 18px;
 }
-.a{
-
-
-  border-radius: 5px;
+.a {
+	border-radius: 5px;
 }
 
-.middle{
-
-  position: absolute;
-  right:50%;
-  font-size: 18px;
+.middle {
+	position: absolute;
+	right: 50%;
+	font-size: 18px;
 }
-.fault{
-align-items: center;
-  right:50%;
-  font-size: 18px;
-color: red;
-padding-top: 5px;
-
+.fault {
+	align-items: center;
+	right: 50%;
+	font-size: 18px;
+	color: red;
+	padding-top: 5px;
 }
 
-
-.timer{
-
-  border: 2px ;
-  height: 20vh;
-  width: 20vh;
-  border-style: solid;
-  border-color: coral;
+.timer {
+	border: 2px;
+	height: 20vh;
+	width: 20vh;
+	border-style: solid;
+	border-color: coral;
 }
 .left-corner1 {
-
-  position: absolute;
-right:7%;
-font-size: 18px;
-border-radius: 8px;
-color: red;
-
+	position: absolute;
+	right: 7%;
+	font-size: 18px;
+	border-radius: 8px;
+	color: red;
 }
 
-.dropdown{
-
-
-/* height: 100px; */
-padding: 10px 10px;
-border-radius: 5px;
-outline: none;
-/*border: 1px solid #cfcfcf;*/
+.dropdown {
+	/* height: 100px; */
+	padding: 10px 10px;
+	border-radius: 5px;
+	outline: none;
+	/*border: 1px solid #cfcfcf;*/
 }
 
-.submita{
-
-  position: absolute;
-  right: 6%;
-
-  background: linear-gradient(
-          to right,
-          var(--main-color-green),
-          var(--second-color-green)
-  );
-  border-radius: 10px;
-  color: #fff;
-  border: 2px solid #fff;
- 
-  /* margin-top: 1em; */
-  padding: 8px 0px;
-  font-size: 1em;
-  font-weight: lighter;
-  letter-spacing: 1px;
-  width: 15%;
-  justify-content: end;
+.submita {
+	background: linear-gradient(to right, var(--main-color-blue), var(--second-color));
+	border-radius: 5px;
+	color: #fff;
+	border: none;
+	font-size: 1.1rem;
+	font-family: "Work sans", sans-serif;
+	font-weight: 600;
+	padding: 1rem 4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.submitb{
 
-  position: absolute;
+.submitb {
+	position: absolute;
 
-  background: linear-gradient(
-          to right,
-          var(--main-color-orange),
-          var(--second-color-orange)
-  );
-  border-radius: 10px;
-  color: #fff;
-  border: 2px solid #fff;
+	background: linear-gradient(to right, var(--main-color-orange), var(--second-color-orange));
+	border-radius: 10px;
+	color: #fff;
+	border: 2px solid #fff;
 
-  /* margin-top: 1em; */
-  padding: 8px 0px;
-  font-size: 1em;
-  font-weight: lighter;
-  letter-spacing: 1px;
-  width: 15%;
-  justify-content: end;
+	/* margin-top: 1em; */
+	padding: 8px 0px;
+	font-size: 1em;
+	font-weight: lighter;
+	letter-spacing: 1px;
+	width: 15%;
+	justify-content: end;
 }
-.position{
-  margin-top: 20%;
-  left: auto;
-  right: auto;
+.position {
+	margin-top: 4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.status {
+	padding: 0.5rem 2rem;
+	color: white;
+	width: 9rem;
+}
+
+.target {
+	padding: 0.5rem 1.2rem;
+	color: white;
+	display: flex;
+	justify-content: center;
+}
+
+.success {
+	background: #0bab64;
+}
+.pending {
+	background: #f3ce28;
+}
+.stopped {
+	background: #ea2121;
+}
+
+.indicator {
+	animation: flash ease-in-out 0.5s infinite alternate;
+}
+
+@keyframes flash {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
