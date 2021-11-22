@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
+import Spinner from "../spinner/Spinner";
+
 import "./authmodal.css";
 
 const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
+	const [btnState, setBtnState] = useState(false);
 
 	const handleAuth = async e => {
 		e.preventDefault();
 		setErr("");
+		setBtnState(true);
 
 		const headers = {
 			headers: {
@@ -19,6 +23,7 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 		};
 		try {
 			if (authCode === "") {
+				setBtnState(false);
 				return setErr("Please enter auth code");
 			}
 			const response = await axios.post(
@@ -28,7 +33,6 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 			);
 
 			if (response.status === 200) {
-				console.log(response.data);
 				localStorage.setItem("executiveId", response.data.data.allData.id);
 				localStorage.setItem(
 					"executiveName",
@@ -39,11 +43,12 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 				execute(e, response.data.data.allData.id);
 				setAuthModal(false);
 			} else {
+				setBtnState(false);
 				setErr("Please check authorization code");
 			}
 		} catch (err) {
-			console.log(err.response);
-			err && setErr("Please check authorization code");
+			setBtnState(false);
+			setErr("Please check authorization code");
 		}
 	};
 
@@ -65,9 +70,9 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 						name=""
 						value={authCode}
 						onChange={e => setAuthCode(e.target.value)}
+						disabled={btnState}
 					/>
 				</div>
-				{/* to make space*/}
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 					<button
 						className="submita"
@@ -85,7 +90,7 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 						Close
 					</button>
 					<button className="submita" onClick={e => handleAuth(e)}>
-						OK
+						{btnState ? <Spinner /> : "OK"}
 					</button>
 				</div>
 			</div>
