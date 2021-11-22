@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useHistory, Link } from "react-router-dom";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import axios from "axios";
+
+import Spinner from "../components/spinner/Spinner";
+
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
-import { useHistory, Link } from "react-router-dom";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import axios from "axios";
-// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 
 const MachineLogin = () => {
+	const history = useHistory();
 	const [devicename, setDeviceName] = useState("");
 	const [password, setPassword] = useState("");
 	const [err, setErr] = useState("");
-	const history = useHistory();
-	const [text, setText] = useState("");
+	const [btnState, setBtnState] = useState(false);
 
 	const submit = async e => {
 		e.preventDefault();
 		setErr("");
+		setBtnState(true);
 
-		if (devicename === "" || password === "") return setErr("Please fill all fields");
+		if (devicename === "" || password === "") {
+			setBtnState(false);
+			return setErr("Please fill all fields");
+		}
 
 		try {
 			const res = await axios.post("https://acl-automation.herokuapp.com/api/v1/device/login", {
@@ -33,10 +39,11 @@ const MachineLogin = () => {
 				return history.push("/Changeover");
 			}
 
-			setErr();
+			setErr("");
+			setBtnState(false);
 		} catch (err) {
-			console.log(err.response);
-			err && setErr(err.response.data.message);
+			setErr(err.response.data.message);
+			setBtnState(false);
 		}
 	};
 
@@ -53,7 +60,7 @@ const MachineLogin = () => {
 					</h1>
 				</div>
 				<div id="loginform">
-					<div>
+					<div className="login-form">
 						{err ? (
 							<Alert severity="error">
 								<AlertTitle>Error</AlertTitle>
@@ -68,6 +75,7 @@ const MachineLogin = () => {
 								placeholder="Enter machine UUID"
 								value={devicename}
 								onChange={e => setDeviceName(e.target.value)}
+								disabled={btnState}
 							/>
 						</div>
 						<div className="rowlogin">
@@ -78,11 +86,12 @@ const MachineLogin = () => {
 								placeholder="Enter machine password"
 								value={password}
 								onChange={e => setPassword(e.target.value)}
+								disabled={btnState}
 							/>
 						</div>
 
 						<div id="button" className="rowlogin">
-							<button onClick={submit}>Log in</button>
+							<button onClick={submit}>{btnState ? <Spinner /> : "Log in"}</button>
 						</div>
 						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
 							<label>
