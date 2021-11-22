@@ -32,7 +32,6 @@ const DowntimeReason = () => {
 		const name = location.name;
 		const permissionId = location.permissionId;
 		setdataproduction(data);
-		// setdowntimeId(data.id);
 		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
@@ -60,7 +59,10 @@ const DowntimeReason = () => {
 				body,
 				headers
 			);
-			history.push("/Home");
+
+			if (loginResponse.status === 200) {
+				history.push("/Home");
+			}
 		} catch (err) {
 			err && setErr(err);
 		}
@@ -75,6 +77,7 @@ const DowntimeReason = () => {
 			permissionId: permissionId,
 		});
 	};
+
 	if (loading) {
 		return (
 			<div
