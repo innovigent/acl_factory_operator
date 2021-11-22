@@ -1,44 +1,21 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
-import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 
-const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
-	console.log(props);
-	return (
-		<div
-			className={cx(
-				css(getStyles("singleValue", props)),
-				{
-					"single-value": true,
-					"single-value--is-disabled": isDisabled,
-				},
-				className
-			)}
-		>
-			<div>{selectProps.getOptionLabel(data)}</div>
-		</div>
-	);
-};
+import Spinner from "../components/spinner/Spinner";
+
+import "../assets/css/Usercreate.css";
+import "../assets/css/chooseButton.css";
+import "../assets/css/operatorfrm.css";
 
 const ShiftChange = () => {
 	const history = useHistory();
-	const [listData, setListData] = useState({ lists: [] });
-	const [text, setText] = useState("");
-	const epfNo = localStorage.getItem("epfno");
-	const [productionId, setproductionId] = useState("");
-	const [productID, setProductID] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
-	const [podata, setpodata] = useState([]);
-	const [authModal, setAuthModal] = useState(false);
-	const community = localStorage.getItem("community");
+	const [btnState, setBtnState] = useState(false);
 	const [Epf, setEpf] = useState("");
 	const [epfList, setEpfList] = useState([]);
 	const [authCode, setAuthCode] = useState("");
@@ -52,12 +29,9 @@ const ShiftChange = () => {
 		getEpfList();
 	}, []);
 
-	let options = listData.lists.map(function (city) {
-		return { value: city.id, label: city.productionorderCode };
-	});
-
 	const submit = async e => {
 		e.preventDefault();
+		setBtnState(true);
 		setErr("");
 
 		try {
@@ -68,7 +42,6 @@ const ShiftChange = () => {
 			);
 
 			if (response.status === 200) {
-				console.log(response.data);
 				localStorage.setItem("epfNo", response.data.data.allRecords.epfNo);
 				localStorage.setItem(
 					"operatorName",
@@ -76,10 +49,12 @@ const ShiftChange = () => {
 				);
 				history.push("/Changeover");
 			} else {
+				setBtnState(false);
 				setErr("Please check your details");
 			}
 		} catch (err) {
-			err && setErr("Please check your details");
+			setBtnState(false);
+			setErr("Please check your details");
 		}
 	};
 
@@ -98,19 +73,6 @@ const ShiftChange = () => {
 		}
 	}
 
-	function removeDuplicates(arr) {
-		arr.forEach(value => podata.push({ value: value.id, label: value.productionorderCode }));
-		console.log(podata);
-	}
-
-	const handleChange = (newValue: any, actionMeta: any) => {
-		let value = newValue.value;
-		setproductionId(value);
-		console.log(listData.lists, value);
-		const selectedID = listData.lists.filter(item => item.id === value);
-		console.log(selectedID);
-		setProductID(selectedID[0].productInfos ? selectedID[0].productInfos.productCode : "");
-	};
 	function validateForm() {
 		return Epf.length > 0 && authCode.length > 0;
 	}
@@ -175,7 +137,7 @@ const ShiftChange = () => {
 
 							<div id="button" className="rowlogin">
 								<button disabled={!validateForm()} onClick={submit}>
-									Log in
+									{btnState ? <Spinner /> : "Log in"}
 								</button>
 							</div>
 						</div>
