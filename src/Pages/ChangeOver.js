@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
 import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
@@ -9,7 +6,13 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+
 import AuthModel from "../components/modals/AuthModel";
+import SmallSpinner from "../components/spinner/SmallSpinner";
+
+import "../assets/css/Usercreate.css";
+import "../assets/css/chooseButton.css";
+import "../assets/css/operatorfrm.css";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	return (
@@ -37,13 +40,12 @@ const Changeover = () => {
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [productionOrderCode, setProductionOrderCode] = useState("");
-	const [podata, setpodata] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
+	const [btnState, setBtnState] = useState(false);
 	const community = localStorage.getItem("community");
 
 	useEffect(() => {
 		fetchData();
-		// setTempValues();
 	}, []);
 
 	const fetchData = async () => {
@@ -64,30 +66,20 @@ const Changeover = () => {
 		setLoading(false);
 	};
 
-	const setTempValues = () => {
-		const tempProductDetails = localStorage.getItem("productDetails");
-		const tempProductionId = localStorage.getItem("productionId");
-		const tempProductionCode = localStorage.getItem("productionOrderCode");
-		// eslint-disable-next-line no-unused-expressions
-		tempProductDetails ? setProductID(tempProductDetails) : "";
-		// eslint-disable-next-line no-unused-expressions
-		tempProductionId
-			? handleChange({ value: parseInt(tempProductionId), label: tempProductionCode })
-			: "";
-	};
-
 	let options = listData.lists.map(function (city) {
 		return { value: city.id, label: city.productionorderCode };
 	});
 
 	const submit = async (e, id) => {
 		e.preventDefault();
+		setBtnState(true);
+		setErr("");
+
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
 			},
 		};
-		setErr("");
 		try {
 			const body = { epfNo: id, productionId };
 
@@ -103,8 +95,8 @@ const Changeover = () => {
 			localStorage.setItem("productionId", productionId);
 			history.push("/Home");
 		} catch (err) {
-			console.log(err.response);
-			err.response.data.message && setErr(err.response.data.message);
+			setErr("Something went wrong");
+			setBtnState(false);
 		}
 	};
 
@@ -159,7 +151,6 @@ const Changeover = () => {
 								<div className="right-corner">Date: {new Date().toDateString()}</div>
 							</div>
 							<div className="textFieldContainer1"></div>
-							{/* to make space*/}
 							<div className="textFieldContainer1">
 								<label htmlFor="orderNo">Production Order Code</label>
 								<CreatableSelect
@@ -168,7 +159,6 @@ const Changeover = () => {
 									components={{ SingleValue }}
 									onChange={handleChange}
 									isValidNewOption={() => false}
-									// styles={customStyles}
 									styles={{
 										menu: (provided, state) => ({
 											...provided,
@@ -183,14 +173,6 @@ const Changeover = () => {
 										}),
 									}}
 								/>
-								{/*<input*/}
-								{/*    className="a"*/}
-								{/*    placeholder=""*/}
-								{/*    type="text"*/}
-								{/*    name=""*/}
-								{/*    value={productionId}*/}
-								{/*    onChange={(e) => setproductionId(e.target.value)}*/}
-								{/*/>*/}
 							</div>
 							<div className="textFieldContainer1">
 								<label htmlFor="epf">Product Name</label>
@@ -209,7 +191,6 @@ const Changeover = () => {
 									<p>Pending</p>
 								</div>
 							</div>
-							{/* to make space*/}
 							<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 								<button
 									onClick={() => {
@@ -221,11 +202,10 @@ const Changeover = () => {
 									}}
 									className="submita"
 								>
-									Submit
+									{btnState ? <SmallSpinner /> : "Submit"}
 								</button>
 							</div>
 							<div className="textFieldContiner1"></div>
-							{/* to make space*/}
 							<br />
 						</div>
 					</div>
