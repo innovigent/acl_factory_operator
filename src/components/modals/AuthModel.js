@@ -41,7 +41,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 			}
 		} catch (err) {
 			setBtnState(false);
-			err && setErr("Please check authorization code");
+			setErr("Please check authorization code");
 		}
 	};
 
@@ -63,6 +63,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 						name=""
 						value={authCode}
 						onChange={e => setAuthCode(e.target.value)}
+						disabled={btnState}
 					/>
 				</div>
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
