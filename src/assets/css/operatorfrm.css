@@ -5,9 +5,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* background-color: #258ea6; */
 	margin-top: 8%;
 	padding: 30px;
+}
+
+.login-form {
+	overflow: hidden;
 }
 
 .form-wrapper {
