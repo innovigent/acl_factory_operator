@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
+import Spinner from "../spinner/Spinner";
+
 import "./authmodal.css";
 
 const AuthModel = ({ execute, setAuthModal }) => {
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
+	const [btnState, setBtnState] = useState(false);
 
 	const handleAuth = async e => {
 		e.preventDefault();
+		setBtnState(true);
 		setErr("");
 
 		const headers = {
@@ -19,6 +23,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 		};
 		try {
 			if (authCode === "") {
+				setBtnState(false);
 				return setErr("Please enter auth code");
 			}
 			const response = await axios.post(
@@ -31,10 +36,11 @@ const AuthModel = ({ execute, setAuthModal }) => {
 				execute(e, response.data.data.id);
 				setAuthModal(false);
 			} else {
+				setBtnState(false);
 				setErr("Please check authorization code");
 			}
 		} catch (err) {
-			console.log(err.response);
+			setBtnState(false);
 			err && setErr("Please check authorization code");
 		}
 	};
@@ -59,7 +65,6 @@ const AuthModel = ({ execute, setAuthModal }) => {
 						onChange={e => setAuthCode(e.target.value)}
 					/>
 				</div>
-				{/* to make space*/}
 				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 					<button
 						className="submita"
@@ -77,7 +82,7 @@ const AuthModel = ({ execute, setAuthModal }) => {
 						Close
 					</button>
 					<button className="submita" onClick={e => handleAuth(e)}>
-						OK
+						{btnState ? <Spinner /> : "OK"}
 					</button>
 				</div>
 			</div>
