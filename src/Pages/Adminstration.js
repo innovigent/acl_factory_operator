@@ -50,23 +50,13 @@ const Administration = () => {
 		}
 	};
 
-	const fieldsDowntime = [
+	const fields = [
 		"ID",
 		"POC",
-		"Product Code",
+		"Item Code",
 		"Start Time",
 		"End Time",
-		"Down Time Case",
-		"Status",
-		"Action",
-	];
-	const fieldsSlowSpeed = [
-		"ID",
-		"POC",
-		"Product Code",
-		"Start Time",
-		"End Time",
-		"Slow Speed Case",
+		"Response",
 		"Status",
 		"Action",
 	];
@@ -283,7 +273,7 @@ const Administration = () => {
 							{downtimeListData.length > 0 ? (
 								<Table
 									limit="5"
-									headData={fieldsDowntime}
+									headData={fields}
 									renderHead={(item, index) => renderOrderHead(item, index)}
 									bodyData={downtimeListData}
 									renderBody={(item, index) => renderOrderBodyDownTime(item, index)}
@@ -298,7 +288,7 @@ const Administration = () => {
 							{slowSpeedListData.length > 0 ? (
 								<Table
 									limit="5"
-									headData={fieldsSlowSpeed}
+									headData={fields}
 									renderHead={(item, index) => renderOrderHead(item, index)}
 									bodyData={slowSpeedListData}
 									renderBody={(item, index) => renderOrderBodySlowRun(item, index)}
