@@ -8,7 +8,8 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import AuthModel from "../components/modals/AuthModel";
+import Spinner from "../components/spinner/Spinner";
+import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 
 const SlowRunReason = () => {
 	const history = useHistory();
@@ -24,10 +25,12 @@ const SlowRunReason = () => {
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
+	const [btnState, setBtnState] = useState(false);
 
 	useEffect(() => {
 		const data = location.state;
-		setSlowRunId(data.slowRunId);
+		console.log(data);
+		setSlowRunId(data.id);
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
@@ -40,6 +43,7 @@ const SlowRunReason = () => {
 
 	const submit = async e => {
 		e.preventDefault();
+		setBtnState(true);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -55,6 +59,7 @@ const SlowRunReason = () => {
 				permissionId,
 				defaultResponse: reasonId,
 			};
+			console.log(body);
 			const loginResponse = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/ResolveSlowRun/${slowRunId}/ResolvedPerson/${reasonId}/submit`,
 				body,
@@ -62,10 +67,14 @@ const SlowRunReason = () => {
 			);
 
 			if (loginResponse.status === 200) {
-				history.push("/Home");
+				return history.push("/Home");
 			}
+
+			setBtnState(false);
 		} catch (err) {
-			err && setErr(err);
+			console.log(err.response);
+			setBtnState(false);
+			setErr("Something went wrong");
 		}
 	};
 
@@ -99,7 +108,7 @@ const SlowRunReason = () => {
 	}
 	return (
 		<>
-			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
+			{authModal && <ExecutiveAuthModal setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -160,7 +169,7 @@ const SlowRunReason = () => {
 										</button>
 									</Link>
 									<button className="submita" onClick={() => setAuthModal(true)}>
-										Submit
+										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
 								<div className="textFieldContainer1"></div>
