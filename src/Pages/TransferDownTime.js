@@ -32,7 +32,8 @@ const TransferDowntime = () => {
 
 	useEffect(() => {
 		try {
-			console.log(history);
+			const data = location.state;
+			console.log(data.id);
 			setdowntimeId(data.id);
 			setepfNo(data.downtime[0].operatorId);
 			setproductionorder(data.downtime[0].specialcaseId);
