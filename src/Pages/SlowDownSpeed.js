@@ -11,25 +11,20 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-// import txt from "D:/Innovigent/ACL Automation/acl-factory-operator-frontend/src/token.txt";
 import AuthModel from "../components/modals/AuthModel";
+import Spinner from "../components/spinner/Spinner";
 
 const SlowDownSpeed = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [slowSpeedId, setSlowSpeedId] = useState("");
-	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
 	const [specialcaseId, setSpecialCaseId] = useState("");
-	const [name, setname] = useState("");
-	const [permissionId, setpermissionId] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
-	const macaddress = localStorage.getItem("macaddress");
-	const community = localStorage.getItem("community");
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [listData, setListData] = useState([]);
-	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
+	const [btnState, setBtnState] = useState(false);
 
 	const setId = () => {
 		if (Object.keys(location.state).length === 0) {
@@ -73,6 +68,7 @@ const SlowDownSpeed = () => {
 
 	const submit = async (e, id) => {
 		e.preventDefault();
+		setBtnState(true);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -94,10 +90,12 @@ const SlowDownSpeed = () => {
 			if (res.status === 200) {
 				history.push("/Home");
 			} else {
+				setBtnState(false);
 				setErr("Something went wrong");
 			}
 		} catch (err) {
 			console.log(err.response);
+			setBtnState(false);
 			setErr("Something went wrong");
 		}
 	};
@@ -130,7 +128,7 @@ const SlowDownSpeed = () => {
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
-						<div className="page-header">Slow Run Reasoning</div>
+						<div className="page-header">Slow Run Detection</div>
 						<div className="card full-height col-6">
 							<div>
 								{err ? (
@@ -143,7 +141,6 @@ const SlowDownSpeed = () => {
 									<div className="right-corner">Date: {new Date().toDateString()}</div>
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label>Slow Run Reasons</label>
 
@@ -164,16 +161,13 @@ const SlowDownSpeed = () => {
 									))}
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 									<button onClick={() => setAuthModal(true)} className="submita">
-										Submit
+										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 							</div>
 						</div>
 					</div>
