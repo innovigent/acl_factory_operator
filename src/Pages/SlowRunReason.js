@@ -78,13 +78,6 @@ const SlowRunReason = () => {
 		}
 	};
 
-	const transfer = async e => {
-		history.push({
-			pathname: "/SlowSpeedTransfer",
-			state: { id: slowRunId },
-		});
-	};
-
 	if (loading) {
 		return (
 			<div
@@ -152,7 +145,7 @@ const SlowRunReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link onClick={transfer}>
+									<Link to={{ pathname: "/SlowSpeedTransfer", state: { id: slowRunId } }}>
 										<button
 											style={{
 												background: "transparent",
