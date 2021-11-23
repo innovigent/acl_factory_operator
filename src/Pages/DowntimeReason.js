@@ -73,11 +73,6 @@ const DowntimeReason = () => {
 		}
 	};
 
-	const transfer = async e => {
-		console.log(downtimeId);
-		history.push("/Downtimetransfer", { id: downtimeId });
-	};
-
 	if (loading) {
 		return (
 			<div
@@ -145,7 +140,7 @@ const DowntimeReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link onClick={transfer}>
+									<Link to={{ pathname: "/DowntimeTransfer", state: { id: downtimeId } }}>
 										<button
 											style={{
 												background: "transparent",
