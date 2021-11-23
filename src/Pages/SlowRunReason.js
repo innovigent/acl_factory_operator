@@ -3,25 +3,25 @@ import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
 import "../assets/css/Login.css";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 import Spinner from "../components/spinner/Spinner";
+import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 
-const DowntimeReason = () => {
+const SlowRunReason = () => {
 	const history = useHistory();
 	const location = useLocation();
-	const [downtimeId, setdowntimeId] = useState("");
+	const [slowRunId, setSlowRunId] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
 	const [reasonId, setreasonId] = useState("");
 	const [name, setname] = useState("");
 	const [permissionId, setpermissionId] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
+	const macaddress = localStorage.getItem("macaddress");
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
@@ -29,7 +29,8 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const data = location.state;
-		setdowntimeId(data.id);
+		console.log(data);
+		setSlowRunId(data.id);
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
@@ -51,23 +52,27 @@ const DowntimeReason = () => {
 		setErr("");
 		try {
 			const body = {
-				downtimeId,
+				slowRunId,
 				reportedExecutiveId,
 				reasonId,
 				productionrunId,
 				permissionId,
 				defaultResponse: reasonId,
 			};
+			console.log(body);
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/ResolveDowntime/${downtimeId}/ResolvedPerson/${reasonId}/submit`,
+				`https://acl-automation.herokuapp.com/api/v1/ResolveSlowRun/${slowRunId}/ResolvedPerson/${reasonId}/submit`,
 				body,
 				headers
 			);
 
 			if (loginResponse.status === 200) {
-				history.push("/Home");
+				return history.push("/Home");
 			}
+
+			setBtnState(false);
 		} catch (err) {
+			console.log(err.response);
 			setBtnState(false);
 			setErr("Something went wrong");
 		}
@@ -97,7 +102,7 @@ const DowntimeReason = () => {
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
-						<div className="page-header">Downtime Reasoning</div>
+						<div className="page-header">Slow Run Reasoning</div>
 						<div className="card full-height col-6">
 							<div>
 								{err ? (
@@ -140,7 +145,7 @@ const DowntimeReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link to={{ pathname: "/DowntimeTransfer", state: { id: downtimeId } }}>
+									<Link to={{ pathname: "/SlowSpeedTransfer", state: { id: slowRunId } }}>
 										<button
 											style={{
 												background: "transparent",
@@ -169,4 +174,4 @@ const DowntimeReason = () => {
 	);
 };
 
-export default DowntimeReason;
+export default SlowRunReason;

@@ -58,7 +58,7 @@ const Downtime = () => {
 		fetchData();
 	}, []);
 
-	const submit = async e => {
+	const submit = async (e, id) => {
 		e.preventDefault();
 		const headers = {
 			headers: {
@@ -84,7 +84,6 @@ const Downtime = () => {
 					headers
 				);
 
-				console.log(loginResponse);
 				if (loginResponse.status === 200) {
 					history.push("/ChangeOver");
 				}
@@ -109,10 +108,15 @@ const Downtime = () => {
 					body,
 					headers
 				);
-				localStorage.setItem("specialcaseId", specialcaseId);
-				history.push("/DowntimeReason");
+
+				if (loginResponse.status === 200) {
+					localStorage.setItem("specialcaseId", specialcaseId);
+					history.push("/Home", { downtimeId, id });
+				} else {
+					setErr("Something went wrong");
+				}
 			} catch (err) {
-				console.log(err.repsonse);
+				console.log(err.response);
 				setErr("Something went wrong");
 			}
 		}

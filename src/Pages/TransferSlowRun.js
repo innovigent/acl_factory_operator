@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
@@ -11,29 +10,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
-
-const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
-	console.log(props);
-	return (
-		<div
-			className={cx(
-				css(getStyles("singleValue", props)),
-				{
-					"single-value": true,
-					"single-value--is-disabled": isDisabled,
-				},
-				className
-			)}
-		>
-			<div>{selectProps.getOptionLabel(data)}</div>
-		</div>
-	);
-};
+import Spinner from "../components/spinner/Spinner";
 
 const TransferSlowRun = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const [loading, setLoading] = useState(true);
+	const [btnState, setBtnState] = useState(false);
 	const [listData, setListData] = useState({ lists: [] });
 	const [downtimeId, setdowntimeId] = useState("");
 	const [epfNo, setepfNo] = useState("");
@@ -47,7 +30,6 @@ const TransferSlowRun = () => {
 
 	useEffect(() => {
 		try {
-			console.log(data);
 			setdowntimeId(data.id);
 			setepfNo(data.downtime[0].operatorId);
 			setproductionorder(data.downtime[0].specialcaseId);
@@ -78,6 +60,7 @@ const TransferSlowRun = () => {
 
 	const submit = async (e, id) => {
 		e.preventDefault();
+		setBtnState(true);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -86,7 +69,6 @@ const TransferSlowRun = () => {
 		setErr("");
 
 		try {
-			console.log(id);
 			const body = {
 				downtimeId,
 				macaddress,
@@ -106,10 +88,12 @@ const TransferSlowRun = () => {
 			);
 
 			if (loginResponse.status === 200) {
-				history.push("/Home");
+				return history.push("/Home");
 			}
+
+			setBtnState(false);
 		} catch (err) {
-			console.log(err.response);
+			setBtnState(false);
 			setErr(err.response.data.message);
 		}
 	};
@@ -154,7 +138,6 @@ const TransferSlowRun = () => {
 									<div className="right-corner">Date: {new Date().toDateString()}</div>
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">Transfer SlowRun Cases</label>
 									<div className="wrapper1">
@@ -177,11 +160,10 @@ const TransferSlowRun = () => {
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 									<button onClick={submit} className="submita">
-										Submit
+										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 							</div>
 						</div>
 					</div>
