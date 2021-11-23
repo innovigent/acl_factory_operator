@@ -29,7 +29,7 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const data = location.state;
-		setdowntimeId(data.downtimeId);
+		setdowntimeId(data.id);
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
@@ -74,13 +74,8 @@ const DowntimeReason = () => {
 	};
 
 	const transfer = async e => {
-		history.push({
-			pathname: "/Downtimetransfer",
-			state: dataproduction,
-			executive: reportedExecutiveId,
-			name: name,
-			permissionId: permissionId,
-		});
+		console.log(downtimeId);
+		history.push("/Downtimetransfer", { id: downtimeId });
 	};
 
 	if (loading) {
@@ -150,7 +145,7 @@ const DowntimeReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link to="/DownTimeTransfer">
+									<Link onClick={transfer}>
 										<button
 											style={{
 												background: "transparent",
