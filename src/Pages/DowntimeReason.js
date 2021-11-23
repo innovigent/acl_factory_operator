@@ -28,6 +28,7 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const data = location.state;
+		setdowntimeId(data.downtimeId);
 		const executive = location.executive;
 		const name = location.name;
 		const permissionId = location.permissionId;
@@ -53,9 +54,10 @@ const DowntimeReason = () => {
 				reasonId,
 				productionrunId,
 				permissionId,
+				defaultResponse: reasonId,
 			};
 			const loginResponse = await axios.post(
-				"https://acl-automation.herokuapp.com/api/v1/SubmitFaultReason/create",
+				`https://acl-automation.herokuapp.com/api/v1/ResolveDowntime/${downtimeId}/ResolvedPerson/${reasonId}/submit`,
 				body,
 				headers
 			);
@@ -112,7 +114,6 @@ const DowntimeReason = () => {
 									</Alert>
 								) : null}
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 								<div className="textFieldContainer1">
 									<label>Production Order Code</label>
 									<input value={localStorage.getItem("productionOrderCode")} disabled></input>
@@ -142,8 +143,7 @@ const DowntimeReason = () => {
 										<option value="" selected>
 											Please Select a Reason
 										</option>
-
-										<option value="completed">Resolved</option>
+										<option value="resolved">Resolved</option>
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
