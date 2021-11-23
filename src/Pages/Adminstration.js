@@ -68,7 +68,13 @@ const Administration = () => {
 			{authModalDowntime && transferId === item.id ? (
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalDowntime}
-					execute={() => history.push("/Downtimetransfer", { id: item.id })}
+					execute={() => {
+						if (item.status.name === "Operator-Entered") {
+							history.push("/DowntimeReason", { id: item.id });
+						} else {
+							history.push("/Downtimetransfer", { id: item.id });
+						}
+					}}
 				/>
 			) : (
 				""
@@ -93,7 +99,12 @@ const Administration = () => {
 			</td>
 			{item.status.name === "Operator-Entered" ? (
 				<td>
-					<Link to={{ pathname: "/DowntimeReason", state: { id: item.id } }}>
+					<Link
+						onClick={() => {
+							setTransferId(item.id);
+							setAuthModalDowntime(true);
+						}}
+					>
 						<button
 							className="submita"
 							style={{
@@ -158,7 +169,13 @@ const Administration = () => {
 			{authModalSlowSpeed && transferId === item.id ? (
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
-					execute={() => history.push("/SlowSpeedTransfer", { id: item.id })}
+					execute={() => {
+						if (item.status.name === "Operator-Entered") {
+							history.push("/SlowRunReason", { id: item.id });
+						} else {
+							history.push("/SlowSpeedTransfer", { id: item.id });
+						}
+					}}
 				/>
 			) : (
 				""
@@ -183,7 +200,12 @@ const Administration = () => {
 			</td>
 			{item.status.name === "Operator-Entered" ? (
 				<td>
-					<Link to={{ pathname: "/SlowRunReason", state: { id: item.id } }}>
+					<Link
+						onClick={() => {
+							setTransferId(item.id);
+							setAuthModalSlowSpeed(true);
+						}}
+					>
 						<button
 							className="submita"
 							style={{
