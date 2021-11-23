@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/Usercreate.css";
 import "../assets/css/chooseButton.css";
 import "../assets/css/operatorfrm.css";
-import { css } from "@emotion/css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
@@ -31,7 +30,6 @@ const TransferSlowRun = () => {
 
 	useEffect(() => {
 		try {
-			console.log(history);
 			setdowntimeId(data.id);
 			setepfNo(data.downtime[0].operatorId);
 			setproductionorder(data.downtime[0].specialcaseId);
