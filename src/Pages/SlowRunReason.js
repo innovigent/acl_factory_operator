@@ -80,11 +80,8 @@ const SlowRunReason = () => {
 
 	const transfer = async e => {
 		history.push({
-			pathname: "/Downtimetransfer",
-			state: dataproduction,
-			executive: reportedExecutiveId,
-			name: name,
-			permissionId: permissionId,
+			pathname: "/SlowSpeedTransfer",
+			state: { id: slowRunId },
 		});
 	};
 
@@ -155,7 +152,7 @@ const SlowRunReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link to="/DownTimeTransfer">
+									<Link onClick={transfer}>
 										<button
 											style={{
 												background: "transparent",
