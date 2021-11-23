@@ -9,7 +9,8 @@ import axios from "axios";
 import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import AuthModel from "../components/modals/AuthModel";
+import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
+import Spinner from "../components/spinner/Spinner";
 
 const DowntimeReason = () => {
 	const history = useHistory();
@@ -21,10 +22,10 @@ const DowntimeReason = () => {
 	const [permissionId, setpermissionId] = useState("");
 	const [err, setErr] = useState("");
 	const [loading, setLoading] = useState(true);
-	const macaddress = localStorage.getItem("macaddress");
 	const productionrunId = +localStorage.getItem("productionrunId");
 	const [dataproduction, setdataproduction] = useState([]);
 	const [authModal, setAuthModal] = useState(false);
+	const [btnState, setBtnState] = useState(false);
 
 	useEffect(() => {
 		const data = location.state;
@@ -41,6 +42,7 @@ const DowntimeReason = () => {
 
 	const submit = async e => {
 		e.preventDefault();
+		setBtnState(true);
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
@@ -66,7 +68,8 @@ const DowntimeReason = () => {
 				history.push("/Home");
 			}
 		} catch (err) {
-			err && setErr(err);
+			setBtnState(false);
+			setErr("Something went wrong");
 		}
 	};
 
@@ -100,7 +103,7 @@ const DowntimeReason = () => {
 	}
 	return (
 		<>
-			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
+			{authModal && <ExecutiveAuthModal setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -161,7 +164,7 @@ const DowntimeReason = () => {
 										</button>
 									</Link>
 									<button className="submita" onClick={() => setAuthModal(true)}>
-										Submit
+										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
 								<div className="textFieldContainer1"></div>
