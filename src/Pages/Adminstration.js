@@ -8,7 +8,7 @@ import Badge from "../components/badge/Badge";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import AuthModel from "../components/modals/ExecutiveAuthModal";
+import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 
 const Administration = () => {
 	const history = useHistory();
@@ -66,7 +66,7 @@ const Administration = () => {
 	const renderOrderBodyDownTime = (item, index) => (
 		<tr key={index}>
 			{authModalDowntime && transferId === item.id ? (
-				<AuthModel
+				<ExecutiveAuthModal
 					setAuthModal={setAuthModalDowntime}
 					execute={() => history.push("/Downtimetransfer", { id: item.id })}
 				/>
@@ -93,7 +93,7 @@ const Administration = () => {
 			</td>
 			{item.status.name === "Operator-Entered" ? (
 				<td>
-					<Link to={{ pathname: "/Downtime", state: { id: item.id } }}>
+					<Link to={{ pathname: "/DowntimeReason", state: { id: item.id } }}>
 						<button
 							className="submita"
 							style={{
@@ -156,7 +156,7 @@ const Administration = () => {
 	const renderOrderBodySlowRun = (item, index) => (
 		<tr key={index}>
 			{authModalSlowSpeed && transferId === item.id ? (
-				<AuthModel
+				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
 					execute={() => history.push("/SlowSpeedTransfer", { id: item.id })}
 				/>
@@ -183,7 +183,7 @@ const Administration = () => {
 			</td>
 			{item.status.name === "Operator-Entered" ? (
 				<td>
-					<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
+					<Link to={{ pathname: "/SlowRunReason", state: { id: item.id } }}>
 						<button
 							className="submita"
 							style={{
