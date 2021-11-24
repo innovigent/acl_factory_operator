@@ -47,6 +47,7 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 				setErr("Please check authorization code");
 			}
 		} catch (err) {
+			console.log(err.response);
 			setBtnState(false);
 			setErr("Please check authorization code");
 		}
