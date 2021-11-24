@@ -68,11 +68,11 @@ const Administration = () => {
 			{authModalDowntime && transferId === item.id ? (
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalDowntime}
-					execute={() => {
+					execute={(e, executiveId) => {
 						if (item.status.name === "Operator-Entered") {
-							history.push("/DowntimeReason", { id: item.id });
+							history.push("/DowntimeReason", { id: item.id, executiveId: executiveId });
 						} else {
-							history.push("/Downtimetransfer", { id: item.id });
+							history.push("/Downtimetransfer", { id: item.id, executiveId: executiveId });
 						}
 					}}
 				/>
@@ -169,11 +169,11 @@ const Administration = () => {
 			{authModalSlowSpeed && transferId === item.id ? (
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
-					execute={() => {
+					execute={(e, executiveId) => {
 						if (item.status.name === "Operator-Entered") {
-							history.push("/SlowRunReason", { id: item.id });
+							history.push("/SlowRunReason", { id: item.id, executiveId: executiveId });
 						} else {
-							history.push("/SlowSpeedTransfer", { id: item.id });
+							history.push("/SlowSpeedTransfer", { id: item.id, executiveId: executiveId });
 						}
 					}}
 				/>
