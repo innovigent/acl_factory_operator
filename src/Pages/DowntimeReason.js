@@ -30,11 +30,11 @@ const DowntimeReason = () => {
 	useEffect(() => {
 		const data = location.state;
 		setdowntimeId(data.id);
-		const executive = location.executive;
+		setreportedExecutiveId(data.executiveId);
+		console.log(data);
 		const name = location.name;
 		const permissionId = location.permissionId;
 		setdataproduction(data);
-		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
 		setLoading(false);
@@ -59,7 +59,7 @@ const DowntimeReason = () => {
 				defaultResponse: reasonId,
 			};
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/ResolveDowntime/${downtimeId}/ResolvedPerson/${reasonId}/submit`,
+				`https://acl-automation.herokuapp.com/api/v1/ResolveDowntime/${downtimeId}/ResolvedPerson/${reportedExecutiveId}/submit`,
 				body,
 				headers
 			);
@@ -153,7 +153,7 @@ const DowntimeReason = () => {
 											Transfer
 										</button>
 									</Link>
-									<button className="submita" onClick={() => setAuthModal(true)}>
+									<button className="submita" onClick={submit}>
 										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
