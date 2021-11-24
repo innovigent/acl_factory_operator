@@ -31,11 +31,10 @@ const SlowRunReason = () => {
 		const data = location.state;
 		console.log(data);
 		setSlowRunId(data.id);
-		const executive = location.executive;
+		setreportedExecutiveId(data.executiveId);
 		const name = location.name;
 		const permissionId = location.permissionId;
 		setdataproduction(data);
-		setreportedExecutiveId(executive);
 		setname(name);
 		setpermissionId(permissionId);
 		setLoading(false);
@@ -61,7 +60,7 @@ const SlowRunReason = () => {
 			};
 			console.log(body);
 			const loginResponse = await axios.post(
-				`https://acl-automation.herokuapp.com/api/v1/ResolveSlowRun/${slowRunId}/ResolvedPerson/${reasonId}/submit`,
+				`https://acl-automation.herokuapp.com/api/v1/ResolveSlowRun/${slowRunId}/ResolvedPerson/${reportedExecutiveId}/submit`,
 				body,
 				headers
 			);
@@ -158,12 +157,11 @@ const SlowRunReason = () => {
 											Transfer
 										</button>
 									</Link>
-									<button className="submita" onClick={() => setAuthModal(true)}>
+									<button className="submita" onClick={submit}>
 										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>
 								<div className="textFieldContainer1"></div>
-								{/* to make space*/}
 							</div>
 						</div>
 					</div>
