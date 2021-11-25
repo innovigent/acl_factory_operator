@@ -36,7 +36,7 @@ const MachineLogin = () => {
 			if (res.status === 200) {
 				localStorage.setItem("device-token", res.data.data.token);
 				localStorage.setItem("community", res.data.data.user.organizationId);
-				return history.push("/Changeover");
+				return history.push("/login");
 			}
 
 			setErr("");
