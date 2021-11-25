@@ -6,7 +6,6 @@
 	height: var(--topnav-height);
 	bottom: 0;
 	left: 0;
-	/*overflow: hidden;*/
 	position: fixed;
 	background-color: white;
 	box-shadow: rgba(149, 157, 165, 0.5) 20px 8px 80px;
@@ -16,12 +15,8 @@
 .topnav__search {
 	position: relative;
 	height: 50px;
-	/*background-color: var(--main-bg);*/
 	display: flex;
 	align-items: center;
-	/*box-shadow: var(--box-shadow);*/
-	/*border-radius: var(--border-radius);*/
-	overflow: hidden;
 }
 
 .topnav__search > input {

@@ -16,7 +16,7 @@ const SlowRunReason = () => {
 	const location = useLocation();
 	const [slowRunId, setSlowRunId] = useState("");
 	const [reportedExecutiveId, setreportedExecutiveId] = useState("");
-	const [reasonId, setreasonId] = useState("");
+	const [reasonId, setreasonId] = useState("resolved");
 	const [name, setname] = useState("");
 	const [permissionId, setpermissionId] = useState("");
 	const [err, setErr] = useState("");
@@ -137,10 +137,9 @@ const SlowRunReason = () => {
 								<div className="textFieldContainer1">
 									<label>Reason</label>
 									<select value={reasonId} onChange={e => setreasonId(e.target.value)}>
-										<option value="" selected>
-											Please Select a Reason
+										<option value="resolved" selected>
+											Resolved
 										</option>
-										<option value="resolved">Resolved</option>
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>

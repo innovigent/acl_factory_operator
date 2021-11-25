@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
-import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
-import DropdownWithButton from "../components/dropdown/DropdownWithButton";
-import { useHistory } from "react-router-dom";
-import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { HashLoader } from "react-spinners";
+import { useHistory } from "react-router-dom";
+
+import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import OptionModal from "../components/modals/OptionModal";
+import TopNav from "../components/topnav/TopNav";
+
+import "../assets/css/Usercreate.css";
 
 const Home = () => {
 	const [listData, setListData] = useState({ lists: [] });
@@ -30,6 +32,8 @@ const Home = () => {
 				`https://acl-automation.herokuapp.com/api/v1/productionRun/${productionrunId}/faultIdentification`,
 				headers
 			);
+
+			console.log(res.data);
 
 			if (res.status === 200) {
 				setFaultDetectionData({
@@ -69,8 +73,11 @@ const Home = () => {
 					`https://acl-automation.herokuapp.com/api/v1/createproductionrunIPC/${productionrunId}/getall`,
 					headers
 				);
-				setListData({ lists: result.data.data.productionOrders });
-				setLoading(false);
+
+				if (result.status === 200) {
+					setListData({ lists: result.data.data.productionOrders });
+					setLoading(false);
+				}
 			} catch (err) {
 				console.log(err.response);
 				window.location.href = "/changeover";
@@ -157,7 +164,14 @@ const Home = () => {
 									<div className="textFieldContainer1">
 										<label htmlFor="epf">Target Achieved</label>
 										<div
-											className="target success"
+											className={
+												(parseFloat(listData.lists[0].outputQuantity) /
+													parseFloat(listData.lists[0].productionorders.orderQuantity)) *
+													100 ===
+												100
+													? "target success"
+													: "target pending"
+											}
 											style={{
 												width:
 													(parseFloat(listData.lists[0].outputQuantity) /
@@ -192,6 +206,8 @@ const Home = () => {
 													? "Slow Running"
 													: status === "downtime"
 													? "Stopped"
+													: status === "completedrun"
+													? "Complete"
 													: "Loading.."}
 											</p>
 										</div>

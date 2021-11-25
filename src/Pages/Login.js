@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
@@ -40,6 +40,33 @@ const Login = () => {
 		}
 
 		getEpfList();
+	}, []);
+
+	useEffect(() => {
+		const getShifts = async () => {
+			try {
+				const res = await axios.get(
+					`https://acl-automation.herokuapp.com/api/v1/shiftcontrollers/TimeDrivenList`,
+					headers
+				);
+
+				if (res.status === 200) {
+					const factoryId = parseInt(localStorage.getItem("community"));
+
+					for (let i = 0; i < res.data.data.ShiftDetails.length; i++) {
+						if (res.data.data.ShiftDetails[i].factoryId === factoryId) {
+							localStorage.setItem("shiftStartTime", res.data.data.ShiftDetails[i].startTime);
+							localStorage.setItem("shiftEndTime", res.data.data.ShiftDetails[i].endTime);
+
+							return;
+						}
+					}
+				}
+			} catch (err) {
+				console.log(err.response);
+			}
+		};
+		getShifts();
 	}, []);
 
 	function validateForm() {
@@ -133,13 +160,14 @@ const Login = () => {
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
-						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
-							<label style={{ textAlign: "center" }}>
-								<Link to="/" style={{ color: "#3dbc84", fontWeight: "500", textAlign: "center" }}>
-									Login with Machine Login
-								</Link>
-							</label>
-						</div>
+						{history.location.state ? (
+							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
+								<button onClick={() => history.push("/changeover")}>Continue</button>
+							</div>
+						) : (
+							""
+						)}
+						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}></div>
 					</div>
 				</div>
 			</div>
