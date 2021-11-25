@@ -31,37 +31,9 @@ const sidebar_items = [
 		icon: "bx bx-down-arrow-circle",
 	},
 	{
-		display_name: "Shift Change",
-		route: "/ShiftChange",
-		icon: "bx bx-repost",
-	},
-	{
 		icon: "bx bx-log-out-circle bx-rotate-180",
 		route: "/Home",
 		display_name: "Logout",
-	},
-];
-
-const notifications = [
-	{
-		content: "Operator Experiment",
-		route: "/OperatorExperiment",
-		icon: "bx bx-category-alt",
-	},
-	{
-		content: "Slow down",
-		route: "/SlowDownSpeed",
-		icon: "bx bx-category-alt",
-	},
-	{
-		content: "Status",
-		route: "/StatusChanged",
-		icon: "bx bx-category-alt",
-	},
-	{
-		display_name: "Fault Detection",
-		route: "/FaultDetection",
-		icon: "bx bx-category-alt",
 	},
 ];
 
@@ -124,17 +96,6 @@ const Topnav = () => {
 						</Link>
 					)
 				)}
-			</div>
-			<div className="topnav__right">
-				<div className="topnav__right-item">
-					{/* dropdown here */}
-					<Dropdown
-						icon="bx bx-menu"
-						contentData={notifications}
-						renderItems={(item, index) => renderNotificationItem(item, index)}
-						//renderFooter={() => <Link to='/'>View All</Link>}
-					/>
-				</div>
 			</div>
 		</div>
 	);
