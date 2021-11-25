@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 
 import Changeover from "./pages/ChangeOver";
 import Downtime from "./pages/DownTime";
@@ -21,6 +21,21 @@ import TransferSlowRun from "./pages/TransferSlowRun";
 import SlowRunReason from "./pages/SlowRunReason";
 
 const Routes = () => {
+	const history = useHistory();
+
+	const triggerLogin = () => {
+		const shiftStartTime = localStorage.getItem("shiftStartTime");
+
+		if (
+			shiftStartTime.slice(0, 2).toString() == new Date().getHours() &&
+			shiftStartTime.slice(3, 5).toString() == new Date().getMinutes()
+		) {
+			history.push("/login", { from: "timeTrigger" });
+		}
+	};
+
+	setTimeout(triggerLogin, 1000);
+
 	return (
 		<Switch>
 			<Route exact path="/" component={MachineLogin} />
