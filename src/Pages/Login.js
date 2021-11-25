@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
@@ -17,6 +17,7 @@ const Login = () => {
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 	const [btnState, setBtnState] = useState(false);
+	console.log(history);
 
 	const headers = {
 		headers: {
