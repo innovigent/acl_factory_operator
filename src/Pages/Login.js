@@ -42,6 +42,33 @@ const Login = () => {
 		getEpfList();
 	}, []);
 
+	useEffect(() => {
+		const getShifts = async () => {
+			try {
+				const res = await axios.get(
+					`https://acl-automation.herokuapp.com/api/v1/shiftcontrollers/TimeDrivenList`,
+					headers
+				);
+
+				if (res.status === 200) {
+					const factoryId = parseInt(localStorage.getItem("community"));
+
+					for (let i = 0; i < res.data.data.ShiftDetails.length; i++) {
+						if (res.data.data.ShiftDetails[i].factoryId === factoryId) {
+							localStorage.setItem("shiftStartTime", res.data.data.ShiftDetails[i].startTime);
+							localStorage.setItem("shiftEndTime", res.data.data.ShiftDetails[i].endTime);
+
+							return;
+						}
+					}
+				}
+			} catch (err) {
+				console.log(err.response);
+			}
+		};
+		getShifts();
+	}, []);
+
 	function validateForm() {
 		return epf.length > 0 && authCode.length > 0;
 	}
