@@ -33,6 +33,8 @@ const Home = () => {
 				headers
 			);
 
+			console.log(res.data);
+
 			if (res.status === 200) {
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,
@@ -162,7 +164,14 @@ const Home = () => {
 									<div className="textFieldContainer1">
 										<label htmlFor="epf">Target Achieved</label>
 										<div
-											className="target success"
+											className={
+												(parseFloat(listData.lists[0].outputQuantity) /
+													parseFloat(listData.lists[0].productionorders.orderQuantity)) *
+													100 ===
+												100
+													? "target success"
+													: "target pending"
+											}
 											style={{
 												width:
 													(parseFloat(listData.lists[0].outputQuantity) /
