@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
@@ -93,13 +93,7 @@ const MachineLogin = () => {
 						<div id="button" className="rowlogin">
 							<button onClick={submit}>{btnState ? <Spinner /> : "Log in"}</button>
 						</div>
-						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
-							<label>
-								<Link to="/Login" style={{ color: "#3dbc84", textAlign: "center" }}>
-									Login as Operator
-								</Link>
-							</label>
-						</div>
+						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}></div>
 					</div>
 				</div>
 			</div>
