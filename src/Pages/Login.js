@@ -133,13 +133,7 @@ const Login = () => {
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
-						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}>
-							<label style={{ textAlign: "center" }}>
-								<Link to="/" style={{ color: "#3dbc84", fontWeight: "500", textAlign: "center" }}>
-									Login with Machine Login
-								</Link>
-							</label>
-						</div>
+						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}></div>
 					</div>
 				</div>
 			</div>
