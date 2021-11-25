@@ -92,7 +92,7 @@ const Downtime = () => {
 				setErr("Something went wrong");
 			}
 		} else if (type === "end-shift") {
-			history.push("/ShiftChange");
+			history.push("/login");
 		} else {
 			try {
 				const body = {
