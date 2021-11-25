@@ -2,26 +2,26 @@ import React, { useState } from "react";
 
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
-import Changeover from "./Pages/ChangeOver";
-import Downtime from "./Pages/DownTime";
-import DowntimeReason from "./Pages/DowntimeReason";
-import Downtimetransfer from "./Pages/Downtimetransfer";
-import FaultDetection from "./Pages/MachineFaultDetected";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import MachineLogin from "./Pages/MachineLogin";
-import OperatorActionTable from "./Pages/OperatorActionTable";
-import OperatorBrakdown from "./Pages/OperatorBrakdown";
-import OperatorExperiment from "./Pages/OperatorExperiment";
-import SlowDownSpeed from "./Pages/SlowDownSpeed";
-import StatusChanged from "./Pages/StatusChanged";
-import VerifyIssue from "./Pages/VerifyIssue";
-import VerifySlowdown from "./Pages/VerifySlowdown";
-import Administration from "./Pages/Adminstration";
-import ShiftChange from "./Pages/ShiftChange";
-import TransferDowntime from "./Pages/TransferDownTime";
-import TransferSlowRun from "./Pages/TransferSlowRun";
-import SlowRunReason from "./Pages/SlowRunReason";
+import Changeover from "./pages/ChangeOver";
+import Downtime from "./pages/DownTime";
+import DowntimeReason from "./pages/DowntimeReason";
+import Downtimetransfer from "./pages/Downtimetransfer";
+import FaultDetection from "./pages/MachineFaultDetected";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import MachineLogin from "./pages/MachineLogin";
+import OperatorActionTable from "./pages/OperatorActionTable";
+import OperatorBrakdown from "./pages/OperatorBrakdown";
+import OperatorExperiment from "./pages/OperatorExperiment";
+import SlowDownSpeed from "./pages/SlowDownSpeed";
+import StatusChanged from "./pages/StatusChanged";
+import VerifyIssue from "./pages/VerifyIssue";
+import VerifySlowdown from "./pages/VerifySlowdown";
+import Administration from "./pages/Adminstration";
+import ShiftChange from "./pages/ShiftChange";
+import TransferDowntime from "./pages/TransferDownTime";
+import TransferSlowRun from "./pages/TransferSlowRun";
+import SlowRunReason from "./pages/SlowRunReason";
 
 const Routes = () => {
 	return (
