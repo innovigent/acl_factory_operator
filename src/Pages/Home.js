@@ -30,7 +30,7 @@ const Home = () => {
 				`https://acl-automation.herokuapp.com/api/v1/productionRun/${productionrunId}/faultIdentification`,
 				headers
 			);
-
+			console.log(res.data);
 			if (res.status === 200) {
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,
@@ -192,6 +192,8 @@ const Home = () => {
 													? "Slow Running"
 													: status === "downtime"
 													? "Stopped"
+													: status === "completedrun"
+													? "Complete"
 													: "Loading.."}
 											</p>
 										</div>
