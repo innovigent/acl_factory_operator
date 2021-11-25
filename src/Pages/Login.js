@@ -17,7 +17,6 @@ const Login = () => {
 	const [authCode, setAuthCode] = useState("");
 	const [err, setErr] = useState("");
 	const [btnState, setBtnState] = useState(false);
-	console.log(history);
 
 	const headers = {
 		headers: {
@@ -161,6 +160,13 @@ const Login = () => {
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
+						{history.location.state ? (
+							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
+								<button onClick={() => history.push("/changeover")}>Continue</button>
+							</div>
+						) : (
+							""
+						)}
 						<div className="rowlogin" style={{ paddingTop: 0, paddingBottom: "1rem" }}></div>
 					</div>
 				</div>
