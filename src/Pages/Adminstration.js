@@ -70,14 +70,8 @@ const Administration = () => {
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalDowntime}
 					execute={(e, executiveId) => {
-						if (item.status.name === "Operator-Entered") {
+						if (item.status.name === "Operator-Entered" || item.status.name === "Transfer") {
 							history.push("/DowntimeReason", {
-								id: item.id,
-								executiveId: executiveId,
-								specialCaseId: item.specialCases.id,
-							});
-						} else {
-							history.push("/Downtimetransfer", {
 								id: item.id,
 								executiveId: executiveId,
 								specialCaseId: item.specialCases.id,
@@ -163,7 +157,7 @@ const Administration = () => {
 								fontSize: "0.8rem",
 							}}
 						>
-							Transfer
+							Submit
 						</button>
 					</Link>
 				</td>
@@ -179,15 +173,8 @@ const Administration = () => {
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
 					execute={(e, executiveId) => {
-						console.log(item);
-						if (item.status.name === "Operator-Entered") {
+						if (item.status.name === "Operator-Entered" || item.status.name === "Transfer") {
 							history.push("/SlowRunReason", {
-								id: item.id,
-								executiveId: executiveId,
-								specialCaseId: item.specialcases.id,
-							});
-						} else {
-							history.push("/SlowSpeedTransfer", {
 								id: item.id,
 								executiveId: executiveId,
 								specialCaseId: item.specialcases.id,
@@ -273,7 +260,7 @@ const Administration = () => {
 								fontSize: "0.8rem",
 							}}
 						>
-							Transfer{" "}
+							Submit
 						</button>
 					</Link>
 				</td>
