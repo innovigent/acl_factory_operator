@@ -51,7 +51,7 @@ const Login = () => {
 				);
 
 				if (res.status === 200) {
-					const factoryId = parseInt(localStorage.getItem("community"));
+					const factoryId = parseInt(localStorage.getItem("factoryId"));
 
 					for (let i = 0; i < res.data.data.ShiftDetails.length; i++) {
 						if (res.data.data.ShiftDetails[i].factoryId === factoryId) {
