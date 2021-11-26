@@ -44,7 +44,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							history.push("/ShiftChange", {});
+							history.push("/login", { from: "timeTrigger" });
 							setOptionModal(false);
 						}}
 					>
