@@ -27,7 +27,6 @@ const SlowDownSpeed = () => {
 	const [btnState, setBtnState] = useState(false);
 
 	const setId = () => {
-		console.log(location.state);
 		if (Object.keys(location.state).length === 0) {
 			if (localStorage.getItem("slowRunId")) {
 				setSlowSpeedId(localStorage.getItem("slowRunId"));
