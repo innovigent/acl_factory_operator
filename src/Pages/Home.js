@@ -43,15 +43,18 @@ const Home = () => {
 				setstatus(res.data.data.allData.status.key);
 
 				setTimeout(() => {
-					if (res.data.data.allData.status.key === "slowrun") {
-						localStorage.setItem("slowRunId", res.data.data.allData.id);
+					if (res.data.data.allData.status.key === "slowrun" && res.data.data.slowrun.length > 0) {
+						localStorage.setItem("slowRunId", res.data.data.slowrun[0].id);
 						history.push({
 							pathname: "/SlowDownSpeed",
-							state: { data: res.data.data.allData },
+							state: { data: res.data.data },
 						});
-					} else if (res.data.data.allData.status.key === "downtime") {
-						localStorage.setItem("downtimeId", res.data.data.allData.id);
-						history.push({ pathname: "/Downtime", state: { data: res.data.data.allData } });
+					} else if (
+						res.data.data.allData.status.key === "downtime" &&
+						res.data.data.downtime.length > 0
+					) {
+						localStorage.setItem("downtimeId", res.data.data.downtime[0].id);
+						history.push({ pathname: "/Downtime", state: { data: res.data.data } });
 					}
 				}, 6000);
 			}
@@ -80,7 +83,7 @@ const Home = () => {
 				}
 			} catch (err) {
 				console.log(err.response);
-				window.location.href = "/changeover";
+				window.location.href = "/Changeover";
 			}
 		};
 		fetchData();

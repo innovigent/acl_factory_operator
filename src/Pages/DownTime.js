@@ -35,7 +35,7 @@ const Downtime = () => {
 				setdowntimeId("");
 			}
 		} else {
-			setdowntimeId(location.state.id);
+			setdowntimeId(location.state.data.downtime[0].id);
 		}
 	};
 
@@ -103,6 +103,7 @@ const Downtime = () => {
 					productionorder,
 					empid,
 				};
+
 				const loginResponse = await axios.post(
 					`https://acl-automation.herokuapp.com/api/v1/downtimecontroller/${productionrunId}/ReportSpecialCase/${downtimeId}/create`,
 					body,

@@ -143,7 +143,12 @@ const SlowRunReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link to={{ pathname: "/SlowSpeedTransfer", state: { id: slowRunId } }}>
+									<Link
+										to={{
+											pathname: "/SlowSpeedTransfer",
+											state: { id: slowRunId, specialCaseId: location.state.specialCaseId },
+										}}
+									>
 										<button
 											style={{
 												background: "transparent",

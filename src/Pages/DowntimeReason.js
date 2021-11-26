@@ -29,9 +29,9 @@ const DowntimeReason = () => {
 
 	useEffect(() => {
 		const data = location.state;
+		console.log(location.state);
 		setdowntimeId(data.id);
 		setreportedExecutiveId(data.executiveId);
-		console.log(data);
 		const name = location.name;
 		const permissionId = location.permissionId;
 		setdataproduction(data);
@@ -139,7 +139,12 @@ const DowntimeReason = () => {
 									</select>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
-									<Link to={{ pathname: "/DowntimeTransfer", state: { id: downtimeId } }}>
+									<Link
+										to={{
+											pathname: "/DowntimeTransfer",
+											state: { id: downtimeId, specialCaseId: location.state.specialCaseId },
+										}}
+									>
 										<button
 											style={{
 												background: "transparent",

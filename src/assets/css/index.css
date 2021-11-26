@@ -40,7 +40,9 @@
 	--transition-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-* {
+*,
+*::before,
+*::after {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -85,8 +87,6 @@ ul {
 }
 
 input {
-	/*border: 1px solid;*/
-	/*outline: 0;*/
 	font-family: "work sans", sans-serif;
 	font-size: 0.9rem;
 }
@@ -125,6 +125,7 @@ input:focus {
 
 .card.full-height {
 	position: relative;
+	margin-bottom: 10rem;
 }
 
 .card__header {

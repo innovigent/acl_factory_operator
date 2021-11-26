@@ -46,6 +46,7 @@ const Administration = () => {
 			setSlowSpeedListData(res2.data.data.productRunLog);
 			setLoading(false);
 		} catch (error) {
+			window.location.href = "/Changeover";
 			console.log(error.response);
 		}
 	};
@@ -69,10 +70,12 @@ const Administration = () => {
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalDowntime}
 					execute={(e, executiveId) => {
-						if (item.status.name === "Operator-Entered") {
-							history.push("/DowntimeReason", { id: item.id, executiveId: executiveId });
-						} else {
-							history.push("/Downtimetransfer", { id: item.id, executiveId: executiveId });
+						if (item.status.name === "Operator-Entered" || item.status.name === "Transfer") {
+							history.push("/DowntimeReason", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialCases.id,
+							});
 						}
 					}}
 				/>
@@ -154,7 +157,7 @@ const Administration = () => {
 								fontSize: "0.8rem",
 							}}
 						>
-							Transfer
+							Submit
 						</button>
 					</Link>
 				</td>
@@ -170,10 +173,12 @@ const Administration = () => {
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
 					execute={(e, executiveId) => {
-						if (item.status.name === "Operator-Entered") {
-							history.push("/SlowRunReason", { id: item.id, executiveId: executiveId });
-						} else {
-							history.push("/SlowSpeedTransfer", { id: item.id, executiveId: executiveId });
+						if (item.status.name === "Operator-Entered" || item.status.name === "Transfer") {
+							history.push("/SlowRunReason", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialcases.id,
+							});
 						}
 					}}
 				/>
@@ -255,7 +260,7 @@ const Administration = () => {
 								fontSize: "0.8rem",
 							}}
 						>
-							Transfer{" "}
+							Submit
 						</button>
 					</Link>
 				</td>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { HashLoader } from "react-spinners";
 import axios from "axios";
 
 import Spinner from "../components/spinner/Spinner";
@@ -12,6 +13,7 @@ import "../assets/css/Login.css";
 
 const Login = () => {
 	const history = useHistory();
+	const [loading, setLoading] = useState(true);
 	const [epf, setEpf] = useState("");
 	const [epfList, setEpfList] = useState([]);
 	const [authCode, setAuthCode] = useState("");
@@ -34,7 +36,9 @@ const Login = () => {
 					headers
 				);
 				setEpfList(res.data.data.OperatorsDetails);
+				setLoading(false);
 			} catch (err) {
+				setLoading(false);
 				console.log(err.response);
 			}
 		}
@@ -51,14 +55,15 @@ const Login = () => {
 				);
 
 				if (res.status === 200) {
-					const factoryId = parseInt(localStorage.getItem("community"));
+					const factoryId = parseInt(localStorage.getItem("factoryId"));
 
 					for (let i = 0; i < res.data.data.ShiftDetails.length; i++) {
 						if (res.data.data.ShiftDetails[i].factoryId === factoryId) {
-							localStorage.setItem("shiftStartTime", res.data.data.ShiftDetails[i].startTime);
-							localStorage.setItem("shiftEndTime", res.data.data.ShiftDetails[i].endTime);
-
-							return;
+							localStorage.setItem(
+								`shiftStartTime${i + 1}`,
+								res.data.data.ShiftDetails[i].startTime
+							);
+							localStorage.setItem(`shiftEndTime${i + 1}`, res.data.data.ShiftDetails[i].endTime);
 						}
 					}
 				}
@@ -102,6 +107,25 @@ const Login = () => {
 			setBtnState(false);
 		}
 	};
+
+	if (loading) {
+		return (
+			<div
+				style={{
+					padding: "10px 20px",
+					textAlign: "center",
+					justifyContent: "center",
+					display: "flex",
+					alignItems: "center",
+					width: "100%",
+					height: "100vh",
+					backgroundColor: "#FFFFFF",
+				}}
+			>
+				<HashLoader loading={loading} size={150} color="#0bab64" />
+			</div>
+		);
+	}
 
 	return (
 		<>
@@ -160,9 +184,9 @@ const Login = () => {
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
-						{history.location.state ? (
+						{history.location.state && localStorage.getItem("epfNo") ? (
 							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
-								<button onClick={() => history.push("/changeover")}>Continue</button>
+								<button onClick={() => history.push("/Changeover")}>Continue</button>
 							</div>
 						) : (
 							""
