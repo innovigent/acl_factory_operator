@@ -163,7 +163,7 @@ const Login = () => {
 						</div>
 						{history.location.state ? (
 							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
-								<button onClick={() => history.push("/changeover")}>Continue</button>
+								<button onClick={() => history.push("/Changeover")}>Continue</button>
 							</div>
 						) : (
 							""
