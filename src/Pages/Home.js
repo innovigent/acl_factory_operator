@@ -80,7 +80,7 @@ const Home = () => {
 				}
 			} catch (err) {
 				console.log(err.response);
-				window.location.href = "/changeover";
+				window.location.href = "/Changeover";
 			}
 		};
 		fetchData();
