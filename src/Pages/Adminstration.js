@@ -179,10 +179,19 @@ const Administration = () => {
 				<ExecutiveAuthModal
 					setAuthModal={setAuthModalSlowSpeed}
 					execute={(e, executiveId) => {
+						console.log(item);
 						if (item.status.name === "Operator-Entered") {
-							history.push("/SlowRunReason", { id: item.id, executiveId: executiveId });
+							history.push("/SlowRunReason", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialcases.id,
+							});
 						} else {
-							history.push("/SlowSpeedTransfer", { id: item.id, executiveId: executiveId });
+							history.push("/SlowSpeedTransfer", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialcases.id,
+							});
 						}
 					}}
 				/>

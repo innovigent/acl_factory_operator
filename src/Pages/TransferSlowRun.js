@@ -151,7 +151,12 @@ const TransferSlowRun = () => {
 											>
 												<FormControlLabel
 													value={country.id}
-													control={<Radio color="primary" />}
+													control={
+														<Radio
+															color="primary"
+															disabled={location.state.specialCaseId === country.id}
+														/>
+													}
 													label={country.name}
 												/>
 											</RadioGroup>
