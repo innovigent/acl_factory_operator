@@ -81,6 +81,7 @@ const SlowDownSpeed = () => {
 				authorziedPersonId: id,
 				specialcaseId,
 			};
+
 			const res = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/SlowRunDetection/${productionrunId}/ReportSpecialCase/${slowSpeedId}/create`,
 				body,
@@ -143,22 +144,23 @@ const SlowDownSpeed = () => {
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1">
 									<label>Slow Run Reasons</label>
-
-									{listData.map((country, key) => (
-										<RadioGroup
-											aria-label="type"
-											name="type"
-											value={specialcaseId}
-											onChange={e => handleChange(country.id)}
-											row
-										>
-											<FormControlLabel
-												value={country.id}
-												control={<Radio color="primary" />}
-												label={country.name}
-											/>
-										</RadioGroup>
-									))}
+									<div className="wrapper1">
+										{listData.map((country, key) => (
+											<RadioGroup
+												aria-label="type"
+												name="type"
+												value={specialcaseId}
+												onChange={e => handleChange(country.id)}
+												row
+											>
+												<FormControlLabel
+													value={country.id}
+													control={<Radio color="primary" />}
+													label={country.name}
+												/>
+											</RadioGroup>
+										))}
+									</div>
 								</div>
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1"></div>
