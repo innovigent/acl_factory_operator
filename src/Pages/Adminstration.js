@@ -71,9 +71,17 @@ const Administration = () => {
 					setAuthModal={setAuthModalDowntime}
 					execute={(e, executiveId) => {
 						if (item.status.name === "Operator-Entered") {
-							history.push("/DowntimeReason", { id: item.id, executiveId: executiveId });
+							history.push("/DowntimeReason", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialCases.id,
+							});
 						} else {
-							history.push("/Downtimetransfer", { id: item.id, executiveId: executiveId });
+							history.push("/Downtimetransfer", {
+								id: item.id,
+								executiveId: executiveId,
+								specialCaseId: item.specialCases.id,
+							});
 						}
 					}}
 				/>
