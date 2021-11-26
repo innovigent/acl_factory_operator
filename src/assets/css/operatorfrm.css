@@ -31,13 +31,6 @@ form {
 	margin: 3.1rem 0;
 }
 
-/* h1 {
-	text-align: center;
-	border-radius: 10px;
-	background-image: linear-gradient(to right, var(--main-color-blue), var(--second-color));
-	width: 100%;
-	color: #111;
-} */
 h2 {
 	text-align: center;
 	width: 100%;
@@ -227,11 +220,9 @@ input.error {
 }
 
 .dropdown {
-	/* height: 100px; */
 	padding: 10px 10px;
 	border-radius: 5px;
 	outline: none;
-	/*border: 1px solid #cfcfcf;*/
 }
 
 .submita {
