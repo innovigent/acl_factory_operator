@@ -33,7 +33,6 @@ const TransferDowntime = () => {
 	useEffect(() => {
 		try {
 			const data = location.state;
-			console.log(data.id);
 			setdowntimeId(data.id);
 			setepfNo(data.downtime[0].operatorId);
 			setproductionorder(data.downtime[0].specialcaseId);
@@ -152,7 +151,12 @@ const TransferDowntime = () => {
 											>
 												<FormControlLabel
 													value={country.id}
-													control={<Radio color="primary" />}
+													control={
+														<Radio
+															color="primary"
+															disabled={location.state.specialCaseId === country.id}
+														/>
+													}
 													label={country.name}
 												/>
 											</RadioGroup>
