@@ -37,6 +37,7 @@ const MachineLogin = () => {
 				console.log(res.data);
 				localStorage.setItem("device-token", res.data.data.token);
 				localStorage.setItem("community", res.data.data.user.organizationId);
+				localStorage.setItem("factoryId", res.data.data.user.factoryId);
 				return history.push("/login");
 			}
 
