@@ -184,7 +184,7 @@ const Login = () => {
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
-						{history.location.state ? (
+						{history.location.state && localStorage.getItem("epfNo") ? (
 							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
 								<button onClick={() => history.push("/Changeover")}>Continue</button>
 							</div>
