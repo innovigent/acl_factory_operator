@@ -26,11 +26,13 @@ const Routes = () => {
 	const triggerLogin = () => {
 		const shiftStartTime = localStorage.getItem("shiftStartTime");
 
-		if (
-			shiftStartTime.slice(0, 2).toString() == new Date().getHours() &&
-			shiftStartTime.slice(3, 5).toString() == new Date().getMinutes()
-		) {
-			history.push("/login", { from: "timeTrigger" });
+		if (shiftStartTime) {
+			if (
+				shiftStartTime.slice(0, 2).toString() == new Date().getHours() &&
+				shiftStartTime.slice(3, 5).toString() == new Date().getMinutes()
+			) {
+				history.push("/login", { from: "timeTrigger" });
+			}
 		}
 	};
 
