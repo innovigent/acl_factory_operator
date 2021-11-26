@@ -2,7 +2,6 @@ import React from "react";
 import "./topnav.css";
 import "../sidebar/sidebar.css";
 import { Link } from "react-router-dom";
-import Dropdown from "../dropdown/Dropdown";
 
 const sidebar_items = [
 	{
@@ -41,15 +40,6 @@ function ClearLocalStorage() {
 	localStorage.clear();
 	window.location.href = "/";
 }
-
-const renderNotificationItem = (item, index) => (
-	<Link to={{ pathname: item.route, state: {} }} key={index}>
-		<div className="notification-item" key={index}>
-			<i className={item.icon}></i>
-			<span>{item.content}</span>
-		</div>
-	</Link>
-);
 
 const SidebarItem = props => {
 	const active = props.active ? "active" : "";

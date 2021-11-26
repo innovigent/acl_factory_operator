@@ -25,6 +25,7 @@
 
 .sidebar__item {
 	padding: 0 5px;
+	white-space: nowrap;
 }
 .sidebar__itemmenu {
 	display: flex;
