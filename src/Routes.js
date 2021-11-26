@@ -24,12 +24,15 @@ const Routes = () => {
 	const history = useHistory();
 
 	const triggerLogin = () => {
-		const shiftStartTime = localStorage.getItem("shiftStartTime");
+		const shiftStartTime1 = localStorage.getItem("shiftStartTime1");
+		const shiftStartTime2 = localStorage.getItem("shiftStartTime2");
 
-		if (shiftStartTime) {
+		if (shiftStartTime1 || shiftStartTime2) {
 			if (
-				shiftStartTime.slice(0, 2).toString() == new Date().getHours() &&
-				shiftStartTime.slice(3, 5).toString() == new Date().getMinutes()
+				(shiftStartTime1.slice(0, 2).toString() == new Date().getHours() &&
+					shiftStartTime1.slice(3, 5).toString() == new Date().getMinutes()) ||
+				(shiftStartTime2.slice(0, 2).toString() == new Date().getHours() &&
+					shiftStartTime2.slice(3, 5).toString() == new Date().getMinutes())
 			) {
 				history.push("/login", { from: "timeTrigger" });
 			}

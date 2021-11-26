@@ -55,10 +55,11 @@ const Login = () => {
 
 					for (let i = 0; i < res.data.data.ShiftDetails.length; i++) {
 						if (res.data.data.ShiftDetails[i].factoryId === factoryId) {
-							localStorage.setItem("shiftStartTime", res.data.data.ShiftDetails[i].startTime);
-							localStorage.setItem("shiftEndTime", res.data.data.ShiftDetails[i].endTime);
-
-							return;
+							localStorage.setItem(
+								`shiftStartTime${i + 1}`,
+								res.data.data.ShiftDetails[i].startTime
+							);
+							localStorage.setItem(`shiftEndTime${i + 1}`, res.data.data.ShiftDetails[i].endTime);
 						}
 					}
 				}
