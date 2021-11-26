@@ -35,7 +35,7 @@ const Downtime = () => {
 				setdowntimeId("");
 			}
 		} else {
-			setdowntimeId(location.state.id);
+			setdowntimeId(location.state.data.downtime[0].id);
 		}
 	};
 
