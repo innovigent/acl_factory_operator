@@ -11,6 +11,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import AuthModel from "../components/modals/ExecutiveAuthModal";
+import assetUrl from "../config/url.config";
 
 const Downtime = () => {
 	const history = useHistory();
@@ -51,6 +52,7 @@ const Downtime = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
+			console.log(result.data.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -213,6 +215,11 @@ const Downtime = () => {
 													onChange={e => handleChange(country.id)}
 													row
 												>
+													<img
+														className="specialcase-img"
+														src="https://cdn4.iconfinder.com/data/icons/project-management-4-2/65/176-512.png"
+														alt="change-shift"
+													/>
 													<FormControlLabel
 														value={country.id}
 														control={<Radio color="primary" />}

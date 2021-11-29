@@ -154,6 +154,11 @@ const SlowDownSpeed = () => {
 													onChange={e => handleChange(country.id)}
 													row
 												>
+													<img
+														className="specialcase-img"
+														src="https://cdn4.iconfinder.com/data/icons/project-management-4-2/65/176-512.png"
+														alt="change-shift"
+													/>
 													<FormControlLabel
 														value={country.id}
 														control={<Radio color="primary" />}
