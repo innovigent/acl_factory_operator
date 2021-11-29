@@ -174,44 +174,52 @@ const Downtime = () => {
 									<label htmlFor="Department">Normal Stoppages</label>
 									<FormControl component="fieldset">
 										<RadioGroup value={type} onChange={handleTypeChange} row>
-											<i
-												className="bx bx-transfer-alt"
-												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
-											></i>
-											<FormControlLabel
-												value="change-over"
-												control={<Radio color="primary" />}
-												label="Change Over"
-											/>
-											<i
-												className="bx bx-shield-x"
-												style={{ fontSize: "2rem", paddingLeft: "1rem" }}
-											></i>
-											<FormControlLabel
-												value="end-shift"
-												control={<Radio color="primary" />}
-												label="End Shift"
-											/>
+											<div className="specialcase-container">
+												<img
+													className="specialcase-img"
+													src="https://cdn0.iconfinder.com/data/icons/website-design-4/467/setting_icon-512.png"
+													alt="change-over"
+												/>
+												<FormControlLabel
+													value="change-over"
+													control={<Radio color="primary" />}
+													label="Change Over"
+												/>
+											</div>
+											<div className="specialcase-container">
+												<img
+													className="specialcase-img"
+													src="https://cdn4.iconfinder.com/data/icons/project-management-4-2/65/176-512.png"
+													alt="change-shift"
+												/>
+												<FormControlLabel
+													value="end-shift"
+													control={<Radio color="primary" />}
+													label="End Shift"
+												/>
+											</div>
 										</RadioGroup>
 									</FormControl>
 								</div>
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">Downtime Cases</label>
-									<div className="wrapper1">
+									<div className="wrapper1 flex-style">
 										{listData.map((country, key) => (
-											<RadioGroup
-												aria-label="type"
-												name="type"
-												value={specialcaseId}
-												onChange={e => handleChange(country.id)}
-												row
-											>
-												<FormControlLabel
-													value={country.id}
-													control={<Radio color="primary" />}
-													label={country.name}
-												/>
-											</RadioGroup>
+											<div className="specialcase-container">
+												<RadioGroup
+													aria-label="type"
+													name="type"
+													value={specialcaseId}
+													onChange={e => handleChange(country.id)}
+													row
+												>
+													<FormControlLabel
+														value={country.id}
+														control={<Radio color="primary" />}
+														label={country.name}
+													/>
+												</RadioGroup>
+											</div>
 										))}
 									</div>
 								</div>

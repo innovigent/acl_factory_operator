@@ -144,21 +144,23 @@ const SlowDownSpeed = () => {
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1">
 									<label>Slow Run Reasons</label>
-									<div className="wrapper1">
+									<div className="wrapper1 flex-style">
 										{listData.map((country, key) => (
-											<RadioGroup
-												aria-label="type"
-												name="type"
-												value={specialcaseId}
-												onChange={e => handleChange(country.id)}
-												row
-											>
-												<FormControlLabel
-													value={country.id}
-													control={<Radio color="primary" />}
-													label={country.name}
-												/>
-											</RadioGroup>
+											<div className="specialcase-container">
+												<RadioGroup
+													aria-label="type"
+													name="type"
+													value={specialcaseId}
+													onChange={e => handleChange(country.id)}
+													row
+												>
+													<FormControlLabel
+														value={country.id}
+														control={<Radio color="primary" />}
+														label={country.name}
+													/>
+												</RadioGroup>
+											</div>
 										))}
 									</div>
 								</div>
