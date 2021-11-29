@@ -216,6 +216,21 @@ const Downtime = () => {
 									</div>
 								</div>
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+									<button
+										className="submita"
+										style={{
+											background: "transparent",
+											border: "1px solid #3ab78e",
+											color: "#3ab78e",
+											marginRight: "1rem",
+										}}
+										onClick={() => {
+											setType("");
+											setspecialcaseId("");
+										}}
+									>
+										Clear
+									</button>
 									<button onClick={() => setAuthModal(true)} className="submita">
 										Submit
 									</button>
