@@ -230,14 +230,20 @@ const Downtime = () => {
 										))}
 									</div>
 								</div>
-								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										paddingTop: "2rem",
+										flexWrap: "wrap",
+									}}
+								>
 									<button
 										className="submita"
 										style={{
 											background: "transparent",
 											border: "1px solid #3ab78e",
 											color: "#3ab78e",
-											marginRight: "1rem",
 										}}
 										onClick={() => {
 											setType("");
