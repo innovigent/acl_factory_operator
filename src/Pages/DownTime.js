@@ -36,7 +36,6 @@ const Downtime = () => {
 				setdowntimeId("");
 			}
 		} else {
-			console.log(location.state);
 			if (location.state?.from === "administration") {
 				setdowntimeId(location.state.id);
 			} else {

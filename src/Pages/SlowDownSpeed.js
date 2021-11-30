@@ -34,7 +34,11 @@ const SlowDownSpeed = () => {
 				setSlowSpeedId("");
 			}
 		} else {
-			setSlowSpeedId(location.state.data.slowrun[0].id);
+			if (location.state?.from === "administration") {
+				setSlowSpeedId(location.state.id);
+			} else {
+				setSlowSpeedId(location.state.data.slowrun[0].id);
+			}
 		}
 	};
 

@@ -227,7 +227,7 @@ const Administration = () => {
 				</td>
 			) : item.status.name === "Created" ? (
 				<td>
-					<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id } }}>
+					<Link to={{ pathname: "/SlowDownSpeed", state: { id: item.id, from: "administration" } }}>
 						<button
 							className="submita"
 							style={{
