@@ -138,7 +138,14 @@ const DowntimeReason = () => {
 										</option>
 									</select>
 								</div>
-								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										paddingTop: "2rem",
+										flexWrap: "wrap",
+									}}
+								>
 									<Link
 										to={{
 											pathname: "/DowntimeTransfer",
