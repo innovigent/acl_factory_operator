@@ -92,7 +92,7 @@ const Downtime = () => {
 				);
 
 				if (loginResponse.status === 200) {
-					history.push("/ChangeOver");
+					window.location.href = "/ChangeOver";
 				}
 			} catch (err) {
 				console.log(err.response);
@@ -108,6 +108,7 @@ const Downtime = () => {
 					specialcaseId,
 					productionrunId,
 					productionorder,
+					authorziedPersonId: id,
 					empid,
 				};
 
