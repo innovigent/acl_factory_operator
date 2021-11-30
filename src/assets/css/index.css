@@ -193,6 +193,7 @@ input:focus {
 .forgot-password a {
 	color: #167bff;
 }
+
 ::-webkit-scrollbar {
 	width: 0;
 	background: transparent;

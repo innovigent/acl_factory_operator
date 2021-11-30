@@ -48,14 +48,17 @@ input {
 	border-radius: 5px;
 	border: 1px solid #cfcfcf;
 }
+
 select {
 	padding: 10px 10px;
 	border-radius: 5px;
 	border: 1px solid #cfcfcf;
 }
+
 option {
 	width: 250px;
 }
+
 input::placeholder {
 	font-size: 1.2em;
 	font-weight: lighter;
@@ -72,32 +75,18 @@ input.error {
 	display: relative;
 }
 
-/* .firstName {
-    margin-right: 1%;
-  } */
-
-/* .lastName {
-    margin-left: 1%;
-  } */
-
-/* .firstName,
-  .lastName, */
 .textFieldContainer1,
 .textFieldContainer2 {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 22px;
 }
+
 .textFieldContainer1 label {
 	font-size: medium;
 	font-weight: 600;
 }
-/*   
-  .firstName,
-  .lastName {
-    width: 49%;
-  }
-   */
+
 .textFieldContainer1,
 .textFieldContainer2 {
 	width: 100%;
@@ -117,8 +106,6 @@ input.error {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	/* bottom: 15%;
-    right: 8%; */
 }
 
 .SubmitButtonB {
@@ -135,12 +122,10 @@ input.error {
 	color: #fff;
 	border: 2px solid #fff;
 	width: 100%;
-	/* margin-top: 1em; */
 	padding: 8px 0px;
 	font-size: 1em;
 	font-weight: lighter;
 	letter-spacing: 1px;
-	/* margin-bottom: 0.25em; */
 }
 
 .SubmitButtonB button {
@@ -161,6 +146,7 @@ input.error {
 	background: linear-gradient(to right, var(--main-color-green), var(--second-color-green));
 	border: 2px solid #519e8a;
 }
+
 .SubmitButtonB button:hover {
 	color: #519e8a;
 	background-color: #fff;
@@ -187,6 +173,7 @@ input.error {
 .right-corner {
 	font-size: 18px;
 }
+
 .a {
 	border-radius: 5px;
 }
@@ -196,6 +183,7 @@ input.error {
 	right: 50%;
 	font-size: 18px;
 }
+
 .fault {
 	align-items: center;
 	right: 50%;
@@ -211,6 +199,7 @@ input.error {
 	border-style: solid;
 	border-color: coral;
 }
+
 .left-corner1 {
 	position: absolute;
 	right: 7%;
@@ -242,13 +231,10 @@ input.error {
 
 .submitb {
 	position: absolute;
-
 	background: linear-gradient(to right, var(--main-color-orange), var(--second-color-orange));
 	border-radius: 10px;
 	color: #fff;
 	border: 2px solid #fff;
-
-	/* margin-top: 1em; */
 	padding: 8px 0px;
 	font-size: 1em;
 	font-weight: lighter;
@@ -256,6 +242,7 @@ input.error {
 	width: 15%;
 	justify-content: end;
 }
+
 .position {
 	margin-top: 3rem;
 	display: flex;
