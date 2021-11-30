@@ -68,6 +68,7 @@
 	width: auto !important;
 	flex-wrap: wrap !important;
 	justify-content: flex-start !important;
+	height: auto !important;
 }
 
 @keyframes App-logo-spin {
