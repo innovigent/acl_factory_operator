@@ -27,6 +27,7 @@
 	padding: 0 5px;
 	white-space: nowrap;
 }
+
 .sidebar__itemmenu {
 	display: flex;
 	flex-direction: column;
@@ -71,15 +72,18 @@
 		font-size: 18px;
 	}
 }
+
 @media screen and (max-width: 900px) {
 	.sidebar__item-inner > i {
 		margin-right: 5px;
 		font-size: 1rem;
 	}
+
 	.sidebar__item-inner > span {
 		text-transform: capitalize;
 		font-size: 0.9rem;
 	}
+
 	.sidebar__item-inner {
 		padding: 10px 15px;
 		display: flex;
