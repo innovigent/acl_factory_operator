@@ -140,7 +140,7 @@ const Login = () => {
 					</h1>
 				</div>
 				<div id="loginform">
-					<div>
+					<div style={{ marginBottom: "4rem" }}>
 						{err ? (
 							<Alert severity="error">
 								<AlertTitle>Error</AlertTitle>

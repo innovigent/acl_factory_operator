@@ -101,6 +101,7 @@ input:focus {
 	font-size: 3rem;
 	font-weight: 800;
 	color: #1f2937;
+	text-align: center;
 }
 
 .card {
@@ -192,7 +193,8 @@ input:focus {
 .forgot-password a {
 	color: #167bff;
 }
+
 ::-webkit-scrollbar {
-	width: 0; /* Remove scrollbar space */
-	background: transparent; /* Optional: just make scrollbar invisible */
+	width: 0;
+	background: transparent;
 }

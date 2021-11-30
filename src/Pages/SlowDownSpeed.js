@@ -13,6 +13,7 @@ import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 import Spinner from "../components/spinner/Spinner";
+import assetUrl from "../config/url.config";
 
 const SlowDownSpeed = () => {
 	const history = useHistory();
@@ -34,7 +35,11 @@ const SlowDownSpeed = () => {
 				setSlowSpeedId("");
 			}
 		} else {
-			setSlowSpeedId(location.state.data.slowrun[0].id);
+			if (location.state?.from === "administration") {
+				setSlowSpeedId(location.state.id);
+			} else {
+				setSlowSpeedId(location.state.data.slowrun[0].id);
+			}
 		}
 	};
 
@@ -56,6 +61,7 @@ const SlowDownSpeed = () => {
 					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 					headers
 				);
+				console.log(result.data);
 				setListData(result.data.data.specialCaseslowSpeed);
 				setLoading(false);
 			} catch (err) {
@@ -144,27 +150,54 @@ const SlowDownSpeed = () => {
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1">
 									<label>Slow Run Reasons</label>
-									<div className="wrapper1">
+									<div className="wrapper1 flex-style">
 										{listData.map((country, key) => (
-											<RadioGroup
-												aria-label="type"
-												name="type"
-												value={specialcaseId}
-												onChange={e => handleChange(country.id)}
-												row
-											>
-												<FormControlLabel
-													value={country.id}
-													control={<Radio color="primary" />}
-													label={country.name}
-												/>
-											</RadioGroup>
+											<div className="specialcase-container">
+												<RadioGroup
+													aria-label="type"
+													name="type"
+													value={specialcaseId}
+													onChange={e => handleChange(country.id)}
+													row
+												>
+													<img
+														className="specialcase-img"
+														src={`${assetUrl}/${country.caseImage}`}
+														alt="change-shift"
+													/>
+													<FormControlLabel
+														value={country.id}
+														control={<Radio color="primary" />}
+														label={country.name}
+													/>
+												</RadioGroup>
+											</div>
 										))}
 									</div>
 								</div>
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1"></div>
-								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										paddingTop: "2rem",
+										flexWrap: "wrap",
+									}}
+								>
+									<button
+										className="submita"
+										style={{
+											background: "transparent",
+											border: "1px solid #3ab78e",
+											color: "#3ab78e",
+										}}
+										onClick={() => {
+											setSpecialCaseId("");
+										}}
+									>
+										Clear
+									</button>
 									<button onClick={() => setAuthModal(true)} className="submita">
 										{btnState ? <Spinner /> : "Submit"}
 									</button>

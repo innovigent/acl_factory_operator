@@ -11,7 +11,7 @@ html {
 }
 
 #loginform {
-	width: 30%;
+	width: 40%;
 	height: 60%;
 	margin: 100px auto;
 	background: #ffffff;
@@ -25,6 +25,10 @@ html {
 	padding: 2rem 0;
 	margin: 0;
 	font-size: 2rem;
+}
+
+.login-form {
+	margin-bottom: 4rem;
 }
 
 .rowlogin {

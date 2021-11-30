@@ -5,6 +5,7 @@
 	padding-top: 1rem;
 	justify-content: center;
 }
+
 .rowusermeasure {
 	display: flex;
 	flex-direction: column;
@@ -12,6 +13,7 @@
 	padding-top: 1rem;
 	justify-content: center;
 }
+
 .rowuserradio {
 	display: flex;
 	flex-direction: column;
@@ -37,6 +39,7 @@
 	box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 	transition: box-shadow 0.2s ease-in;
 }
+
 .rowuserproductivity {
 	width: 80%;
 	box-sizing: border-box;
@@ -47,6 +50,7 @@
 	box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 	transition: box-shadow 0.2s ease-in;
 }
+
 .rowuser select {
 	width: 80%;
 	box-sizing: border-box;
@@ -57,19 +61,23 @@
 	box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 	transition: box-shadow 0.2s ease-in;
 }
+
 .option {
 	border-radius: 15px;
 }
+
 input:focus {
 	outline: none;
 	border: none;
 	border-style: none;
 }
+
 *:focus {
 	outline: none;
 	border: none;
 	border-style: none;
 }
+
 .rowuser input:focus {
 	box-shadow: inset 0px -3px 0px 0px rgb(98, 180, 255);
 	outline: none;
@@ -118,6 +126,7 @@ input:focus {
 	padding-top: 2rem;
 	margin-top: 1.5rem;
 }
+
 .form-imguser {
 	display: block;
 	position: relative;
@@ -164,9 +173,11 @@ a:hover {
 	cursor: pointer;
 	transition: opacity 0.25s ease-out;
 }
+
 .usertblactivebutton:hover {
 	opacity: 0.8;
 }
+
 @media screen and (max-width: 900px) {
 	.rowuser input {
 		width: 60%;
@@ -178,12 +189,14 @@ a:hover {
 		box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 		transition: box-shadow 0.2s ease-in;
 	}
+
 	.rowuser label {
 		align-self: start;
 		padding-left: 5rem;
 		padding-bottom: 0.5rem;
 		color: rgba(187, 187, 187, 0.9);
 	}
+
 	.rowuser select {
 		width: 60%;
 		box-sizing: border-box;
@@ -194,6 +207,7 @@ a:hover {
 		box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 		transition: box-shadow 0.2s ease-in;
 	}
+
 	.usertblbutton {
 		border-radius: 5px;
 		width: 90%;
@@ -202,6 +216,7 @@ a:hover {
 		font-weight: 700;
 		border: 0px;
 	}
+
 	.usertblactivebutton {
 		border-radius: 5px;
 		width: 90%;
@@ -211,6 +226,7 @@ a:hover {
 		border: 0px;
 	}
 }
+
 @media screen and (max-width: 600px) {
 	.rowuser input {
 		width: 50%;
@@ -222,12 +238,14 @@ a:hover {
 		box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
 		transition: box-shadow 0.2s ease-in;
 	}
+
 	.rowuser label {
 		align-self: start;
 		padding-left: 4.5rem;
 		padding-bottom: 0.5rem;
 		color: rgba(187, 187, 187, 0.9);
 	}
+
 	.rowuser select {
 		width: 50%;
 		box-sizing: border-box;
