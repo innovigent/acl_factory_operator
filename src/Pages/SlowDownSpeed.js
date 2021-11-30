@@ -13,6 +13,7 @@ import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 import Spinner from "../components/spinner/Spinner";
+import assetUrl from "../config/url.config";
 
 const SlowDownSpeed = () => {
 	const history = useHistory();
@@ -60,6 +61,7 @@ const SlowDownSpeed = () => {
 					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 					headers
 				);
+				console.log(result.data);
 				setListData(result.data.data.specialCaseslowSpeed);
 				setLoading(false);
 			} catch (err) {
@@ -160,7 +162,7 @@ const SlowDownSpeed = () => {
 												>
 													<img
 														className="specialcase-img"
-														src="https://cdn4.iconfinder.com/data/icons/project-management-4-2/65/176-512.png"
+														src={`${assetUrl}/${country.caseImage}`}
 														alt="change-shift"
 													/>
 													<FormControlLabel

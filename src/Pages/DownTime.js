@@ -222,7 +222,7 @@ const Downtime = () => {
 												>
 													<img
 														className="specialcase-img"
-														src="https://cdn4.iconfinder.com/data/icons/project-management-4-2/65/176-512.png"
+														src={`${assetUrl}/${country.caseImage}`}
 														alt="change-shift"
 													/>
 													<FormControlLabel

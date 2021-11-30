@@ -96,7 +96,7 @@ const Administration = () => {
 							? "warning"
 							: item.status.name === "Executive-Entered"
 							? "success"
-							: "primary"
+							: "danger"
 					}
 				/>
 			</td>
