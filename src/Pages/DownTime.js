@@ -45,6 +45,9 @@ const Downtime = () => {
 	};
 
 	useEffect(() => {
+		if (!localStorage.getItem("productionrunId")) {
+			return (window.location.href = "/Changeover");
+		}
 		setId();
 		const fetchData = async () => {
 			const headers = {

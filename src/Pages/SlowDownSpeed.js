@@ -44,6 +44,9 @@ const SlowDownSpeed = () => {
 	};
 
 	useEffect(() => {
+		if (!localStorage.getItem("productionrunId")) {
+			return (window.location.href = "/Changeover");
+		}
 		setId();
 		setLoading(false);
 	}, []);
