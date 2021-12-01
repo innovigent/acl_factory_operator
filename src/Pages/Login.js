@@ -97,7 +97,7 @@ const Login = () => {
 					"operatorName",
 					response.data.data.allRecords.firstName + " " + response.data.data.allRecords.lastName
 				);
-				history.push("/changeover");
+				history.push("/Changeover");
 			} else {
 				setErr("Please check your details");
 				setBtnState(false);
@@ -186,7 +186,7 @@ const Login = () => {
 						</div>
 						{history.location.state && localStorage.getItem("epfNo") ? (
 							<div id="button" className="rowlogin" style={{ paddingTop: "0", marginTop: ".5rem" }}>
-								<button onClick={() => history.push("/changeover")}>Continue</button>
+								<button onClick={() => history.push("/Changeover")}>Continue</button>
 							</div>
 						) : (
 							""

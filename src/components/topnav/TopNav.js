@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const sidebar_items = [
 	{
 		display_name: "Change Over",
-		route: "/changeover",
+		route: "/Changeover",
 		icon: "bx bx-transfer-alt",
 	},
 	{

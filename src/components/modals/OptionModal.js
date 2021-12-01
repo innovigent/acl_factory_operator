@@ -54,7 +54,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 						style={{ margin: "1rem" }}
 						className="submita"
 						onClick={() => {
-							history.push("/ChangeOver", {});
+							history.push("/Changeover", {});
 							setOptionModal(false);
 						}}
 					>

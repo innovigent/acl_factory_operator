@@ -46,7 +46,7 @@ const Administration = () => {
 			setSlowSpeedListData(res2.data.data.productRunLog);
 			setLoading(false);
 		} catch (error) {
-			window.location.href = "/changeover";
+			window.location.href = "/Changeover";
 			console.log(error.response);
 		}
 	};

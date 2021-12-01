@@ -91,7 +91,7 @@ const Downtime = () => {
 				);
 
 				if (loginResponse.status === 200) {
-					window.location.href = "/ChangeOver";
+					window.location.href = "/Changeover";
 				}
 			} catch (err) {
 				console.log(err.response);

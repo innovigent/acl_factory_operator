@@ -37,7 +37,7 @@ const Routes = () => {
 		<Switch>
 			<Route exact path="/" component={MachineLogin} />
 			<Route path="/Login" component={Login} />
-			<Route path="/changeover" component={Changeover} />
+			<Route path="/Changeover" component={Changeover} />
 			<Route path="/Downtime" component={Downtime} />
 			<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
 			<Route path="/Administration" component={Administration} />
