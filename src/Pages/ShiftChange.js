@@ -47,7 +47,7 @@ const ShiftChange = () => {
 					"operatorName",
 					response.data.data.allRecords.firstName + " " + response.data.data.allRecords.lastName
 				);
-				history.push("/Changeover");
+				history.push("/changeover");
 			} else {
 				setBtnState(false);
 				setErr("Please check your details");
