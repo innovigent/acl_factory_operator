@@ -37,7 +37,9 @@ const sidebar_items = [
 ];
 
 function ClearLocalStorage() {
-	localStorage.clear();
+	localStorage.removeItem("token");
+	localStorage.removeItem("epfNo");
+	localStorage.removeItem("operatorName");
 	window.location.href = "/";
 }
 
