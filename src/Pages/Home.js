@@ -56,7 +56,7 @@ const Home = () => {
 						localStorage.setItem("downtimeId", res.data.data.downtime[0].id);
 						history.push({ pathname: "/Downtime", state: { data: res.data.data } });
 					}
-				}, 6000);
+				}, 8000);
 			}
 		} catch (err) {
 			console.log(err.response);
@@ -83,15 +83,19 @@ const Home = () => {
 				}
 			} catch (err) {
 				console.log(err.response);
-				window.location.href = "/Changeover";
+				window.location.href = "/changeover";
 			}
 		};
-		fetchData();
-		detectFaults();
-		setInterval(() => {
+
+		const interval = setInterval(() => {
 			detectFaults();
 			fetchData();
-		}, 10000);
+		}, 5000);
+
+		detectFaults();
+		fetchData();
+
+		return () => clearInterval(interval);
 	}, []);
 
 	if (loading) {
