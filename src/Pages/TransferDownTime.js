@@ -10,9 +10,9 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 
 import Spinner from "../components/spinner/Spinner";
 
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
+import "../assets/css/operator.css";
 
 const TransferDowntime = () => {
 	const history = useHistory();

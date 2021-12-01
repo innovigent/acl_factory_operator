@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
+import "../assets/css/operator.css";
 import "../assets/css/Login.css";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
