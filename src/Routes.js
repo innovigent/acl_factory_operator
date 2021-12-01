@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import MachineLogin from "./pages/MachineLogin";
 import SlowDownSpeed from "./pages/SlowDownSpeed";
 import Administration from "./pages/Adminstration";
-import ShiftChange from "./pages/ShiftChange";
 import TransferDowntime from "./pages/TransferDownTime";
 import TransferSlowRun from "./pages/TransferSlowRun";
 import SlowRunReason from "./pages/SlowRunReason";
@@ -40,7 +39,6 @@ const Routes = () => {
 			<Route path="/Login" component={Login} />
 			<Route path="/Changeover" component={Changeover} />
 			<Route path="/Downtime" component={Downtime} />
-			<Route path="/ShiftChange" component={ShiftChange} />
 			<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
 			<Route path="/Administration" component={Administration} />
 			<Route path="/Home" component={Home} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
+import "../assets/css/operator.css";
 import "../assets/css/Login.css";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -44,6 +44,9 @@ const SlowDownSpeed = () => {
 	};
 
 	useEffect(() => {
+		if (!localStorage.getItem("productionrunId")) {
+			return (window.location.href = "/Changeover");
+		}
 		setId();
 		setLoading(false);
 	}, []);

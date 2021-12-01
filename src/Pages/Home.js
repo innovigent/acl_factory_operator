@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { HashLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import OptionModal from "../components/modals/OptionModal";
 import TopNav from "../components/topnav/TopNav";
 
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 
 const Home = () => {
 	const [listData, setListData] = useState({ lists: [] });
@@ -56,7 +56,7 @@ const Home = () => {
 						localStorage.setItem("downtimeId", res.data.data.downtime[0].id);
 						history.push({ pathname: "/Downtime", state: { data: res.data.data } });
 					}
-				}, 6000);
+				}, 8000);
 			}
 		} catch (err) {
 			console.log(err.response);
@@ -86,12 +86,16 @@ const Home = () => {
 				window.location.href = "/Changeover";
 			}
 		};
-		fetchData();
-		detectFaults();
-		setInterval(() => {
+
+		const interval = setInterval(() => {
 			detectFaults();
 			fetchData();
-		}, 10000);
+		}, 5000);
+
+		detectFaults();
+		fetchData();
+
+		return () => clearInterval(interval);
 	}, []);
 
 	if (loading) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
+import "../assets/css/operator.css";
 import TopNav from "../components/topnav/TopNav";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
@@ -45,6 +45,9 @@ const Downtime = () => {
 	};
 
 	useEffect(() => {
+		if (!localStorage.getItem("productionrunId")) {
+			return (window.location.href = "/Changeover");
+		}
 		setId();
 		const fetchData = async () => {
 			const headers = {
@@ -91,7 +94,7 @@ const Downtime = () => {
 				);
 
 				if (loginResponse.status === 200) {
-					window.location.href = "/ChangeOver";
+					window.location.href = "/Changeover";
 				}
 			} catch (err) {
 				console.log(err.response);

@@ -10,9 +10,9 @@ import { HashLoader } from "react-spinners";
 import AuthModel from "../components/modals/AuthModel";
 import SmallSpinner from "../components/spinner/SmallSpinner";
 
-import "../assets/css/Usercreate.css";
+import "../assets/css/user.css";
 import "../assets/css/chooseButton.css";
-import "../assets/css/operatorfrm.css";
+import "../assets/css/operator.css";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	return (
