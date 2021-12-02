@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import TopNav from "../components/topnav/TopNav";
-import axios from "axios";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import { FormControlLabel, FormControl } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
+import axios from "axios";
+
+import TopNav from "../components/topnav/TopNav";
 import AuthModel from "../components/modals/ExecutiveAuthModal";
 import assetUrl from "../config/url.config";
 
@@ -59,7 +57,6 @@ const Downtime = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
-			console.log(result.data.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -75,6 +72,7 @@ const Downtime = () => {
 			},
 		};
 		setErr("");
+
 		if (type === "change-over") {
 			try {
 				const body = {
@@ -139,7 +137,6 @@ const Downtime = () => {
 
 	const handleTypeChange = e => {
 		setType(e.target.value);
-		console.log(type);
 	};
 
 	if (loading) {
@@ -260,7 +257,15 @@ const Downtime = () => {
 									>
 										Clear
 									</button>
-									<button onClick={() => setAuthModal(true)} className="submita">
+									<button
+										onClick={() => {
+											if (specialcaseId === "" && type === "")
+												return setErr("Please select a type or special case");
+											setErr("");
+											setAuthModal(true);
+										}}
+										className="submita"
+									>
 										Submit
 									</button>
 								</div>

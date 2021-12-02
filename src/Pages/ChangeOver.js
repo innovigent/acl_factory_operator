@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { css } from "@emotion/css";
-import TopNav from "../components/topnav/TopNav";
-import axios from "axios";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import CreatableSelect from "react-select/creatable/dist/react-select.esm";
 import { useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import CreatableSelect from "react-select/creatable/dist/react-select.esm";
+import axios from "axios";
 
+import TopNav from "../components/topnav/TopNav";
 import AuthModel from "../components/modals/AuthModel";
 import SmallSpinner from "../components/spinner/SmallSpinner";
-
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
 
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	return (

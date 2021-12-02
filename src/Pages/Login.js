@@ -4,12 +4,9 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { HashLoader } from "react-spinners";
 import axios from "axios";
 
-import Spinner from "../components/spinner/Spinner";
+import "../assets/css/login.css";
 
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import "../assets/css/Login.css";
+import Spinner from "../components/spinner/Spinner";
 
 const Login = () => {
 	const history = useHistory();

@@ -3,12 +3,9 @@ import { useHistory } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import axios from "axios";
 
-import Spinner from "../components/spinner/Spinner";
+import "../assets/css/login.css";
 
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import "../assets/css/Login.css";
+import Spinner from "../components/spinner/Spinner";
 
 const MachineLogin = () => {
 	const history = useHistory();
@@ -34,7 +31,6 @@ const MachineLogin = () => {
 			});
 
 			if (res.status === 200) {
-				console.log(res.data);
 				localStorage.setItem("device-token", res.data.data.token);
 				localStorage.setItem("community", res.data.data.user.organizationId);
 				localStorage.setItem("factoryId", res.data.data.user.factoryId);
