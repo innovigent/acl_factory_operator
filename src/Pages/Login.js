@@ -4,6 +4,8 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { HashLoader } from "react-spinners";
 import axios from "axios";
 
+import "../assets/css/login.css";
+
 import Spinner from "../components/spinner/Spinner";
 
 const Login = () => {
