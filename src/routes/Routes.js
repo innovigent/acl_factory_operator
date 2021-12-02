@@ -1,17 +1,17 @@
 /* eslint-disable eqeqeq */
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
+import Administration from "../pages/Adminstration";
 import Changeover from "../pages/ChangeOver";
-import Downtime from "../pages/DownTime";
+import DownTime from "../pages/DownTime";
 import DowntimeReason from "../pages/DowntimeReason";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MachineLogin from "../pages/MachineLogin";
 import SlowDownSpeed from "../pages/SlowDownSpeed";
-import Administration from "../pages/Adminstration";
+import SlowRunReason from "../pages/SlowRunReason";
 import TransferDowntime from "../pages/TransferDownTime";
 import TransferSlowRun from "../pages/TransferSlowRun";
-import SlowRunReason from "../pages/SlowRunReason";
 
 const Routes = () => {
 	const history = useHistory();
@@ -39,7 +39,7 @@ const Routes = () => {
 			<Route exact path="/" component={MachineLogin} />
 			<Route path="/Login" component={Login} />
 			<Route path="/Changeover" component={Changeover} />
-			<Route path="/Downtime" component={Downtime} />
+			<Route path="/Downtime" component={DownTime} />
 			<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
 			<Route path="/Administration" component={Administration} />
 			<Route path="/Home" component={Home} />

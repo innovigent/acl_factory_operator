@@ -8,8 +8,6 @@ import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import OptionModal from "../components/modals/OptionModal";
 import TopNav from "../components/topnav/TopNav";
 
-import "../assets/css/user.css";
-
 const Home = () => {
 	const [listData, setListData] = useState({ lists: [] });
 	const [err, setErr] = useState("");

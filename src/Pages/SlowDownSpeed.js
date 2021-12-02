@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import "../assets/css/Login.css";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import { FormControlLabel } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import axios from "axios";
-import TopNav from "../components/topnav/TopNav";
+import { FormControlLabel } from "@material-ui/core";
 import { HashLoader } from "react-spinners";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import axios from "axios";
+
 import AuthModel from "../components/modals/AuthModel";
 import Spinner from "../components/spinner/Spinner";
+import TopNav from "../components/topnav/TopNav";
+
 import assetUrl from "../config/url.config";
 
 const SlowDownSpeed = () => {

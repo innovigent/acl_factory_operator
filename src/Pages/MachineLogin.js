@@ -5,11 +5,6 @@ import axios from "axios";
 
 import Spinner from "../components/spinner/Spinner";
 
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import "../assets/css/Login.css";
-
 const MachineLogin = () => {
 	const history = useHistory();
 	const [devicename, setDeviceName] = useState("");

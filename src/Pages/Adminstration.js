@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
+import { Link, useHistory } from "react-router-dom";
+import { HashLoader } from "react-spinners";
+import axios from "axios";
+
 import TopNav from "../components/topnav/TopNav";
 import Table from "../components/table/Table";
 import Badge from "../components/badge/Badge";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import { HashLoader } from "react-spinners";
 import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 
 const Administration = () => {

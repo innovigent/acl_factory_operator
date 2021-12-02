@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import "../assets/css/Login.css";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import axios from "axios";
-import TopNav from "../components/topnav/TopNav";
 import { HashLoader } from "react-spinners";
-import Spinner from "../components/spinner/Spinner";
+import axios from "axios";
+
 import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
+import Spinner from "../components/spinner/Spinner";
+import TopNav from "../components/topnav/TopNav";
 
 const SlowRunReason = () => {
 	const history = useHistory();

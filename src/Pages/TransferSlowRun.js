@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/user.css";
-import "../assets/css/chooseButton.css";
-import "../assets/css/operator.css";
-import TopNav from "../components/topnav/TopNav";
-import axios from "axios";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { useHistory, useLocation } from "react-router-dom";
+import { HashLoader } from "react-spinners";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { useHistory, useLocation } from "react-router-dom";
-import { HashLoader } from "react-spinners";
-import { Alert, AlertTitle } from "@material-ui/lab";
+import axios from "axios";
+
 import Spinner from "../components/spinner/Spinner";
+import TopNav from "../components/topnav/TopNav";
 
 const TransferSlowRun = () => {
 	const history = useHistory();
