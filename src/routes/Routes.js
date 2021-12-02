@@ -1,16 +1,17 @@
+/* eslint-disable eqeqeq */
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 
-import Changeover from "./pages/ChangeOver";
-import Downtime from "./pages/DownTime";
-import DowntimeReason from "./pages/DowntimeReason";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import MachineLogin from "./pages/MachineLogin";
-import SlowDownSpeed from "./pages/SlowDownSpeed";
-import Administration from "./pages/Adminstration";
-import TransferDowntime from "./pages/TransferDownTime";
-import TransferSlowRun from "./pages/TransferSlowRun";
-import SlowRunReason from "./pages/SlowRunReason";
+import Changeover from "../pages/ChangeOver";
+import Downtime from "../pages/DownTime";
+import DowntimeReason from "../pages/DowntimeReason";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import MachineLogin from "../pages/MachineLogin";
+import SlowDownSpeed from "../pages/SlowDownSpeed";
+import Administration from "../pages/Adminstration";
+import TransferDowntime from "../pages/TransferDownTime";
+import TransferSlowRun from "../pages/TransferSlowRun";
+import SlowRunReason from "../pages/SlowRunReason";
 
 const Routes = () => {
 	const history = useHistory();

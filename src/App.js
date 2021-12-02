@@ -5,7 +5,7 @@ import "./assets/css/grid.css";
 import "./assets/css/index.css";
 import "./App.css";
 
-import Routes from "./Routes";
+import Routes from "./routes/Routes";
 
 function App() {
 	return (
