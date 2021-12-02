@@ -55,7 +55,7 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 
 	return (
 		<div className="auth-background">
-			<div className="col-4 card auth-container">
+			<div className="col-6 card auth-container">
 				{err ? (
 					<Alert severity="error">
 						<AlertTitle>Error</AlertTitle>
@@ -74,7 +74,14 @@ const ExecutiveAuthModel = ({ execute, setAuthModal }) => {
 						disabled={btnState}
 					/>
 				</div>
-				<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						paddingTop: "2rem",
+						flexWrap: "wrap",
+					}}
+				>
 					<button
 						className="submita"
 						style={{

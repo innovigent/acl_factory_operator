@@ -198,7 +198,14 @@ const SlowDownSpeed = () => {
 									>
 										Clear
 									</button>
-									<button onClick={() => setAuthModal(true)} className="submita">
+									<button
+										onClick={() => {
+											if (specialcaseId === "") return setErr("Please select a special case");
+											setErr("");
+											setAuthModal(true);
+										}}
+										className="submita"
+									>
 										{btnState ? <Spinner /> : "Submit"}
 									</button>
 								</div>

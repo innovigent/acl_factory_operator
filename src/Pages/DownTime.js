@@ -72,6 +72,7 @@ const Downtime = () => {
 			},
 		};
 		setErr("");
+
 		if (type === "change-over") {
 			try {
 				const body = {
@@ -256,7 +257,15 @@ const Downtime = () => {
 									>
 										Clear
 									</button>
-									<button onClick={() => setAuthModal(true)} className="submita">
+									<button
+										onClick={() => {
+											if (specialcaseId === "" || type === "")
+												return setErr("Please select a type or special case");
+											setErr("");
+											setAuthModal(true);
+										}}
+										className="submita"
+									>
 										Submit
 									</button>
 								</div>
