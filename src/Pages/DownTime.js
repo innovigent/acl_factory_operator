@@ -259,7 +259,7 @@ const Downtime = () => {
 									</button>
 									<button
 										onClick={() => {
-											if (specialcaseId === "" || type === "")
+											if (specialcaseId === "" && type === "")
 												return setErr("Please select a type or special case");
 											setErr("");
 											setAuthModal(true);
