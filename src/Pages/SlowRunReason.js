@@ -26,7 +26,6 @@ const SlowRunReason = () => {
 
 	useEffect(() => {
 		const data = location.state;
-		console.log(data);
 		setSlowRunId(data.id);
 		setreportedExecutiveId(data.executiveId);
 		const name = location.name;
@@ -55,7 +54,6 @@ const SlowRunReason = () => {
 				permissionId,
 				defaultResponse: reasonId,
 			};
-			console.log(body);
 			const loginResponse = await axios.post(
 				`https://acl-automation.herokuapp.com/api/v1/ResolveSlowRun/${slowRunId}/ResolvedPerson/${reportedExecutiveId}/submit`,
 				body,

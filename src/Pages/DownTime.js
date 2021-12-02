@@ -57,7 +57,6 @@ const Downtime = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallDowntime`,
 				headers
 			);
-			console.log(result.data.data);
 			setListData(result.data.data.specialCaseDowntime);
 			setLoading(false);
 		};
@@ -137,7 +136,6 @@ const Downtime = () => {
 
 	const handleTypeChange = e => {
 		setType(e.target.value);
-		console.log(type);
 	};
 
 	if (loading) {

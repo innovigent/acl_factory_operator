@@ -31,8 +31,6 @@ const Home = () => {
 				headers
 			);
 
-			console.log(res.data);
-
 			if (res.status === 200) {
 				setFaultDetectionData({
 					speed: res.data.data.allData.machineSpeed,

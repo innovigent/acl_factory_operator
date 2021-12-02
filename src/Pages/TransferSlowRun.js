@@ -48,7 +48,7 @@ const TransferSlowRun = () => {
 				`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 				headers
 			);
-			console.log(result.data);
+
 			setListData({ lists: result.data.data.specialCaseslowSpeed });
 			setLoading(false);
 		};

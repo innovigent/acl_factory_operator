@@ -62,7 +62,6 @@ const SlowDownSpeed = () => {
 					`https://acl-automation.herokuapp.com/api/v1/specialcasescontrollerdevice/getallSlowSpeed`,
 					headers
 				);
-				console.log(result.data);
 				setListData(result.data.data.specialCaseslowSpeed);
 				setLoading(false);
 			} catch (err) {
