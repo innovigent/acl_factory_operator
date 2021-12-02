@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import "./authmodal.css";
+import "./authModal.css";
 
 const OptionModal = ({ setOptionModal, data }) => {
 	const history = useHistory();

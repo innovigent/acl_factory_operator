@@ -4,7 +4,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 
 import Spinner from "../spinner/Spinner";
 
-import "./authmodal.css";
+import "./authModal.css";
 
 const AuthModel = ({ execute, setAuthModal }) => {
 	const [authCode, setAuthCode] = useState("");
