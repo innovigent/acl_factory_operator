@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 
 import Administration from "../pages/Adminstration";
 import Changeover from "../pages/ChangeOver";
@@ -47,6 +47,9 @@ const Routes = () => {
 			<Route path="/SlowRunReason" component={SlowRunReason} />
 			<Route path="/Downtimetransfer" component={TransferDowntime} />
 			<Route path="/SlowSpeedTransfer" component={TransferSlowRun} />
+			<Route path="*">
+				<Redirect to="/" />
+			</Route>
 		</Switch>
 	);
 };
