@@ -8,6 +8,8 @@ import "../assets/css/login.css";
 
 import Spinner from "../components/spinner/Spinner";
 
+import Background from "../assets/images/background.jpg";
+
 const Login = () => {
 	const history = useHistory();
 	const [loading, setLoading] = useState(true);
@@ -126,6 +128,7 @@ const Login = () => {
 
 	return (
 		<>
+			<img src={Background} alt="background" className="background" />
 			<div className="layout__content-main">
 				<div style={{ textAlign: "center", position: "relative", marginTop: "6rem" }}>
 					<h1
