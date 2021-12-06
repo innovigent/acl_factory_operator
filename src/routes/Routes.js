@@ -15,6 +15,7 @@ import TransferSlowRun from "../pages/TransferSlowRun";
 
 const Routes = () => {
 	const history = useHistory();
+	const epfNo = localStorage.getItem("epfNo");
 
 	const triggerLogin = () => {
 		const shiftStartTime1 = localStorage.getItem("shiftStartTime1");
@@ -38,7 +39,7 @@ const Routes = () => {
 		<Switch>
 			<Route exact path="/" component={MachineLogin} />
 			<Route path="/Login" component={Login} />
-			<Route path="/Changeover" component={Changeover} />
+			<Route path="/Changeover">{epfNo ? <Changeover /> : <Redirect to={MachineLogin} />}</Route>
 			<Route path="/Downtime" component={DownTime} />
 			<Route path="/SlowDownSpeed" component={SlowDownSpeed} />
 			<Route path="/Administration" component={Administration} />
