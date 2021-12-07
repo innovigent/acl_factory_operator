@@ -40,3 +40,11 @@
 	justify-content: flex-start !important;
 	height: auto !important;
 }
+
+.login-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 80%;
+	z-index: -1;
+}
