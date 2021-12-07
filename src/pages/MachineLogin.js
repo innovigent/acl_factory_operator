@@ -7,7 +7,7 @@ import "../assets/css/login.css";
 
 import Spinner from "../components/spinner/Spinner";
 
-import Image from "../assets/images/login.jpg";
+import Image from "../assets/images/login.png";
 
 const MachineLogin = () => {
 	const history = useHistory();
@@ -60,7 +60,7 @@ const MachineLogin = () => {
 						Welcome Back
 					</h1>
 				</div>
-				<div id="loginform">
+				<div id="loginform" className="blur">
 					<div className="login-form">
 						{err ? (
 							<Alert severity="error">

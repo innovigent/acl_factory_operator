@@ -29,6 +29,7 @@ html {
 
 .login-form {
 	margin-bottom: 4rem;
+	position: relative;
 }
 
 .rowlogin {
