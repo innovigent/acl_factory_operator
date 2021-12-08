@@ -75,8 +75,8 @@ const OptionModal = ({ setOptionModal, data }) => {
 					<button
 						style={{
 							background: "transparent",
-							border: "1px solid #3ab78e",
-							color: "#3ab78e",
+							border: "1px solid #fe9843",
+							color: "#fe9843",
 							marginRight: "1rem",
 						}}
 						className="submita"

@@ -110,8 +110,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -127,8 +127,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -149,8 +149,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -213,8 +213,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -230,8 +230,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -252,8 +252,8 @@ const Administration = () => {
 							className="submita"
 							style={{
 								background: "transparent",
-								border: "1px solid #3ab78e",
-								color: "#3ab78e",
+								border: "1px solid #fe9843",
+								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
 							}}
@@ -282,7 +282,7 @@ const Administration = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} color="#0bab64" />
+				<HashLoader loading={loading} size={150} color="#fe9843" />
 			</div>
 		);
 	}

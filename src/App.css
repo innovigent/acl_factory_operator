@@ -48,8 +48,9 @@
 	transform: translate(-50%, -50%);
 	width: 80%;
 	z-index: -1;
+	opacity: 0.8;
 }
 
 .blur {
-	background: rgba(255, 255, 255, 0.95) !important;
+	background: rgba(255, 255, 255, 0.9) !important;
 }

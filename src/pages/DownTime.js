@@ -153,7 +153,7 @@ const Downtime = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} color="#0bab64" />
+				<HashLoader loading={loading} size={150} color="#fe9843" />
 			</div>
 		);
 	}
@@ -247,8 +247,8 @@ const Downtime = () => {
 										className="submita"
 										style={{
 											background: "transparent",
-											border: "1px solid #3ab78e",
-											color: "#3ab78e",
+											border: "1px solid #fe9843",
+											color: "#fe9843",
 										}}
 										onClick={() => {
 											setType("");
