@@ -114,7 +114,7 @@ const TransferSlowRun = () => {
 					backgroundColor: "#FFFFFF",
 				}}
 			>
-				<HashLoader loading={loading} size={150} color="#0bab64" />
+				<HashLoader loading={loading} size={150} color="#fe9843" />
 			</div>
 		);
 	}

@@ -7,6 +7,8 @@ import "../assets/css/login.css";
 
 import Spinner from "../components/spinner/Spinner";
 
+import Image from "../assets/images/login.png";
+
 const MachineLogin = () => {
 	const history = useHistory();
 	const [devicename, setDeviceName] = useState("");
@@ -47,6 +49,7 @@ const MachineLogin = () => {
 
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image" />
 			<div className="layout__content-main">
 				<div style={{ textAlign: "center", position: "relative", marginTop: "6rem" }}>
 					<h1
@@ -57,7 +60,8 @@ const MachineLogin = () => {
 						Welcome Back
 					</h1>
 				</div>
-				<div id="loginform">
+				<div id="loginform" className="blur">
+					<div className="blur-background"></div>
 					<div className="login-form">
 						{err ? (
 							<Alert severity="error">
