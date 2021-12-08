@@ -1,10 +1,38 @@
 import React from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import "./authModal.css";
 
 const OptionModal = ({ setOptionModal, data }) => {
 	const history = useHistory();
+
+	const manualSlowrunCreate = async () => {
+		const headers = {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("device-token")}`,
+			},
+		};
+
+		console.log(headers);
+		console.log(localStorage.getItem("productionrunId"));
+		try {
+			const res = await axios.post(
+				`https://acl-automation.herokuapp.com/api/v1/slowspeedcontroller/${localStorage.getItem(
+					"productionrunId"
+				)}/ManualSlowrecord/addinfo`,
+				{},
+				headers
+			);
+
+			if (res.status === 200) {
+				setOptionModal(false);
+			}
+		} catch (error) {
+			console.log(error);
+			console.log(error.response);
+		}
+	};
 
 	return (
 		<div className="auth-background">
@@ -60,14 +88,7 @@ const OptionModal = ({ setOptionModal, data }) => {
 					>
 						Change Over
 					</button>
-					<button
-						style={{ margin: "1rem" }}
-						className="submita"
-						onClick={() => {
-							history.push("/SlowDownSpeed", {});
-							setOptionModal(false);
-						}}
-					>
+					<button style={{ margin: "1rem" }} className="submita" onClick={manualSlowrunCreate}>
 						Slow Run Reasoning
 					</button>
 				</div>
