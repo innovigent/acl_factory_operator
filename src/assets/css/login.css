@@ -17,6 +17,7 @@ html {
 	background: #ffffff;
 	border-radius: 20px;
 	box-shadow: var(--box-shadow);
+	position: relative;
 }
 
 #headerTitle {

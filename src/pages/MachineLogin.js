@@ -61,6 +61,7 @@ const MachineLogin = () => {
 					</h1>
 				</div>
 				<div id="loginform" className="blur">
+					<div className="blur-background"></div>
 					<div className="login-form">
 						{err ? (
 							<Alert severity="error">
