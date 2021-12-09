@@ -11,6 +11,8 @@ import TopNav from "../components/topnav/TopNav";
 import AuthModel from "../components/modals/ExecutiveAuthModal";
 import assetUrl from "../config/url.config";
 
+import Image from "../assets/images/product-line.png";
+
 const Downtime = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -159,6 +161,7 @@ const Downtime = () => {
 	}
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">

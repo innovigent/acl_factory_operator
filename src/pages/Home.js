@@ -8,6 +8,8 @@ import DropdownWithButton from "../components/dropdown/DropdownWithButton";
 import OptionModal from "../components/modals/OptionModal";
 import TopNav from "../components/topnav/TopNav";
 
+import Image from "../assets/images/product-line.png";
+
 const Home = () => {
 	const [listData, setListData] = useState({ lists: [] });
 	const [err, setErr] = useState("");
@@ -115,6 +117,7 @@ const Home = () => {
 
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			<div id="container">
 				{optionModal && <OptionModal setOptionModal={setOptionModal} data={faultDetectionData} />}
 				<div className="position">

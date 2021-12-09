@@ -8,6 +8,8 @@ import Table from "../components/table/Table";
 import Badge from "../components/badge/Badge";
 import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 
+import Image from "../assets/images/product-line.png";
+
 const Administration = () => {
 	const history = useHistory();
 	const [downtimeListData, setDowntimeListData] = useState([]);
@@ -289,11 +291,12 @@ const Administration = () => {
 
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			<div className="layout__content-main">
 				<div className="position">
 					<div className="page-header">Administration</div>
 					<div className="full-height col-10">
-						<div className="card" style={{ position: "relative", minHeight: "20vh" }}>
+						<div className="card" style={{ position: "relative", minHeight: "25vh" }}>
 							<h2 style={{ textAlign: "left", paddingBottom: "1rem" }}>Downtime</h2>
 							{downtimeListData.length > 0 ? (
 								<Table
@@ -308,7 +311,7 @@ const Administration = () => {
 							)}
 						</div>
 						<div style={{ paddingBottom: "1rem" }}></div>
-						<div className="card" style={{ position: "relative", minHeight: "20vh" }}>
+						<div className="card" style={{ position: "relative", minHeight: "25vh" }}>
 							<h2 style={{ textAlign: "left", paddingBottom: "1rem" }}>Slow Speed</h2>
 							{slowSpeedListData.length > 0 ? (
 								<Table

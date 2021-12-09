@@ -10,6 +10,8 @@ import axios from "axios";
 import Spinner from "../components/spinner/Spinner";
 import TopNav from "../components/topnav/TopNav";
 
+import Image from "../assets/images/product-line.png";
+
 const TransferDowntime = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -118,6 +120,7 @@ const TransferDowntime = () => {
 	}
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			<div className="layout__content-main">
 				<div className="col-12">
 					<div className="position">
@@ -136,7 +139,7 @@ const TransferDowntime = () => {
 								<div className="textFieldContainer1"></div>
 								<div className="textFieldContainer1">
 									<label htmlFor="Department">TransferDowntime Cases</label>
-									<div className="wrapper1">
+									<div className="wrapper1 flex-style">
 										{listData.lists.map((country, key) => (
 											<RadioGroup
 												aria-label="type"

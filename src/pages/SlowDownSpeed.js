@@ -12,6 +12,7 @@ import Spinner from "../components/spinner/Spinner";
 import TopNav from "../components/topnav/TopNav";
 
 import assetUrl from "../config/url.config";
+import Image from "../assets/images/product-line.png";
 
 const SlowDownSpeed = () => {
 	const history = useHistory();
@@ -131,6 +132,7 @@ const SlowDownSpeed = () => {
 	}
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">

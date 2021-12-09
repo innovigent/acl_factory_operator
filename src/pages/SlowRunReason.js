@@ -8,6 +8,8 @@ import ExecutiveAuthModal from "../components/modals/ExecutiveAuthModal";
 import Spinner from "../components/spinner/Spinner";
 import TopNav from "../components/topnav/TopNav";
 
+import Image from "../assets/images/product-line.png";
+
 const SlowRunReason = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -92,6 +94,7 @@ const SlowRunReason = () => {
 	}
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			{authModal && <ExecutiveAuthModal setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="col-12">
