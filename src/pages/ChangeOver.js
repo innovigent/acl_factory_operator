@@ -10,6 +10,8 @@ import TopNav from "../components/topnav/TopNav";
 import AuthModel from "../components/modals/AuthModel";
 import SmallSpinner from "../components/spinner/SmallSpinner";
 
+import Image from "../assets/images/product-line.png";
+
 const SingleValue = ({ cx, getStyles, selectProps, data, isDisabled, className, ...props }) => {
 	return (
 		<div
@@ -131,6 +133,7 @@ const Changeover = () => {
 
 	return (
 		<>
+			<img src={Image} alt="factory" className="login-image product-line" />
 			{authModal && <AuthModel setAuthModal={setAuthModal} execute={submit} />}
 			<div className="layout__content-main">
 				<div className="position">
