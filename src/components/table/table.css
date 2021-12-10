@@ -24,9 +24,7 @@ td {
 	padding: 15px 10px;
 	white-space: nowrap;
 }
-td {
-	padding: 0px 10px;
-}
+
 .table__pagination {
 	display: flex;
 	width: 100%;

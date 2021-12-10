@@ -116,6 +116,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
@@ -133,6 +134,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
@@ -155,6 +157,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
@@ -219,6 +222,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
@@ -236,6 +240,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
@@ -258,6 +263,7 @@ const Administration = () => {
 								color: "#fe9843",
 								padding: "5px",
 								fontSize: "0.8rem",
+								margin: "0px",
 							}}
 						>
 							Submit
