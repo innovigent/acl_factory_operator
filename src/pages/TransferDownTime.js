@@ -11,6 +11,7 @@ import Spinner from "../components/spinner/Spinner";
 import TopNav from "../components/topnav/TopNav";
 
 import Image from "../assets/images/product-line.png";
+import assetUrl from "../config/url.config";
 
 const TransferDowntime = () => {
 	const history = useHistory();
@@ -148,6 +149,11 @@ const TransferDowntime = () => {
 												onChange={e => handleChange(country.id)}
 												row
 											>
+												<img
+													className="specialcase-img"
+													src={`${assetUrl}/${country.caseImage}`}
+													alt="change-shift"
+												/>
 												<FormControlLabel
 													value={country.id}
 													control={
