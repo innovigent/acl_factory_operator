@@ -73,14 +73,12 @@ const Login = () => {
 		getShifts();
 	}, []);
 
-	function validateForm() {
-		return epf.length > 0 && authCode.length > 0;
-	}
-
 	const submit = async e => {
 		e.preventDefault();
 		setBtnState(true);
 		setErr("");
+
+		console.log(epf, authCode);
 
 		if (epf === "" || authCode === "") {
 			setBtnState(false);
@@ -186,7 +184,7 @@ const Login = () => {
 						</div>
 
 						<div id="button" className="rowlogin">
-							<button disabled={!validateForm()} onClick={submit}>
+							<button disabled={btnState} onClick={submit}>
 								{btnState ? <Spinner /> : "Log in"}
 							</button>
 						</div>
