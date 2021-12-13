@@ -82,6 +82,11 @@ const Login = () => {
 		setBtnState(true);
 		setErr("");
 
+		if (epf === "" || authCode === "") {
+			setBtnState(false);
+			return setErr("Please fill all fields");
+		}
+
 		try {
 			const response = await axios.post(
 				"https://acl-automation.herokuapp.com/api/v1/operator/login",
