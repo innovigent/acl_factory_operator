@@ -23,9 +23,11 @@ const Routes = () => {
 		if (shiftStartTime1 || shiftStartTime2) {
 			if (
 				(shiftStartTime1.slice(0, 2).toString() == new Date().getHours() &&
-					shiftStartTime1.slice(3, 5).toString() == new Date().getMinutes()) ||
+					shiftStartTime1.slice(3, 5).toString() == new Date().getMinutes() &&
+					shiftStartTime1.slice(6, 8).toString() == new Date().getSeconds()) ||
 				(shiftStartTime2.slice(0, 2).toString() == new Date().getHours() &&
-					shiftStartTime2.slice(3, 5).toString() == new Date().getMinutes())
+					shiftStartTime2.slice(3, 5).toString() == new Date().getMinutes() &&
+					shiftStartTime2.slice(6, 8).toString() == new Date().getSeconds())
 			) {
 				history.push("/login", { from: "timeTrigger" });
 			}
