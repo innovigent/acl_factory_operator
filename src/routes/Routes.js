@@ -34,7 +34,7 @@ const Routes = () => {
 		}
 	};
 
-	setInterval(triggerLogin, 10000);
+	setInterval(triggerLogin, 1000);
 
 	return (
 		<Switch>
