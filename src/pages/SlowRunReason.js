@@ -140,6 +140,7 @@ const SlowRunReason = () => {
 										</option>
 									</select>
 								</div>
+								flexWrap: "wrap",
 								<div style={{ display: "flex", justifyContent: "center", paddingTop: "2rem" }}>
 									<Link
 										to={{
