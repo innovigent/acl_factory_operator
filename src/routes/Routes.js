@@ -19,7 +19,7 @@ const Routes = () => {
 	const triggerLogin = () => {
 		const shiftStartTime1 = localStorage.getItem("shiftStartTime1");
 		const shiftStartTime2 = localStorage.getItem("shiftStartTime2");
-
+		console.log(shiftStartTime1);
 		if (shiftStartTime1 || shiftStartTime2) {
 			if (
 				(shiftStartTime1.slice(0, 2).toString() == new Date().getHours() &&
